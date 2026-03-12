@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The AI Brief — Weekly Intelligence on Artificial Intelligence</title>
+  <meta name="description" content="Three to four developments. One synthesis. Every Sunday. Rigorous analysis of AI and its real-world consequences.">
+  <link rel="stylesheet" href="site.css">
+  <link rel="stylesheet" href="article.css">
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <header class="masthead">
+    <div class="masthead-inner">
+      <a href="index.html" class="masthead-brand">
+        <span class="masthead-name">The AI Brief</span>
+        <span class="masthead-tagline">Weekly intelligence</span>
+      </a>
+      <button class="nav-toggle" onclick="document.querySelector('.masthead-nav').classList.toggle('open')" aria-label="Open navigation">
+        ☰ Menu
+      </button>
+      <nav class="masthead-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="#archive">Archive</a>
+        <a href="issues/2026-03-08.html" class="masthead-cta">Latest Issue</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Featured issue -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-label">Latest Edition &mdash; March 8, 2026</p>
+      <h1 class="hero-title">
+        <a href="issues/2026-03-08.html">The Jobs Question Gets Real</a>
+      </h1>
+      <div class="hero-meta">
+        <span class="hero-date">March 8, 2026</span>
+        <span class="hero-badge">Issue 10</span>
+        <span>Work &amp; Economy &middot; Governance</span>
+      </div>
+      <p class="hero-excerpt">
+        New research on white-collar job displacement arrives the same week governments are still debating definitions.
+        Entry-level hiring is contracting. Four developments — and what they mean together.
+      </p>
+      <a href="issues/2026-03-08.html" class="hero-read">Read this issue</a>
+    </div>
+  </section>
+
+  <!-- Three-column strip -->
+  <div class="about-strip">
+    <div class="about-strip-inner">
+      <div class="about-strip-card">
+        <p class="asc-label">Format</p>
+        <p class="asc-text">Three to four verified developments each week, followed by a synthesis of what they mean in combination.</p>
+      </div>
+      <div class="about-strip-card">
+        <p class="asc-label">Standards</p>
+        <p class="asc-text">Every source cited and linked. Every claim triple-verified before publication. Readers are encouraged to check.</p>
+      </div>
+      <div class="about-strip-card">
+        <p class="asc-label">Perspective</p>
+        <p class="asc-text">Organizational, institutional, and systemic — not product announcements or investor relations.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pillars Key -->
+  <div class="pillars-key">
+    <div class="pillars-key-inner">
+      <span class="pk-item"><span class="pk-dot" style="background:var(--gov-color)"></span>Governance &amp; Policy</span>
+      <span class="pk-item"><span class="pk-dot" style="background:var(--work-color)"></span>Work &amp; Organizations</span>
+      <span class="pk-item"><span class="pk-dot" style="background:var(--econ-color)"></span>Economy &amp; Society</span>
+      <span class="pk-item"><span class="pk-dot" style="background:var(--env-color)"></span>Environment &amp; Planet</span>
+    </div>
+  </div>
+
+  <!-- Archive -->
+  <section id="archive" class="archive">
+    <div class="archive-header">
+      <span class="archive-label">All editions &mdash; January to March 2026</span>
+      <div class="filter-bar">
+        <button class="filter-btn active" data-topic="all">All</button>
+        <button class="filter-btn" data-topic="gov">Governance</button>
+        <button class="filter-btn" data-topic="work">Work</button>
+        <button class="filter-btn" data-topic="econ">Economy</button>
+        <button class="filter-btn" data-topic="env">Environment</button>
+      </div>
+    </div>
+
+    <div class="issue-grid">
+
+      <a class="issue-card" href="issues/2026-03-08.html" data-topics="work econ gov">
+        <div class="card-meta">
+          <span class="card-date">March 8, 2026</span>
+          <span class="card-num">No. 10</span>
+        </div>
+        <p class="card-title">The Jobs Question Gets Real</p>
+        <p class="card-excerpt">New research shows white-collar displacement accelerating. Entry-level hiring contracts. Policy still debating definitions while the data arrives.</p>
+        <div class="card-tags">
+          <span class="tag work">Work</span>
+          <span class="tag econ">Economy</span>
+          <span class="tag gov">Governance</span>
+        </div>
+      </a>
+
+      <a class="issue-card" href="issues/2026-03-01.html" data-topics="work econ gov">
+        <div class="card-meta">
+          <span class="card-date">March 1, 2026</span>
+          <span class="card-num">No. 9</span>
+        </div>
+        <p class="card-title">The Automation Math Doesn't Add Up — Yet</p>
+        <p class="card-excerpt">McKinsey says 30% of work hours could be automated by 2030. The productivity gains aren't showing up. What the gap means for workers and policy.</p>
+        <div class="card-tags">
+          <span class="tag work">Work</span>
+          <span class="tag econ">Economy</span>
+          <span class="tag gov">Governance</span>
+        </div>
+      </a>
+
+      <a class="issue-card" href="issues/2026-02-22.html" data-topics="env econ gov">
+        <div class="card-meta">
+          <span class="card-date">February 22, 2026</span>
+          <span class="card-num">No. 8</span>
+        </div>
+        <p class="card-title">The Environmental Reckoning</p>
+        <p class="card-excerpt">Data centres overtake aviation in energy consumption. Water stress reaches critical levels. The sustainability claims don't hold.</p>
+        <div class="card-tags">
+          <span class="tag env">Environment</span>
+          <span class="tag econ">Economy</span>
+          <span class="tag gov">Governance</span>
+        </div>
+      </a>
+
+      <a class="issue-card" href="issues/2026-02-15.html" data-topics="work gov econ">
+        <div class="card-meta">
+          <span class="card-date">February 15, 2026</span>
+          <span class="card-num">No. 7</span>
+        </div>
+        <p class="card-title">Healthcare AI at the Inflection Point</p>
+        <p class="card-excerpt">Diagnostic AI outperforms specialists in narrow domains. But hospitals can't afford the infrastructure — and regulators are behind.</p>
+        <div class="card-tags">
+          <span class="tag work">Work</span>
+          <span class="tag gov">Governance</span>
+          <span class="tag econ">Economy</span>
+        </div>
+      </a>
+
+      <a class="issue-card" href="issues/2026-02-08.html" data-topics="gov econ work">
+        <div class="card-meta">
+          <span class="card-date">February 8, 2026</span>
+          <span class="card-num">No. 6</span>
+        </div>
+        <p class="card-title">The Model Race Accelerates</p>
+        <p class="card-excerpt">Three frontier model releases in six weeks. Capability gains outpace safety frameworks. What the acceleration means for institutions.</p>
+        <div class="card-tags">
+          <span class="tag gov">Governance</span>
+          <span class="tag econ">Economy</span>
+          <span class="tag work">Work</span>
+        </div>
+      </a>
+
+      <a class="issue-card" href="issues/2026-02-01.html" data-topics="gov econ work">
+        <div class="card-meta">
+          <span class="card-date">February 1, 2026</span>
+          <span class="card-num">No. 5</span>
+        </div>
+        <p class="card-title">AI Safety Governance Takes Shape — Slowly</p>
+        <p class="card-excerpt">The International AI Safety Report lands with 100 researchers behind it. The EU AI Act begins enforcement. What each approach will mean in practice.</p>
+        <div class="card-tags">
+          <span class="tag gov">Governance</span>
+          <span class="tag econ">Economy</span>
+          <span class="tag work">Work</span>
+        </div>
+      </a>
+
+      <a class="issue-card" href="issues/2026-01-25.html" data-topics="econ gov work">
+        <div class="card-meta">
+          <span class="card-date">January 25, 2026</span>
+          <span class="card-num">No. 4</span>
+        </div>
+        <p class="card-title">DeepSeek Changes the Calculus</p>
+        <p class="card-excerpt">A Chinese lab releases a model matching frontier performance at a fraction of the cost. The implications for AI economics are significant.</p>
+        <div class="card-tags">
+          <span class="tag econ">Economy</span>
+          <span class="tag gov">Governance</span>
+          <span class="tag work">Work</span>
+        </div>
+      </a>
+
+      <a class="issue-card" href="issues/2026-01-18.html" data-topics="econ gov env">
+        <div class="card-meta">
+          <span class="card-date">January 18, 2026</span>
+          <span class="card-num">No. 3</span>
+        </div>
+        <p class="card-title">Stargate and the Infrastructure Bet</p>
+        <p class="card-excerpt">A $500 billion US AI infrastructure commitment reshapes the global compute landscape. Who benefits — and who's exposed.</p>
+        <div class="card-tags">
+          <span class="tag econ">Economy</span>
+          <span class="tag gov">Governance</span>
+          <span class="tag env">Environment</span>
+        </div>
+      </a>
+
+      <a class="issue-card" href="issues/2026-01-11.html" data-topics="work econ gov">
+        <div class="card-meta">
+          <span class="card-date">January 11, 2026</span>
+          <span class="card-num">No. 2</span>
+        </div>
+        <p class="card-title">CES and the Robot Moment</p>
+        <p class="card-excerpt">Physical AI arrives at scale. Humanoid robots move from demonstrations to early deployments. The timeline for labour market disruption shortens.</p>
+        <div class="card-tags">
+          <span class="tag work">Work</span>
+          <span class="tag econ">Economy</span>
+          <span class="tag gov">Governance</span>
+        </div>
+      </a>
+
+      <a class="issue-card" href="issues/2026-01-04.html" data-topics="gov work econ">
+        <div class="card-meta">
+          <span class="card-date">January 4, 2026</span>
+          <span class="card-num">No. 1</span>
+        </div>
+        <p class="card-title">Scene-Setting for 2026</p>
+        <p class="card-excerpt">Where AI actually stands entering the year — past the hype, past the fear — and the five dynamics worth watching in the months ahead.</p>
+        <div class="card-tags">
+          <span class="tag gov">Governance</span>
+          <span class="tag work">Work</span>
+          <span class="tag econ">Economy</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">The AI Brief</div>
+        <p class="footer-motto">Weekly analysis of artificial intelligence and its real-world consequences. Published every Sunday. No advertising, no sponsorship.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="#archive">All Editions</a></li>
+          <li><a href="issues/2026-03-08.html">Latest Issue</a></li>
+        </ul>
+      </div>
+      <div class="footer-standards">
+        <h4>Standards</h4>
+        <p>Every claim sourced. Every source linked. Readers are encouraged to verify.</p>
+        <p>Published each Sunday. Sources triple-verified before publication.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 The AI Brief</span>
+      <span><a href="about.html">Editorial standards</a> &middot; <a href="about.html">About</a></span>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

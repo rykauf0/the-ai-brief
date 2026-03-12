@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — The AI Brief</title>
+  <meta name="description" content="The AI Brief is a weekly intelligence briefing on artificial intelligence and its real-world consequences.">
+  <link rel="stylesheet" href="site.css">
+  <link rel="stylesheet" href="article.css">
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <header class="masthead">
+    <div class="masthead-inner">
+      <a href="index.html" class="masthead-brand">
+        <span class="masthead-name">The AI Brief</span>
+        <span class="masthead-tagline">Weekly intelligence</span>
+      </a>
+      <button class="nav-toggle" onclick="document.querySelector('.masthead-nav').classList.toggle('open')" aria-label="Toggle navigation">
+        ☰ Menu
+      </button>
+      <nav class="masthead-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="index.html#archive">Archive</a>
+        <a href="issues/2026-03-08.html" class="masthead-cta">Latest Issue →</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- About hero -->
+  <div class="about-hero">
+    <div class="about-hero-inner">
+      <p class="page-label">About this publication</p>
+      <h1>What it is and why it exists</h1>
+      <p class="lede">
+        AI generates more noise than almost any subject in recent memory.
+        The AI Brief exists to reduce that noise to signal — three to four developments a week,
+        rigorously sourced, with a synthesis of what they mean in combination.
+      </p>
+    </div>
+  </div>
+
+  <!-- About body -->
+  <div class="about-body">
+
+    <h2>The Format</h2>
+    <p>
+      Each Sunday edition covers three to four significant AI developments from the preceding week,
+      each anchored by a distinct primary source. Every edition closes with a "What It All Means"
+      synthesis — where the developments are read together to identify larger patterns, tensions,
+      and second-order implications.
+    </p>
+    <p>
+      The format is deliberate. Individual AI developments, taken in isolation, are often
+      misleading — either overhyped or underweighted. The synthesis is where
+      the genuine analytical work happens.
+    </p>
+
+    <h2>What We Cover</h2>
+    <ul class="pillars-about">
+      <li>
+        <span class="pillar-dot" style="background:var(--gov-color)"></span>
+        <div class="pillar-desc">
+          <strong>Governance &amp; Policy</strong>
+          <span>AI regulation, government adoption, institutional accountability, and the rule of law as intelligent systems become embedded in public infrastructure.</span>
+        </div>
+      </li>
+      <li>
+        <span class="pillar-dot" style="background:var(--work-color)"></span>
+        <div class="pillar-desc">
+          <strong>Work &amp; Organizations</strong>
+          <span>How AI reshapes how organizations function, how leaders manage, what gets automated, and what the next generation of professional work looks like.</span>
+        </div>
+      </li>
+      <li>
+        <span class="pillar-dot" style="background:var(--econ-color)"></span>
+        <div class="pillar-desc">
+          <strong>Economy &amp; Society</strong>
+          <span>The macroeconomic picture: productivity, labour markets, inequality, cost of living, and who benefits from — or bears the cost of — the AI transition.</span>
+        </div>
+      </li>
+      <li>
+        <span class="pillar-dot" style="background:var(--env-color)"></span>
+        <div class="pillar-desc">
+          <strong>Environment &amp; Planet</strong>
+          <span>The energy and water footprint of the AI build-out, the trade-offs with climate commitments, and AI's contested role in climate solutions.</span>
+        </div>
+      </li>
+    </ul>
+
+    <h2>Editorial Standards</h2>
+    <ul class="standards-list">
+      <li>Every claim is sourced. Every source is linked. Readers are expected and encouraged to verify.</li>
+      <li>We do not accept advertising or sponsorship. We have no commercial interest in any technology we cover.</li>
+      <li>We distinguish clearly between what the evidence shows and what advocates claim.</li>
+      <li>We treat complexity, nuance, and uncertainty as features, not obstacles.</li>
+      <li>When evidence is thin, contested, or absent, we say so. We do not fill gaps with confident-sounding speculation.</li>
+    </ul>
+
+    <h2>Analytical Lens</h2>
+    <p>
+      This publication applies an organizational and systemic lens to AI — asking not just
+      "what happened" but "what does this mean for how institutions function, how decisions
+      get made, and what the second-order effects are likely to be."
+    </p>
+    <p>
+      The analytical framework is skeptic-first: we earn trust by naming what doesn't work
+      before celebrating what does, by citing failure modes alongside success stories, and
+      by being honest about what the evidence doesn't yet show. AI coverage that skips the
+      skepticism is just marketing.
+    </p>
+
+    <h2>Publishing Schedule</h2>
+    <p>
+      New editions every Sunday. The archive runs from January 4, 2026 to the present.
+    </p>
+
+    <div style="margin-top:2rem;padding:1rem 1.1rem;background:var(--navy-light);border:1px solid var(--border);border-left:3px solid var(--navy);border-radius:0 var(--r) var(--r) 0;">
+      <p style="font-family:var(--sans);font-size:var(--text-sm);color:var(--text-2);margin:0;">
+        Start with the <a href="issues/2026-01-04.html" style="color:var(--navy)">first edition from January 4, 2026</a>,
+        or go directly to the <a href="issues/2026-03-08.html" style="color:var(--navy)">latest issue</a>.
+      </p>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">The AI Brief</div>
+        <p class="footer-motto">Weekly intelligence on artificial intelligence — consequences, not announcements. Published every Sunday.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="index.html#archive">All Editions</a></li>
+          <li><a href="issues/2026-03-08.html">Latest Issue</a></li>
+        </ul>
+      </div>
+      <div class="footer-standards">
+        <h4>Standards</h4>
+        <p>Every claim sourced. Every source linked. No advertising. No sponsorship.</p>
+        <p>Published each Sunday. Sources triple-verified before publication.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 The AI Brief</span>
+      <span><a href="index.html">Home</a> · <a href="issues/2026-03-08.html">Latest Issue</a></span>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
