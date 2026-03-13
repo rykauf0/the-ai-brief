@@ -214,3 +214,28 @@
 .author-bio p {
   font-size: var(--text-sm); color: var(--text-2); line-height: 1.65; margin: 0;
 }
+
+/* ── Editorial Note ────────────────────────────────────────── */
+.editorial-note {
+  font-style: italic;
+  color: var(--text-3);
+  font-size: 0.9375rem;
+  border-left: 2px solid var(--border-2);
+  padding-left: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* ── Synthesis Sub-Sections ────────────────────────────────── */
+.syn-section {
+  text-transform: uppercase;
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  font-family: var(--sans);
+  font-weight: 600;
+}
+.syn-good { color: #2E6E3F; }
+.syn-bad { color: #8B3A3A; }
+.syn-ugly { color: #6B4E00; }

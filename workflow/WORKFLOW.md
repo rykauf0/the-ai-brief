@@ -2,7 +2,7 @@
 
 **Publication:** The AI Brief
 **Cadence:** Every Sunday
-**Audience:** Informed, skeptical readers — people who follow serious news, want to understand AI's real consequences, and have seen enough hype cycles to be deeply wary of them.
+**Audience:** Informed readers — people who follow serious news, want the full picture on AI's real-world impact, and have seen enough hype cycles to value evidence-weighted honesty over reflexive skepticism or uncritical optimism.
 **Format:** 3–4 distinct headline developments (one primary source each) + a substantial analytical synthesis
 
 ---
@@ -17,7 +17,13 @@ Each development is anchored by a *distinct* primary source. If the same paper, 
 Each development: 2–3 paragraphs of tight analysis + source links. No pull quotes, no "shareable" boxes, no individual "why it matters" callouts — that's what the synthesis is for.
 
 **Part 2 — What It All Means** (~600–800 words)
-This is the centrepiece of the publication, not the postscript. The synthesis reads the week's developments together, identifies what they mean in combination, and gives readers something they could not get from reading the individual stories alone. It earns its length.
+This is the centrepiece of the publication, not the postscript. The synthesis reads the week's developments together through **The Full Picture Lens**, structured in three sections:
+
+- **What's Working** — Genuine progress backed by evidence. When something works, we say so.
+- **What's Not** — Failures, overpromises, and gaps between claims and reality. Named specifically.
+- **What Nobody's Saying** — Uncomfortable truths, perverse incentives, and structural problems that don't fit neat narratives.
+
+The synthesis gives readers something they could not get from reading the individual stories alone. It earns its length.
 
 **Why this structure?**
 The old five-story format created a sourcing problem: when one big study dominates a week, it gets cited three times across three "stories" that are really three angles on one source. The new format treats one source as one development, and moves the multi-angle analysis into the synthesis where it belongs.
@@ -39,7 +45,7 @@ The old five-story format created a sourcing problem: when one big study dominat
 Load skill: research-assistant
 ```
 
-This governs source credibility tiers, search strategy, and the skeptic-first evidence standard.
+This governs source credibility tiers, search strategy, and the Full Picture Lens evidence standard.
 
 ---
 
