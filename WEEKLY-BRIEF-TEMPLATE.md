@@ -447,18 +447,140 @@ Two parts, weighted deliberately:
 
 #### Source Credibility Tiers
 
-| Tier | Examples | Usage |
-|------|----------|-------|
-| **Tier 1** | Peer-reviewed research, major analyst firms, major journalism (WSJ, FT, HBR, NYT, Reuters, Guardian) | Use freely, cite specifically |
-| **Tier 2** | Specialist trade press, think tanks, company research labs | Use with clear attribution |
-| **Tier 3** | Vendor surveys, smaller blogs, opinion pieces | Flag clearly, use only when corroborated |
+Sources are divided into three tiers. **Only Tier 1 and Tier 2 sources may be cited in a published issue.** Tier 3 sources are rejected outright — they cannot appear even as corroboration.
 
-#### Triple-Verification Requirement
+**Tier 1 — Primary Authority** (use freely, cite specifically)
 
-Every source must pass:
-1. **Existence** — URL resolves, article is real
-2. **Content** — article says what is attributed
-3. **Currency** — publication date within claimed period
+These are the gold standard. Prioritise these above all else.
+
+| Category | Examples |
+|----------|----------|
+| **Academic & peer-reviewed research** | Nature, Science, PNAS, The Lancet, JAMA, IEEE, ACM, arXiv (with peer-review status noted), NBER working papers, university press releases tied to published papers |
+| **Think tanks & policy institutions** | Brookings, RAND, CFR, Chatham House, Carnegie Endowment, Peterson Institute, Aspen Institute, Center for a New American Security, Atlantic Council, World Economic Forum, OECD reports, IMF/World Bank research |
+| **Major consulting & analyst firms** | McKinsey Global Institute, BCG Henderson Institute, Deloitte Insights, Gartner, Forrester, IDC, CB Insights |
+| **Industry research labs & foundations** | OpenAI research papers, Google DeepMind, Microsoft Research, Meta FAIR, Allen Institute, Mozilla Foundation research |
+| **Government & regulatory bodies** | White House executive orders, EU Commission, UK Parliament reports, GAO, CBO, FTC, SEC filings, NIST, FDA, EPA |
+
+**Tier 2 — Specialist & Quality Journalism** (use with clear attribution)
+
+Authoritative reporting and specialist coverage — strong but secondary to primary research.
+
+| Category | Examples |
+|----------|----------|
+| **Prestige journalism** | Reuters, Associated Press, Financial Times, Wall Street Journal, New York Times, Washington Post, The Guardian, The Economist, Bloomberg, HBR |
+| **Specialist trade press** | MIT Technology Review, Wired, Ars Technica, The Information, Protocol, Semafor, Rest of World, The Verge (investigative/feature), STAT News, E&E News, Inside Climate News |
+| **Thought leader platforms** | Stratechery, One Useful Thing (Ethan Mollick), Dario Amodei's writing, substantive Substack authors with domain credentials |
+| **Industry bodies & standards orgs** | IEEE Spectrum, Partnership on AI, AI Now Institute, Electronic Frontier Foundation, W3C, IETF |
+
+**Tier 3 — REJECTED (never cite)**
+
+These sources are explicitly banned from the publication. Do not use them in any capacity — not as primary sources, not as corroboration, not as "one perspective."
+
+| Rejected category | Examples & why |
+|-------------------|----------------|
+| **Aggregation & clickbait news** | Yahoo News, Yahoo Finance, MSN, AOL, Huffington Post — repackage others' work, add no original reporting |
+| **Cable news & partisan outlets** | Fox News, CNBC, CNN opinion, MSNBC, Daily Mail, New York Post — editorial slant contaminates factual reporting |
+| **Content farms & SEO mills** | Business Insider (most articles), Forbes contributor network, Inc.com, Entrepreneur.com — pay-per-click incentives over accuracy |
+| **Vendor marketing disguised as research** | Company blogs announcing their own products, vendor-sponsored "surveys" with leading questions, press releases without independent verification |
+| **Social media as source** | Tweets, LinkedIn posts, Reddit threads — use only to locate the *actual* primary source, never cite the social post itself |
+| **Crypto/hype ecosystem** | CoinDesk, TechCrunch (puff pieces), VentureBeat (most), product launch coverage with no critical analysis |
+
+**When in doubt:** Ask — "Is this outlet paid to report accurately, or paid to generate clicks?" If the latter, reject it.
+
+---
+
+#### PHASE 2.5: CITATIONS VERIFICATION GATE
+
+**This is a mandatory step.** After deep research and before writing begins, run this verification protocol on every candidate source. No source enters the draft without passing all checks.
+
+##### Step 1 — Source Sufficiency Check
+
+Before writing, confirm:
+
+```
+Research quality gate:
+- [ ] At least 8-12 candidate sources identified (to select the best 6-10 for 3-4 developments)
+- [ ] At least 2 distinct sources per development (primary + corroboration)
+- [ ] Sources span at least 3 of the 4 topic pillars
+- [ ] At least 50% of sources are Tier 1 (primary authority)
+- [ ] Remaining sources are Tier 2 (specialist journalism)
+- [ ] Zero Tier 3 sources in the candidate list
+
+If any check fails → return to research. Do not proceed to writing with thin sourcing.
+```
+
+##### Step 2 — Source-by-Source Verification
+
+For every source that will appear in the issue, run these checks sequentially:
+
+```
+For each source URL:
+
+1. TIER CHECK
+   → Identify the publication. Is it on the Tier 1 or Tier 2 list?
+   → If Tier 3 or unlisted: REJECT. Find an alternative.
+   → If borderline: flag for user review before proceeding.
+
+2. LINK VERIFICATION
+   → Fetch the URL. Does it resolve to a live page (not 404, not paywall-only, not redirect to homepage)?
+   → If the link is dead or broken: search for the correct URL.
+   → If the article cannot be located at all: DROP the source entirely.
+
+3. CONTENT MATCH
+   → Read/scan the fetched page. Does the article actually say what you're attributing to it?
+   → Check: author, date, key claims, key data points.
+   → If the content doesn't match your attribution: correct the attribution or drop the source.
+
+4. CURRENCY CHECK
+   → Is the publication date within the last 7 days (for news) or last 12 months (for research/reports)?
+   → If older: flag explicitly in the development ("published in [month/year]") or find something more current.
+
+5. INDEPENDENCE CHECK
+   → Is this source independent from the subject it covers?
+   → A company's press release about its own product is not an independent source.
+   → A vendor-commissioned survey is not independent research.
+   → If not independent: use only with explicit caveat, or find independent corroboration.
+```
+
+##### Step 3 — Cross-Source Integrity
+
+After individual verification, check the full source set:
+
+```
+Cross-source checks:
+- [ ] No two developments rely on the same primary source
+- [ ] No single publication appears more than twice across the entire issue
+- [ ] Sources represent at least 3 different types (e.g. research paper + policy report + journalism + analyst firm)
+- [ ] No source is cited for a claim it doesn't actually make
+- [ ] All URLs are HTTPS and resolve to the specific article (not a homepage or section page)
+```
+
+##### Step 4 — Verification Report
+
+Present the verification results to the user before writing:
+
+```
+Source verification complete. Here's what I found:
+
+  Development 1: [headline]
+    ✓ [Source 1] — Tier [X], verified, [publication date]
+    ✓ [Source 2] — Tier [X], verified, [publication date]
+
+  Development 2: [headline]
+    ✓ [Source 1] — Tier [X], verified, [publication date]
+    ⚠ [Source 2] — [issue found, e.g. "paywall — using cached excerpt"]
+
+  [etc.]
+
+  Summary: [N] sources verified, [N] flagged, [N] rejected
+  Tier breakdown: [N] Tier 1, [N] Tier 2
+
+Proceed to writing? (yes / or flag concerns)
+```
+
+Wait for user confirmation before writing the issue.
+
+---
 
 #### Writing Standards
 
@@ -470,11 +592,14 @@ Every source must pass:
 
 #### Pre-Publish Checklist
 
-**Sourcing:**
+**Sourcing (must have passed Phase 2.5 Citations Verification Gate):**
 - [ ] Each development traces to a distinct primary source
 - [ ] No single source for multiple developments
-- [ ] All URLs resolve, content matches attribution
-- [ ] All sources Tier 1 or 2
+- [ ] All URLs verified live and resolving to correct article
+- [ ] All sources Tier 1 or Tier 2 — zero Tier 3 sources present
+- [ ] No rejected-list publications (Yahoo, Fox, CNBC, Forbes contributors, etc.)
+- [ ] At least 50% of sources are Tier 1 (primary authority)
+- [ ] Verification report presented to user and approved
 
 **Content:**
 - [ ] Framing connects without over-explaining
@@ -562,7 +687,7 @@ Good synthesis:
 7. Create both templates in `templates/`
 8. Write `workflow/WORKFLOW.md` — full editorial workflow with topic-specific search strategies
 9. Create `vercel.json`
-10. Draft Issue #1 — a scene-setting edition that establishes the publication's analytical identity for the chosen topic
+10. Draft Issue #1 — run deep research, then run the **Citations Verification Gate (Phase 2.5)** on all candidate sources, present the verification report for user approval, and only then write the issue as a scene-setting edition that establishes the publication's analytical identity
 
 The site must work with zero build steps. Progressive enhancement: fully functional without JavaScript.
 
