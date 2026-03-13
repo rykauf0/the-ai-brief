@@ -42,8 +42,8 @@ I'll set up your weekly briefing site. First, a few questions about your publica
 4. Who is your target reader? Describe them in one sentence.
    (e.g. "Informed professionals who follow AI closely and are skeptical of hype.")
 
-5. What is the publication's motto or editorial identity — one line?
-   (e.g. "Consequences, not announcements." / "Signal over noise." / "Evidence over enthusiasm.")
+5. What is the publication's editorial identity — one line?
+   (e.g. "The full picture." / "Good, bad, and ugly." / "What's actually happening." / "No cheerleading. No doom. Just evidence.")
 ```
 
 Wait for answers. Then proceed to Step 2.
@@ -53,7 +53,9 @@ Wait for answers. Then proceed to Step 2.
 Ask the user to define their four content pillars. Present it like this:
 
 ```
-Every issue is tagged with topic pillars — exactly four categories that cover the landscape of your subject.
+Every issue is tagged with topic pillars — exactly four categories that cover your subject's landscape.
+These are topic areas for filtering and tagging — the editorial lens (what's working, what's not,
+what nobody's saying) operates across ALL pillars in the synthesis.
 
 For each pillar, I need:
 - A short code (3-4 letters, lowercase — used in CSS and HTML)
@@ -61,10 +63,10 @@ For each pillar, I need:
 - A one-sentence scope (what falls under this pillar)
 
 Here's an example for an AI publication:
-  1. gov  — Governance & Policy — Regulation, government adoption, institutional accountability
-  2. work — Work & Organizations — How AI reshapes organizations, what gets automated
-  3. econ — Economy & Society — Productivity, labour markets, inequality, transition costs
-  4. env  — Environment & Planet — Energy footprint, data centre growth, climate trade-offs
+  1. sci  — Science & Research — Breakthroughs, papers, benchmarks, technical advances
+  2. gov  — Governance & Policy — Regulation, institutional adoption, accountability frameworks
+  3. work — Work & Industry — How organizations change, what gets automated, business models
+  4. soc  — Society & Ethics — Human impact, inequality, philosophical questions, cultural shifts
 
 Now define your four pillars:
   1. [code] — [Display Name] — [Scope]
@@ -215,7 +217,7 @@ Pillar colours (from user input):
 - **Sticky masthead** — backdrop blur, serif italic logo, nav links, "Latest Issue" CTA button
 - **Mobile hamburger menu** — toggles nav visibility
 - **Hero section** — latest issue with excerpt, meta info, read CTA
-- **About strip** — 3-column value proposition (Format / Standards / Perspective)
+- **About strip** — 3-column value proposition (What's Working / What's Not / What Nobody's Saying)
 - **Pillars key** — coloured dots with pillar names as visual legend
 - **Archive grid** — responsive card grid with topic filter buttons (All + one per pillar)
 - **Reading progress bar** — 3px fixed bar at viewport top, scroll-driven
@@ -252,6 +254,8 @@ All CSS variables, reset, base styles, and these components:
 - **Section breaks** — flex with before/after pseudo-element lines, centered uppercase label
 - **Synthesis** — navy-light bg, navy top border (3px), rounded bottom, generous padding
 - **Bottom line** — white box inside synthesis, navy uppercase label, summary text
+- **Editorial note** — `.editorial-note`: italic, text-3 colour, 0.9375rem, border-left 2px border colour, padding-left 1rem, margin-top 0.5rem
+- **Synthesis sub-sections** — `.syn-section` h3 headers within `.synthesis`: uppercase, 0.8125rem, letter-spacing 0.08em, margin-top 2rem; `.syn-good` colour: `#2E6E3F`; `.syn-bad` colour: `#8B3A3A`; `.syn-ugly` colour: `#6B4E00`
 - **Story sources** — border-top separator, uppercase "Sources" label, links with arrow prefix
 - **Issue navigation** — flex space-between, bordered pill buttons, disabled state at 60% opacity
 - **Author bio** — bordered card, surface bg, uppercase label, description text
@@ -335,6 +339,7 @@ Each issue page follows this exact structure:
       <span class="badge badge-[pillar]">[Pillar Name]</span>
       <p>[What happened — stated precisely]</p>
       <p>[Why it matters — mechanism, evidence, context]</p>
+      <p class="editorial-note">Why this matters: [one sentence — is this progress, a setback, or an uncomfortable truth nobody wants to name?]</p>
       <div class="story-sources">
         <p class="src-label">Sources</p>
         <ul>
@@ -351,10 +356,19 @@ Each issue page follows this exact structure:
     <section class="synthesis">
       <h2>What It All Means</h2>
       <p class="syn-byline">{{NAME}} · Issue #[N], [Full Date]</p>
-      <p>[SYNTHESIS — 4-6 paragraphs, 600-800 words]</p>
+
+      <h3 class="syn-section syn-good">What's Working</h3>
+      <p>[1-2 paragraphs — genuine progress, earned optimism, things moving in the right direction. Celebrate what the evidence supports without caveating it to death.]</p>
+
+      <h3 class="syn-section syn-bad">What's Not</h3>
+      <p>[1-2 paragraphs — failures, overpromises, where evidence says "not yet" or "not like that." Name the gaps between claims and reality.]</p>
+
+      <h3 class="syn-section syn-ugly">What Nobody's Saying</h3>
+      <p>[1-2 paragraphs — uncomfortable truths, perverse incentives, structural problems, things technically working but ethically/socially broken. The stuff that doesn't fit neat narratives.]</p>
+
       <div class="bottom-line">
         <strong>Bottom line</strong>
-        <p>[2-3 sentences — the single most important takeaway, specific to this week]</p>
+        <p>[2-3 sentences — the single most important takeaway that holds the good, bad, and ugly together. Specific to this week.]</p>
       </div>
     </section>
 
@@ -428,49 +442,57 @@ Create this file adapted to the user's topic. Include all of the following:
 Two parts, weighted deliberately:
 
 **Part 1 — This Week's Developments** (3-4 items)
-- Each anchored by a *distinct* primary source
+- Each anchored by a *distinct* primary source (preferably Tier 1 research)
 - Same source = same development — merge them
-- 2-3 paragraphs of tight analysis + source links per development
-- No pull quotes, no "shareable" boxes, no "why it matters" callouts — that's what synthesis is for
+- 2-3 paragraphs of tight analysis + one-line editorial note + source links per development
+- The editorial note signals where this development sits: genuine progress, a setback, or an uncomfortable truth
+- Developments are reported with evidence-weighted honesty — no reflexive optimism or pessimism
 
-**Part 2 — What It All Means** (~600-800 words)
+**Part 2 — What It All Means** (~600-800 words, three visible sections)
 - The centrepiece, not the postscript
-- Reads developments together, identifies what they mean in combination
-- Gives readers something they cannot get from individual stories alone
+- **What's Working** — genuine progress, earned optimism backed by evidence
+- **What's Not** — failures, overpromises, where evidence says "not yet"
+- **What Nobody's Saying** — structural problems, perverse incentives, uncomfortable truths
+- **Bottom Line** — 2-3 sentences that hold all three dimensions together
+- Gives readers something they cannot get from reading individual stories alone
 
 #### Research Process
 
-- Goal: 3-5 genuinely distinct developments from the past 7 days
-- One-source-per-development rule: if two stories trace to the same paper/report/event, they are one development
-- Distinct = different domain, different publication, different event
+- **Goal:** 3-5 genuinely distinct developments from the past 7 days, grounded in primary research
+- **Research-first:** Start with academic journals, research labs, think tanks, and government reports. Use journalism to find *leads*, then trace back to the primary source.
+- **Development scope is broad:** Developments can come from scientific breakthroughs, academic papers, philosophical/ethical scholarship, social science research, policy analysis, environmental science, clinical trials — any domain where the topic intersects with real-world consequences. This is not a tech news roundup.
+- **One-source-per-development rule:** If two stories trace to the same paper/report/event, they are one development — merge them
+- **Distinct = different domain, different publication, different event**
+- **Balance in selection:** Actively seek developments that represent genuine progress *and* genuine problems. If all candidates are good news or all bad news, the research isn't done.
 - Include topic-specific search strategy templates adapted to the user's subject area
 
 #### Source Credibility Tiers
 
 Sources are divided into three tiers. **Only Tier 1 and Tier 2 sources may be cited in a published issue.** Tier 3 sources are rejected outright — they cannot appear even as corroboration.
 
-**Tier 1 — Primary Authority** (use freely, cite specifically)
+**Tier 1 — Research & Primary Authority** (the foundation — prioritise above all else)
 
-These are the gold standard. Prioritise these above all else.
-
-| Category | Examples |
-|----------|----------|
-| **Academic & peer-reviewed research** | Nature, Science, PNAS, The Lancet, JAMA, IEEE, ACM, arXiv (with peer-review status noted), NBER working papers, university press releases tied to published papers |
-| **Think tanks & policy institutions** | Brookings, RAND, CFR, Chatham House, Carnegie Endowment, Peterson Institute, Aspen Institute, Center for a New American Security, Atlantic Council, World Economic Forum, OECD reports, IMF/World Bank research |
-| **Major consulting & analyst firms** | McKinsey Global Institute, BCG Henderson Institute, Deloitte Insights, Gartner, Forrester, IDC, CB Insights |
-| **Industry research labs & foundations** | OpenAI research papers, Google DeepMind, Microsoft Research, Meta FAIR, Allen Institute, Mozilla Foundation research |
-| **Government & regulatory bodies** | White House executive orders, EU Commission, UK Parliament reports, GAO, CBO, FTC, SEC filings, NIST, FDA, EPA |
-
-**Tier 2 — Specialist & Quality Journalism** (use with clear attribution)
-
-Authoritative reporting and specialist coverage — strong but secondary to primary research.
+The publication leads with research, not news. These sources are the evidence base.
 
 | Category | Examples |
 |----------|----------|
-| **Prestige journalism** | Reuters, Associated Press, Financial Times, Wall Street Journal, New York Times, Washington Post, The Guardian, The Economist, Bloomberg, HBR |
-| **Specialist trade press** | MIT Technology Review, Wired, Ars Technica, The Information, Protocol, Semafor, Rest of World, The Verge (investigative/feature), STAT News, E&E News, Inside Climate News |
-| **Thought leader platforms** | Stratechery, One Useful Thing (Ethan Mollick), Dario Amodei's writing, substantive Substack authors with domain credentials |
-| **Industry bodies & standards orgs** | IEEE Spectrum, Partnership on AI, AI Now Institute, Electronic Frontier Foundation, W3C, IETF |
+| **Peer-reviewed journals & academic research** | Nature, Science, PNAS, The Lancet, JAMA, IEEE, ACM, arXiv (with peer-review status noted), NBER working papers, SSRN, university press releases tied to published papers |
+| **Research institutions & labs** | Google DeepMind, OpenAI research papers, Microsoft Research, Meta FAIR, Allen Institute for AI, Santa Fe Institute, Mozilla Foundation research |
+| **Think tanks with research arms** | Brookings, RAND, CFR, Chatham House, Carnegie Endowment, Peterson Institute, Aspen Institute, Atlantic Council, Center for a New American Security, AI Now Institute |
+| **Government & regulatory research** | NIST, GAO, CBO, EU Commission research, UK Parliament reports, OECD, IMF/World Bank research, NIH, NSF, DARPA, FDA, EPA |
+| **Major consulting & analyst research** | McKinsey Global Institute, BCG Henderson Institute, Deloitte Insights, Gartner, Forrester, IDC, CB Insights |
+| **Ethical & philosophical scholarship** | University centres for ethics/AI/technology, philosophy journals, policy ethics publications |
+
+**Tier 2 — Contextual & Specialist Reporting** (adds depth and accessibility — secondary to research)
+
+Journalism is used to contextualise research findings, not as the primary evidence base. Quality journalism *reporting on* Tier 1 research is valuable. Journalism offering its own analysis without primary sources is weaker.
+
+| Category | Examples |
+|----------|----------|
+| **Prestige journalism (when reporting on primary research)** | Reuters, Associated Press, Financial Times, Wall Street Journal, New York Times, Washington Post, The Guardian, The Economist, Bloomberg, HBR |
+| **Specialist press covering research** | MIT Technology Review, Wired (features), Ars Technica, The Information, Semafor, Rest of World, STAT News, E&E News, Inside Climate News |
+| **Credentialed thought leaders** | Stratechery, One Useful Thing (Ethan Mollick), Dario Amodei's writing, substantive Substack authors with demonstrated domain expertise |
+| **Industry bodies & standards orgs** | IEEE Spectrum, Partnership on AI, Electronic Frontier Foundation, W3C, IETF, World Economic Forum reports |
 
 **Tier 3 — REJECTED (never cite)**
 
@@ -584,11 +606,12 @@ Wait for user confirmation before writing the issue.
 
 #### Writing Standards
 
-- **Voice:** Calm urgency. Collaborative "we" in synthesis. No hype without evidence.
-- **Audience test:** Would a thoughtful skeptic roll their eyes? If yes, cut the hype, add evidence.
-- **Development length:** 2-3 tight paragraphs + sources
-- **Synthesis length:** 4-6 paragraphs (~600-800 words) + bottom line
-- **Synthesis quality test:** Does it say something none of the individual developments say? If not, it's a summary — revise.
+- **Voice:** Calm clarity. Collaborative "we" in synthesis. Match your tone to the evidence — celebrate what works, name what doesn't, surface what's hidden. No default stance.
+- **Balance test:** Does this issue acknowledge genuine progress *and* genuine problems? If it reads as uniformly optimistic or uniformly pessimistic, the lens isn't doing its job.
+- **Audience test:** Would a thoughtful professional who's seen hype cycles *and* premature dismissals trust this? If it reads like cheerleading or doom, revise.
+- **Development length:** 2-3 tight paragraphs + editorial note + sources
+- **Synthesis length:** 3 sections (What's Working / What's Not / What Nobody's Saying) totalling ~600-800 words + bottom line
+- **Synthesis quality test:** Does each section earn its space? Does the bottom line hold all three dimensions together without picking a side? If the synthesis skips any dimension, it's incomplete.
 
 #### Pre-Publish Checklist
 
@@ -603,9 +626,12 @@ Wait for user confirmation before writing the issue.
 
 **Content:**
 - [ ] Framing connects without over-explaining
-- [ ] Synthesis addresses combinations, not sequences
-- [ ] Bottom line is specific, not generic
-- [ ] No hype language without evidence
+- [ ] Each development has a one-line editorial note (progress / setback / uncomfortable truth)
+- [ ] Synthesis has all three sections: What's Working, What's Not, What Nobody's Saying
+- [ ] Each synthesis section earns its space with specific evidence, not filler
+- [ ] Bottom line holds all three dimensions together without picking a side
+- [ ] Issue doesn't read as uniformly optimistic or uniformly pessimistic
+- [ ] No hype language without evidence; no doom without evidence
 
 **Technical:**
 - [ ] HTML matches issue template
@@ -627,17 +653,31 @@ Wait for user confirmation before writing the issue.
 
 Embed these principles in the workflow and about page:
 
-#### The Skeptic-First Lens
+#### The Full Picture Lens
 
-- **Institutional & systemic focus:** Not "what happened" but "what does this mean for how institutions function, decisions get made, and what are the second-order effects"
-- **Evidence-first:** When evidence is thin/contested/absent, say so — don't fill gaps with confident speculation
-- **Failure modes before success stories:** Earn trust by naming what doesn't work before celebrating what does
-- **Complexity as feature:** Nuance and uncertainty are analytical strengths, not obstacles
-- **Combination over sequence:** Synthesis finds patterns visible only when developments are read together
+The publication's core commitment: **tell readers what's actually happening — what's working, what's not, and what nobody wants to say out loud.** This is not "both sides" centrism. It's evidence-weighted honesty. The evidence decides the tone, not a predetermined editorial stance.
+
+- **Balance as discipline:** If the evidence says something is working, celebrate it without reflexive caveats. If it says something is broken, name the failure without softening it. If it's complicated, say that. Reflexive skepticism is as dishonest as reflexive hype.
+- **Three questions for every development:**
+  1. What's genuinely new or significant here?
+  2. What's being overstated, understated, or left out?
+  3. What would change if this trend continues — and who benefits or loses?
+- **Good news earns its place:** Real progress doesn't need qualifiers if the evidence supports it. A breakthrough is a breakthrough. Report it as one.
+- **Bad news earns specificity:** Don't just say "it's failing" — name the mechanism, the gap between promise and reality, the evidence.
+- **Ugly truths earn their name:** "What nobody's saying" isn't cynicism — it's the structural dynamics, incentive problems, and second-order effects that don't fit neat narratives. The stuff that makes both boosters and critics uncomfortable.
+- **Research-grounded, not news-driven:** Lead with academic research, scientific findings, policy analysis, and expert scholarship. Journalism provides context and accessibility, not the primary evidence base.
+- **Combination over sequence:** The synthesis finds patterns visible only when developments are read together — and sorts them into what's working, what's not, and what nobody wants to name.
 
 #### What Makes Good Synthesis
 
-Quality test: "Does this say something none of the individual developments say?"
+The synthesis has three visible sections — **What's Working**, **What's Not**, and **What Nobody's Saying** — plus a unifying **Bottom Line**.
+
+Quality tests:
+- Does the synthesis say something none of the individual developments say?
+- Does "What's Working" identify genuine progress supported by evidence (not just announcements)?
+- Does "What's Not" name specific failures, gaps, or overpromises (not generic caution)?
+- Does "What Nobody's Saying" surface a structural truth that both cheerleaders and doomsayers would rather ignore?
+- Does the bottom line hold all three together — not picking a side, but naming the reality?
 
 Good synthesis:
 - Names the coherent signal across developments
@@ -645,6 +685,7 @@ Good synthesis:
 - Surfaces second-order implications
 - Connects to institutional or structural dynamics
 - Gives readers an analytical frame they cannot get elsewhere
+- **Earns every section:** If there's nothing genuinely good this week, say so — don't manufacture optimism. If there's nothing ugly, don't force it. But usually, all three are present.
 
 ---
 
@@ -698,17 +739,28 @@ The site must work with zero build steps. Progressive enhancement: fully functio
 ```
 ┌────────────────────────────────────────┐
 │  3-4 distinct developments             │
-│  (one primary source each)             │
-│  (2-3 paragraphs + citations each)     │
+│  (research-grounded, one source each)  │
+│  (2-3 paragraphs + editorial note      │
+│   + citations each)                    │
 ├────────────────────────────────────────┤
 │  "What It All Means" synthesis         │
-│  (600-800 words)                       │
-│  (the centrepiece — reads them         │
-│   together, finds what none say alone) │
+│  (600-800 words, three sections)       │
+│                                        │
+│  ┌── What's Working ──────────────┐    │
+│  │ Genuine progress, earned       │    │
+│  │ optimism backed by evidence    │    │
+│  ├── What's Not ──────────────────┤    │
+│  │ Failures, overpromises, gaps   │    │
+│  │ between claims and reality     │    │
+│  ├── What Nobody's Saying ────────┤    │
+│  │ Uncomfortable truths, perverse │    │
+│  │ incentives, structural problems│    │
+│  └────────────────────────────────┘    │
 ├────────────────────────────────────────┤
 │  Bottom line                           │
-│  (2-3 sentences, specific to the week) │
+│  (2-3 sentences — holds all three      │
+│   dimensions together)                 │
 └────────────────────────────────────────┘
 ```
 
-**The value proposition:** Developments in isolation are misleading. The synthesis is where the genuine analytical work happens. Every design, structural, and editorial decision serves this principle.
+**The value proposition:** The full picture — good, bad, and ugly. Not cheerleading. Not doom. Evidence-weighted honesty about what's actually happening, grounded in research and primary sources. The synthesis is where the genuine analytical work happens: identifying what's working, naming what's not, and surfacing what nobody wants to say out loud.
