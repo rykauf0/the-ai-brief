@@ -1,5 +1,5 @@
 /* ================================================================
-   THE AI BRIEF — main.js
+   THE CLIMATE BRIEF — main.js
    Topic filter + reading progress bar
    Progressive enhancement — site works fully without JS
    ================================================================ */

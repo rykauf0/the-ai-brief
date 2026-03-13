@@ -1,5 +1,5 @@
 /* ============================================================
-   THE AI BRIEF — site.css
+   THE CLIMATE BRIEF — site.css
    Editorial Design System
    Light-first, generous type, high contrast, accessible
    Audience: informed skeptics — serious, not technical
@@ -19,20 +19,21 @@
   --text-2:     #3D3C39;     /* dark gray — body secondary */
   --text-3:     #7A7872;     /* medium gray — metadata */
 
-  /* Accent — deep navy for authority */
-  --navy:       #1B3A6B;
-  --navy-light: #EEF3FB;
-  --navy-mid:   rgba(27,58,107,0.12);
+  /* Accent — deep teal for authority */
+  --teal:       #0D5E5E;
+  --teal-light: #EBF5F5;
+  --teal-mid:   rgba(13,94,94,0.12);
 
   /* Warm accent — dates, highlights */
-  --gold:       #8B5E00;
-  --gold-light: #FDF6E3;
+  --amber:      #8B6914;
+  --amber-light:#FDF7E6;
 
   /* Pillar colours — muted, accessible */
-  --gov-color:   #1B5E7B;   /* slate blue */
-  --work-color:  #2E6E3F;   /* forest green */
-  --econ-color:  #8B5E00;   /* warm gold */
-  --env-color:   #3A6E3A;   /* sage green */
+  --pol-color:   #2B5C8A;   /* steel blue */
+  --nrg-color:   #B8860B;   /* dark goldenrod */
+  --sci-color:   #4A7C59;   /* muted green */
+  --ind-color:   #7B5B3A;   /* warm brown */
+  --land-color:  #8B6B2F;   /* earthy ochre */
 
   /* Typography — system fonts only */
   --serif: Georgia,'Times New Roman',serif;
@@ -67,14 +68,14 @@ body {
   min-height: 100vh;
 }
 
-a { color: var(--navy); text-decoration: underline; text-underline-offset: 3px; transition: color .15s; }
-a:hover { color: #0d2a52; }
+a { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; transition: color .15s; }
+a:hover { color: #0A4A4A; }
 img { max-width: 100%; display: block; }
 
 /* ── Reading Progress ───────────────────────────────────────── */
 #reading-progress {
   position: fixed; top: 0; left: 0; height: 3px; width: 0%;
-  background: var(--navy);
+  background: var(--teal);
   z-index: 999; transition: width .1s linear;
 }
 
@@ -130,14 +131,14 @@ img { max-width: 100%; display: block; }
 .masthead-cta {
   font-size: var(--text-sm) !important;
   font-weight: 600 !important;
-  background: var(--navy) !important;
+  background: var(--teal) !important;
   color: #fff !important;
   border-radius: var(--r) !important;
   padding: .45rem 1.1rem !important;
   text-decoration: none !important;
   transition: background .15s !important;
 }
-.masthead-cta:hover { background: #0d2a52 !important; color: #fff !important; }
+.masthead-cta:hover { background: #0A4A4A !important; color: #fff !important; }
 
 /* Mobile nav */
 .nav-toggle {
@@ -169,7 +170,7 @@ img { max-width: 100%; display: block; }
 
 .hero-label {
   font-size: var(--text-sm);
-  color: var(--navy);
+  color: var(--teal);
   font-weight: 600;
   letter-spacing: .04em;
   text-transform: uppercase;
@@ -190,7 +191,7 @@ img { max-width: 100%; display: block; }
   border-bottom: 2px solid var(--border-2);
   transition: border-color .2s;
 }
-.hero-title a:hover { border-color: var(--navy); }
+.hero-title a:hover { border-color: var(--teal); }
 
 .hero-meta {
   display: flex; flex-wrap: wrap; align-items: center; gap: .75rem;
@@ -199,8 +200,8 @@ img { max-width: 100%; display: block; }
 }
 .hero-date { color: var(--text-2); font-weight: 500; }
 .hero-badge {
-  background: var(--gold-light); color: var(--gold);
-  border: 1px solid rgba(139,94,0,.2);
+  background: var(--amber-light); color: var(--amber);
+  border: 1px solid rgba(139,105,20,.2);
   border-radius: 999px; padding: .2rem .7rem;
   font-size: var(--text-xs); font-weight: 600;
   letter-spacing: .04em; text-transform: uppercase;
@@ -214,13 +215,13 @@ img { max-width: 100%; display: block; }
 .hero-read {
   display: inline-flex; align-items: center; gap: .4rem;
   font-size: var(--text-sm); font-weight: 600;
-  color: #fff; background: var(--navy);
+  color: #fff; background: var(--teal);
   text-decoration: none; border-radius: var(--r);
   padding: .65rem 1.4rem;
   transition: background .15s;
 }
 .hero-read::after { content: ' →'; }
-.hero-read:hover { background: #0d2a52; color: #fff; }
+.hero-read:hover { background: #0A4A4A; color: #fff; }
 
 /* ── About strip ─────────────────────────────────────────────── */
 .about-strip {
@@ -239,7 +240,7 @@ img { max-width: 100%; display: block; }
 
 .asc-label {
   font-size: var(--text-xs); font-weight: 700;
-  color: var(--navy);
+  color: var(--teal);
   letter-spacing: .07em; text-transform: uppercase;
 }
 .asc-text { font-size: var(--text-sm); color: var(--text-2); line-height: 1.65; }
@@ -283,8 +284,8 @@ img { max-width: 100%; display: block; }
   white-space: nowrap;
 }
 .filter-btn:hover, .filter-btn.active {
-  color: var(--navy); border-color: var(--navy);
-  background: var(--navy-light);
+  color: var(--teal); border-color: var(--teal);
+  background: var(--teal-light);
 }
 
 /* Issue Grid */
@@ -306,8 +307,8 @@ img { max-width: 100%; display: block; }
   text-decoration: none; color: inherit;
 }
 .issue-card:hover {
-  border-color: var(--navy);
-  box-shadow: 0 2px 12px rgba(27,58,107,.08);
+  border-color: var(--teal);
+  box-shadow: 0 2px 12px rgba(13,94,94,.08);
 }
 
 .card-meta {
@@ -334,10 +335,11 @@ img { max-width: 100%; display: block; }
   border-radius: 999px; padding: .15rem .55rem;
   border: 1px solid transparent;
 }
-.tag.gov    { color: var(--gov-color);    background: #EBF4F8; border-color: rgba(27,94,123,.15); }
-.tag.work   { color: var(--work-color);   background: #EBF4EE; border-color: rgba(46,110,63,.15); }
-.tag.econ   { color: var(--econ-color);   background: #FDF6E3; border-color: rgba(139,94,0,.15);  }
-.tag.env    { color: var(--env-color);    background: #EBF4EB; border-color: rgba(58,110,58,.15); }
+.tag.pol    { color: var(--pol-color);    background: #EBF1F8; border-color: rgba(43,92,138,.15); }
+.tag.nrg    { color: var(--nrg-color);   background: #FDF6E3; border-color: rgba(184,134,11,.15); }
+.tag.sci    { color: var(--sci-color);    background: #EBF4EE; border-color: rgba(74,124,89,.15);  }
+.tag.ind    { color: var(--ind-color);    background: #F5F0EB; border-color: rgba(123,91,58,.15); }
+.tag.land   { color: var(--land-color);   background: #F5F0E3; border-color: rgba(139,107,47,.15); }
 
 /* ── Footer ─────────────────────────────────────────────────── */
 footer { background: var(--surface); border-top: 1px solid var(--border); }
@@ -363,7 +365,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); }
 .footer-links li a {
   font-size: var(--text-sm); color: var(--text-2); text-decoration: none; transition: color .15s;
 }
-.footer-links li a:hover { color: var(--navy); }
+.footer-links li a:hover { color: var(--teal); }
 .footer-standards p { font-size: var(--text-sm); color: var(--text-3); line-height: 1.65; margin-bottom: .5rem; }
 
 .footer-bottom {
@@ -385,7 +387,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); }
 .about-hero-inner { max-width: var(--content-w); margin: 0 auto; }
 .page-label {
   font-size: var(--text-sm); font-weight: 700;
-  color: var(--navy); letter-spacing: .05em;
+  color: var(--teal); letter-spacing: .05em;
   text-transform: uppercase; margin-bottom: .85rem;
 }
 .about-hero h1 {
@@ -400,7 +402,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); }
 .about-body { max-width: var(--content-w); margin: 0 auto; padding: 3rem 1.5rem 5rem; }
 .about-body h2 {
   font-size: var(--text-sm); font-weight: 700;
-  color: var(--navy); letter-spacing: .05em;
+  color: var(--teal); letter-spacing: .05em;
   text-transform: uppercase; margin: 2.5rem 0 1rem;
   border-bottom: 1px solid var(--border); padding-bottom: .5rem;
 }
@@ -436,7 +438,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); }
 }
 .standards-list li::before {
   content: '—'; position: absolute; left: 0;
-  color: var(--navy); font-weight: 600;
+  color: var(--teal); font-weight: 600;
 }
 
 /* ── Scrollbar ──────────────────────────────────────────────── */
@@ -444,4 +446,4 @@ footer { background: var(--surface); border-top: 1px solid var(--border); }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-3); }
-::selection { background: rgba(27,58,107,0.15); color: var(--text); }
+::selection { background: rgba(13,94,94,0.15); color: var(--text); }

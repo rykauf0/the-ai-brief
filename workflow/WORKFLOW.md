@@ -1,8 +1,8 @@
-# The AI Brief — Weekly Publishing Workflow
+# The Climate Brief — Weekly Publishing Workflow
 
-**Publication:** The AI Brief
+**Publication:** The Climate Brief
 **Cadence:** Every Sunday
-**Audience:** Informed, skeptical readers — people who follow serious news, want to understand AI's real consequences, and have seen enough hype cycles to be deeply wary of them.
+**Audience:** Informed, skeptical readers — people who follow climate and energy seriously, want to understand real-world consequences, and have seen enough greenwashing and alarmism to be deeply wary of both.
 **Format:** 3–4 distinct headline developments (one primary source each) + a substantial analytical synthesis
 
 ---
@@ -20,65 +20,130 @@ Each development: 2–3 paragraphs of tight analysis + source links. No pull quo
 This is the centrepiece of the publication, not the postscript. The synthesis reads the week's developments together, identifies what they mean in combination, and gives readers something they could not get from reading the individual stories alone. It earns its length.
 
 **Why this structure?**
-The old five-story format created a sourcing problem: when one big study dominates a week, it gets cited three times across three "stories" that are really three angles on one source. The new format treats one source as one development, and moves the multi-angle analysis into the synthesis where it belongs.
+The old five-story format created a sourcing problem: when one big report dominates a week, it gets cited three times across three "stories" that are really three angles on one source. The new format treats one source as one development, and moves the multi-angle analysis into the synthesis where it belongs.
 
 ---
 
-## The Four Topic Pillars
+## The Five Topic Pillars
 
-1. **Governance & Policy** (`badge-gov`) — AI regulation, government adoption, institutional accountability
-2. **Work & Organizations** (`badge-work`) — how AI reshapes how organizations function, what gets automated
-3. **Economy & Society** (`badge-econ`) — productivity, labour markets, inequality, who bears the cost of the transition
-4. **Environment & Planet** (`badge-env`) — energy and water footprint, data centre growth, climate trade-offs
-
----
-
-## Step 1: Load the Skill
-
-```
-Load skill: research-assistant
-```
-
-This governs source credibility tiers, search strategy, and the skeptic-first evidence standard.
+1. **Policy & Governance** (`badge-pol`) — Climate legislation, international agreements (UNFCCC/COP), carbon pricing, regulatory shifts, just transition frameworks
+2. **Energy & Grid** (`badge-nrg`) — Renewables deployment, grid modernization, fossil fuel transitions, nuclear, battery storage, energy markets
+3. **Science & Systems** (`badge-sci`) — Climate research, IPCC findings, tipping points, extreme weather attribution, carbon cycle dynamics, modeling
+4. **Industry & Finance** (`badge-ind`) — Corporate emissions, green finance, carbon markets, supply chain decarbonization, adaptation tech, ESG
+5. **Land & Agriculture** (`badge-land`) — Deforestation, soil carbon, food systems, land use change, agricultural emissions, biodiversity
 
 ---
 
-## Step 2: Research the Week (research-assistant)
+## Deep Research Workflow
 
-**Goal:** Find 3–5 genuinely distinct AI developments from the past 7 days — each anchored by a different primary source.
+### Step 1: Systematic Source Monitoring
 
-### Search Strategy
+Monitor these source categories weekly. Each category contains Tier 1 and Tier 2 sources that form the backbone of credible climate reporting.
+
+#### Tier 1 Sources — Use Freely, Cite Specifically
+
+| Category | Sources |
+|----------|---------|
+| **Intergovernmental bodies** | IPCC, UNFCCC, IEA, IRENA, World Bank Climate, UNEP |
+| **Peer-reviewed journals** | Nature, Nature Climate Change, Nature Energy, Science, Environmental Research Letters, The Lancet Planetary Health, Joule, Energy Policy |
+| **Major journalism** | Financial Times (Climate Capital), Reuters (Sustainability), The Guardian (Environment), New York Times (Climate), Washington Post (Climate & Environment), The Economist |
+| **Data & tracking** | Global Carbon Project, Climate Action Tracker, Our World in Data, Ember (electricity data), BloombergNEF |
+
+#### Tier 2 Sources — Use with Clear Attribution
+
+| Category | Sources |
+|----------|---------|
+| **Specialist climate media** | Carbon Brief, Climate Home News, E&E News, Canary Media, The Energy Mix, Grist |
+| **Think tanks & research** | World Resources Institute, RMI (Rocky Mountain Institute), Climate Analytics, Carbon Tracker, Chatham House (Environment), Bruegel (Energy), IISD |
+| **Industry research** | Wood Mackenzie, S&P Global Commodity Insights, Lazard LCOE reports, BNEF, McKinsey Sustainability |
+| **Government agencies** | US EIA, US EPA, European Environment Agency, UK Climate Change Committee, China's NDRC |
+
+#### Tier 3 Sources — Flag Clearly, Require Corroboration
+
+| Category | Sources |
+|----------|---------|
+| **Industry-funded** | Trade association reports, corporate sustainability reports, industry-commissioned surveys |
+| **Advocacy** | NGO campaign materials, activist research, opinion columns |
+| **Emerging/unverified** | Preprints, conference presentations, social media claims |
+
+### Step 2: Weekly Research Protocol
+
+**Goal:** Find 3–5 genuinely distinct climate and energy developments from the past 7 days — each anchored by a different primary source.
+
+#### Search Strategy
 
 ```
-AI news [current week] major developments
-AI governance policy [current month] [year]
-AI workforce jobs [current week]
-AI energy data centres [current month]
-AI regulation [current week]
+climate energy news [current week] major developments
+climate policy legislation [current month] [year]
+renewable energy deployment grid [current week]
+carbon emissions research [current month]
+climate finance ESG [current week]
+deforestation land use agriculture emissions [current month]
+IPCC climate science findings [current month]
+energy transition [current week] [year]
 ```
 
-**The one-source-per-development rule:** Before selecting a development, ask: *what is the single primary source for this item?* If two candidate stories both trace back to the same paper, report, or announcement, they are one development. Merge them.
+#### Deep Research Checklist
 
-**Distinct = different domain, different publication, different event.** A government announcement, a peer-reviewed study, an independent poll, and an industry earnings report are four distinct sources. Four angles on the same earnings report are not.
+For each candidate development, complete this verification process:
 
-### Source Credibility Tiers
+1. **Identify the primary source**
+   - What is the original report, study, dataset, or official announcement?
+   - Is it peer-reviewed? Government-issued? From a credible research institution?
+   - Can you access the primary document, not just media coverage of it?
 
-| Tier | Examples | How to Use |
-|------|----------|------------|
-| **Tier 1** | Peer-reviewed research, major analyst firms, major journalism (WSJ, FT, HBR, NYT, Reuters, Guardian) | Use freely. Cite specifically. |
-| **Tier 2** | MIT Tech Review, think tanks (CFR, Brookings, Chatham House), company research labs, reputable trade press | Use with clear attribution. |
-| **Tier 3** | Vendor surveys, smaller blogs, opinion pieces | Flag clearly. Use only when corroborated. |
+2. **Cross-reference with multiple outlets**
+   - Is the development covered by at least 2 independent, credible outlets?
+   - Do different outlets report consistent facts, or are there discrepancies?
+   - If only one outlet covers it, is the source strong enough to stand alone (e.g., a Nature paper)?
 
-### Triple-Verification Requirement
+3. **Check for context and counter-evidence**
+   - What is the historical baseline? Is this genuinely new, or a continuation?
+   - Are there credible dissenting views or methodological concerns?
+   - Does the primary source acknowledge limitations?
+
+4. **Verify data claims**
+   - Can you trace specific numbers back to their origin dataset?
+   - Are units, timeframes, and comparison periods clearly stated?
+   - Has the data been adjusted, normalized, or cherry-picked?
+
+5. **Assess significance**
+   - Does this development change how institutions function or make decisions?
+   - Does it reveal a pattern not visible from individual data points?
+   - Would a skeptical professional find this worth knowing?
+
+#### The One-Source-Per-Development Rule
+
+Before selecting a development, ask: *what is the single primary source for this item?* If two candidate stories both trace back to the same paper, report, or announcement, they are one development. Merge them.
+
+**Distinct = different domain, different publication, different event.** An IEA report, a Nature study, a government policy announcement, and a corporate filing are four distinct sources. Four angles on the same IPCC report are not.
+
+### Step 3: Source Validation Protocol
+
+#### Triple-Verification Requirement
 
 Every cited source must pass three checks:
-1. **Existence** — the URL resolves and the article is real
-2. **Content** — the article says what is attributed to it
+
+1. **Existence** — the URL resolves and the article/report is real
+2. **Content** — the article says what is attributed to it (specific claims, numbers, quotes verified against original)
 3. **Currency** — the publication date is within the claimed period
+
+#### Climate-Specific Verification
+
+Climate and energy reporting requires additional scrutiny:
+
+| Check | What to verify |
+|-------|---------------|
+| **Units & baselines** | CO₂ vs CO₂-equivalent, GW vs GWh, absolute vs per-capita, what year is the baseline? |
+| **Timeframes** | Is the claim about annual, cumulative, or peak values? 20-year vs 100-year GWP for methane? |
+| **Attribution** | Does the study attribute outcomes to specific causes, or just correlate? |
+| **Modeling vs observation** | Is this a projection, a model result, or observed data? Make the distinction explicit. |
+| **Funding & conflicts** | Who funded the research? Does the source have commercial interests in the outcome? |
+| **Geographic scope** | Global, national, or regional? Don't generalize regional findings to global conclusions. |
 
 ---
 
-## Step 3: Draft the Issue
+## Step 4: Draft the Issue
 
 ### File naming
 - File: `issues/YYYY-MM-DD.html` (Sunday's date)
@@ -87,7 +152,7 @@ Every cited source must pass three checks:
 
 ### HTML template
 
-The canonical template is **Issue #10** (`issues/2026-03-08.html`). Read that file before drafting. Key structural elements:
+The canonical template is at `templates/issue-template.html`. Read that file before drafting. Key structural elements:
 
 ```html
 <div class="article-body">
@@ -123,7 +188,7 @@ The canonical template is **Issue #10** (`issues/2026-03-08.html`). Read that fi
 
   <section class="synthesis">
     <h2>What It All Means</h2>
-    <p class="syn-byline">The AI Brief · Issue #[N], [Date]</p>
+    <p class="syn-byline">The Climate Brief · Issue #[N], [Date]</p>
     <!-- 4-6 substantive paragraphs connecting the week's developments -->
     <div class="bottom-line">
       <strong>Bottom line</strong>
@@ -140,7 +205,7 @@ The canonical template is **Issue #10** (`issues/2026-03-08.html`). Read that fi
 
   <div class="author-bio">
     <span class="bio-label">About this publication</span>
-    <p>The AI Brief publishes every Sunday. The week's signal developments, then what they mean together. No advertising. <a href="../about.html">About our editorial standards →</a></p>
+    <p>The Climate Brief publishes every Sunday. The week's signal developments in climate and energy, then what they mean together. No advertising. <a href="../about.html">About our editorial standards →</a></p>
   </div>
 
 </div>
@@ -148,9 +213,9 @@ The canonical template is **Issue #10** (`issues/2026-03-08.html`). Read that fi
 
 ### Writing standards
 
-**Voice:** Calm urgency. Collaborative "we" in synthesis. No hype words without direct evidentiary support.
+**Voice:** Calm urgency. Collaborative "we" in synthesis. No hype words without direct evidentiary support. No doom without evidence. No optimism without caveats.
 
-**Audience test:** Would a thoughtful, skeptical professional who has seen many hype cycles roll their eyes? If yes, remove the hype and add evidence.
+**Audience test:** Would a thoughtful, skeptical professional who has seen many greenwashing campaigns and climate doom cycles roll their eyes? If yes, remove the rhetoric and add evidence.
 
 **Development length:** 2–3 tight paragraphs + sources. No padding.
 
@@ -160,22 +225,25 @@ The canonical template is **Issue #10** (`issues/2026-03-08.html`). Read that fi
 
 ---
 
-## Step 4: Pre-Publish Review
+## Step 5: Pre-Publish Review
 
 **Sourcing**
 - [ ] Each development traces to a distinct primary source
 - [ ] No single source cited as the basis for more than one development
 - [ ] All URLs resolve and content matches attribution
 - [ ] All sources are Tier 1 or Tier 2
+- [ ] Climate-specific verification checklist completed (units, baselines, timeframes)
 
 **Content**
 - [ ] Framing paragraph connects all developments without over-explaining
 - [ ] Synthesis addresses developments in combination, not in sequence
 - [ ] Bottom line is specific, not generic
 - [ ] No hype language without evidence
+- [ ] No doom language without evidence
+- [ ] Modeling vs observation distinction clear where relevant
 
 **Technical**
-- [ ] HTML structure matches the Issue #10 template
+- [ ] HTML structure matches the issue template
 - [ ] Both stylesheets linked (`../site.css`, `../article.css`)
 - [ ] `<script src="../js/main.js"></script>` before `</body>`
 - [ ] Meta description tag present
@@ -183,7 +251,7 @@ The canonical template is **Issue #10** (`issues/2026-03-08.html`). Read that fi
 
 ---
 
-## Step 5: Update the Homepage
+## Step 6: Update the Homepage
 
 1. **Update the featured issue** (`<section class="hero">`) — point to new issue, update title and excerpt
 2. **Add a new issue card** to `.issue-grid` — at the top, before existing cards
@@ -212,4 +280,4 @@ Issues are stored permanently in `issues/` — never deleted, only corrected wit
 
 ---
 
-*The AI Brief exists to reduce noise to signal. The readers are experienced and skeptical. One source = one development. The analytical work belongs in the synthesis.*
+*The Climate Brief exists to reduce noise to signal. The readers are experienced and skeptical. One source = one development. The analytical work belongs in the synthesis.*
