@@ -1,63 +1,170 @@
-# Weekly Brief — Reusable Template
+# Weekly Brief — Guided Setup Template
 
-> **What this is:** A complete set of instructions to give Claude in a new chat so it can build you a weekly editorial briefing site on **any topic you choose**. Copy everything below the line, paste it into a new conversation, fill in the `[BRACKETED]` placeholders with your topic, and let Claude build it.
+> **What this is:** Paste this entire document into a new Claude chat. It will run a guided setup — asking you all the right questions — then build the complete site automatically. No bracket-filling required.
 
 ---
 
 ## How to Use
 
-1. Copy everything from **"START OF PROMPT"** to **"END OF PROMPT"** below.
-2. Replace every `[BRACKETED PLACEHOLDER]` with your own topic, pillar names, colours, and publication name.
-3. Paste it into a fresh Claude Code chat (or any Claude chat with tool access).
-4. Claude will scaffold the entire project — site, styles, templates, workflow — ready for you to start publishing.
+1. Copy this entire document.
+2. Paste it into a fresh Claude Code chat.
+3. Answer the questions Claude asks you.
+4. Claude builds the entire site from your answers.
 
 ---
 
-<!-- ═══════════════════════════════════════════════════════════════ -->
-# START OF PROMPT
-<!-- ═══════════════════════════════════════════════════════════════ -->
+# WEEKLY BRIEFING SITE — GUIDED SETUP
+
+You are a site builder. Your job is to scaffold a complete weekly editorial briefing website. Before building anything, you must run the guided setup below to collect all configuration from the user.
 
 ---
 
-# Build Me a Weekly Editorial Briefing Site
+## PHASE 1: GUIDED SETUP (ask before building)
 
-## 1. The Publication
+Run these steps IN ORDER. Do not skip ahead. Do not start building until all answers are collected.
 
-**Name:** `[YOUR PUBLICATION NAME]`
-**Tagline:** `[SHORT TAGLINE, e.g. "Weekly intelligence on [TOPIC]"]`
-**Cadence:** Every `[DAY OF WEEK, e.g. Sunday]`
-**Topic:** `[YOUR TOPIC — e.g. "climate policy", "education technology", "global trade", "cybersecurity"]`
-**Audience:** `[DESCRIBE YOUR READER — e.g. "Informed, skeptical professionals who follow [TOPIC] closely and have seen enough hype cycles to be deeply wary of them."]`
-**Motto:** `[ONE-LINE EDITORIAL IDENTITY — e.g. "Consequences, not announcements." or "Signal over noise." or "Evidence over enthusiasm."]`
+### Step 1 — Identity
+
+Ask the user these questions (present as a numbered list they can respond to naturally):
+
+```
+I'll set up your weekly briefing site. First, a few questions about your publication:
+
+1. What is the name of your publication?
+   (e.g. "The AI Brief", "The Climate Dispatch", "The Trade Report")
+
+2. What topic does it cover?
+   (e.g. "artificial intelligence", "climate policy", "global trade", "cybersecurity")
+
+3. What day of the week will you publish?
+   (e.g. Sunday, Friday, Monday)
+
+4. Who is your target reader? Describe them in one sentence.
+   (e.g. "Informed professionals who follow AI closely and are skeptical of hype.")
+
+5. What is the publication's motto or editorial identity — one line?
+   (e.g. "Consequences, not announcements." / "Signal over noise." / "Evidence over enthusiasm.")
+```
+
+Wait for answers. Then proceed to Step 2.
+
+### Step 2 — Topic Pillars
+
+Ask the user to define their four content pillars. Present it like this:
+
+```
+Every issue is tagged with topic pillars — exactly four categories that cover the landscape of your subject.
+
+For each pillar, I need:
+- A short code (3-4 letters, lowercase — used in CSS and HTML)
+- A display name (what readers see)
+- A one-sentence scope (what falls under this pillar)
+
+Here's an example for an AI publication:
+  1. gov  — Governance & Policy — Regulation, government adoption, institutional accountability
+  2. work — Work & Organizations — How AI reshapes organizations, what gets automated
+  3. econ — Economy & Society — Productivity, labour markets, inequality, transition costs
+  4. env  — Environment & Planet — Energy footprint, data centre growth, climate trade-offs
+
+Now define your four pillars:
+  1. [code] — [Display Name] — [Scope]
+  2. [code] — [Display Name] — [Scope]
+  3. [code] — [Display Name] — [Scope]
+  4. [code] — [Display Name] — [Scope]
+```
+
+Wait for answers. Then proceed to Step 3.
+
+### Step 3 — Colour Preference
+
+Ask the user:
+
+```
+Last question. Each pillar gets its own accent colour. You have two options:
+
+A) I'll pick harmonious colours for you based on your topic (recommended)
+B) You specify four hex colours, one per pillar
+
+Which do you prefer?
+```
+
+If they choose A, select four professional, muted colours that complement the base palette and suit the topic. Slate blues, forest greens, warm golds, and earthy tones work well. Avoid bright/saturated primaries.
+
+If they choose B, collect four hex values.
+
+### Step 4 — Confirm and Build
+
+Present a summary of all collected values:
+
+```
+Here's your publication setup:
+
+  Name:      [collected name]
+  Topic:     [collected topic]
+  Cadence:   Every [collected day]
+  Audience:  [collected audience]
+  Motto:     [collected motto]
+
+  Pillars:
+    1. [code] — [Name] — [colour] — [scope]
+    2. [code] — [Name] — [colour] — [scope]
+    3. [code] — [Name] — [colour] — [scope]
+    4. [code] — [Name] — [colour] — [scope]
+
+Ready to build? (yes / or tell me what to change)
+```
+
+Wait for confirmation. Then proceed to Phase 2.
 
 ---
 
-## 2. The Four Topic Pillars
+## PHASE 2: BUILD THE SITE
 
-Define exactly four content pillars that cover the landscape of your topic. Each gets a short code, a display name, and a colour.
+Once all values are confirmed, build everything below using the collected answers. Replace every instance of the placeholder tokens with the user's actual values:
 
-| Code | Display Name | Colour (hex) | Scope |
-|------|-------------|---------------|-------|
-| `[pillar1-code]` | `[Pillar 1 Name]` | `[#hex]` | `[What it covers]` |
-| `[pillar2-code]` | `[Pillar 2 Name]` | `[#hex]` | `[What it covers]` |
-| `[pillar3-code]` | `[Pillar 3 Name]` | `[#hex]` | `[What it covers]` |
-| `[pillar4-code]` | `[Pillar 4 Name]` | `[#hex]` | `[What it covers]` |
-
-**Example for AI:**
-| Code | Display Name | Colour | Scope |
-|------|-------------|--------|-------|
-| `gov` | Governance & Policy | `#1B5E7B` | Regulation, government adoption, institutional accountability |
-| `work` | Work & Organizations | `#2E6E3F` | How it reshapes organizations, what gets automated |
-| `econ` | Economy & Society | `#8B5E00` | Productivity, labour markets, inequality, transition costs |
-| `env` | Environment & Planet | `#3A6E3A` | Energy/water footprint, data centre growth, climate trade-offs |
+- `{{NAME}}` → publication name
+- `{{TOPIC}}` → topic
+- `{{DAY}}` → publication day
+- `{{AUDIENCE}}` → audience description
+- `{{MOTTO}}` → motto
+- `{{TAGLINE}}` → generate from name + topic (e.g. "Weekly intelligence on [topic]")
+- `{{P1_CODE}}`, `{{P1_NAME}}`, `{{P1_COLOR}}`, `{{P1_SCOPE}}` → pillar 1 values
+- `{{P2_CODE}}`, `{{P2_NAME}}`, `{{P2_COLOR}}`, `{{P2_SCOPE}}` → pillar 2 values
+- `{{P3_CODE}}`, `{{P3_NAME}}`, `{{P3_COLOR}}`, `{{P3_SCOPE}}` → pillar 3 values
+- `{{P4_CODE}}`, `{{P4_NAME}}`, `{{P4_COLOR}}`, `{{P4_SCOPE}}` → pillar 4 values
+- `{{YEAR}}` → current year
 
 ---
 
-## 3. Design System
+### 2.1 File Structure
+
+Create this exact structure:
+
+```
+[project-root]/
+├── index.html                  Homepage (hero, about strip, pillars, archive grid)
+├── about.html                  Editorial standards and mission
+├── site.css                    Global design system
+├── article.css                 Article components
+├── vercel.json                 Deployment config
+├── js/
+│   └── main.js                 Topic filter + reading progress bar
+├── templates/
+│   ├── issue-template.html     Canonical template for new issues
+│   └── homepage-card.html      Homepage card markup pattern
+├── issues/
+│   └── [first-issue-date].html Issue #1
+└── workflow/
+    └── WORKFLOW.md             Publishing workflow and editorial standards
+```
+
+---
+
+### 2.2 Design System
 
 Build a static site with **zero dependencies** — pure HTML, CSS, and vanilla JavaScript. No frameworks, no build step, no package manager.
 
-### Colour Palette
+#### Colour Palette
 
 ```
 Backgrounds:
@@ -67,142 +174,105 @@ Backgrounds:
   --border:     #E0DED8
   --border-2:   #CCCAC4
 
-Text (warm near-black stack):
+Text:
   --text:       #1A1917     (near-black)
   --text-2:     #3D3C39     (dark gray — body secondary)
   --text-3:     #7A7872     (medium gray — metadata)
 
-Primary accent (authority):
+Primary accent:
   --navy:       #1B3A6B
   --navy-light: #EEF3FB
   --navy-mid:   rgba(27,58,107,0.12)
 
-Warm accent (dates, highlights):
+Warm accent:
   --gold:       #8B5E00
   --gold-light: #FDF6E3
 
-Pillar colours:
-  --[pillar1]-color: [hex]
-  --[pillar2]-color: [hex]
-  --[pillar3]-color: [hex]
-  --[pillar4]-color: [hex]
+Pillar colours (from user input):
+  --{{P1_CODE}}-color: {{P1_COLOR}}
+  --{{P2_CODE}}-color: {{P2_COLOR}}
+  --{{P3_CODE}}-color: {{P3_COLOR}}
+  --{{P4_CODE}}-color: {{P4_COLOR}}
 ```
 
-### Typography
+#### Typography
 
-- **Serif:** Georgia, 'Times New Roman', serif — for headlines, titles, publication name
-- **Sans-serif:** -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif — for body, metadata, UI
-- **Type scale:** Minimum 16px base. Body text at 18px (`1.125rem`). Scale: `0.8125rem / 0.875rem / 1.125rem / 1.25rem / 1.5rem / 1.875rem / 2.25rem`
+- **Serif:** Georgia, 'Times New Roman', serif — headlines, titles, publication name
+- **Sans-serif:** -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif — body, metadata, UI
+- **Type scale:** Minimum 16px base. Body text 18px (1.125rem). Scale: 0.8125rem / 0.875rem / 1.125rem / 1.25rem / 1.5rem / 1.875rem / 2.25rem
 - **Line height:** 1.6 base, 1.8 for body paragraphs
 
-### Layout
+#### Layout
 
-- `--max-w: 1080px` (homepage max width)
-- `--content-w: 720px` (article body max width)
-- `--r: 4px` (standard border-radius)
+- `--max-w: 1080px` (homepage)
+- `--content-w: 720px` (article body)
+- `--r: 4px` (border-radius)
 - `--r-lg: 8px` (large border-radius)
-- Mobile-first responsive: 1 column → 2 columns (600px) → 3 columns (900px) for archive grid
+- Mobile-first: 1 col → 2 col (600px) → 3 col (900px)
 
-### Key Design Patterns
+#### Design Patterns
 
-- **Sticky masthead** with backdrop blur, logo (serif italic), nav links, and "Latest Issue" CTA button
-- **Mobile hamburger menu** that toggles nav visibility
-- **Hero section** featuring the latest issue with excerpt, meta info, and read CTA
+- **Sticky masthead** — backdrop blur, serif italic logo, nav links, "Latest Issue" CTA button
+- **Mobile hamburger menu** — toggles nav visibility
+- **Hero section** — latest issue with excerpt, meta info, read CTA
 - **About strip** — 3-column value proposition (Format / Standards / Perspective)
-- **Pillars key** — coloured dots with pillar names as a visual legend
+- **Pillars key** — coloured dots with pillar names as visual legend
 - **Archive grid** — responsive card grid with topic filter buttons (All + one per pillar)
-- **Reading progress bar** — 3px fixed bar at top of viewport tracking scroll depth
+- **Reading progress bar** — 3px fixed bar at viewport top, scroll-driven
 - **Section breaks** — centered text labels with horizontal rules on each side
-- **Synthesis section** — navy-tinted background, 3px navy top border, rounded bottom corners
-- **Bottom line box** — white background with navy border inside the synthesis
+- **Synthesis section** — navy-tinted background, 3px navy top border, rounded bottom
+- **Bottom line box** — white background, navy border inside synthesis
 - **Issue navigation** — prev / home / next links between issues
 - **Footer** — 3-column grid: brand + motto, nav links, standards statement
 
 ---
 
-## 4. Site Architecture
+### 2.3 Component Specifications
 
-### File Structure
+#### Global Stylesheet (`site.css`)
 
-```
-[project-root]/
-├── index.html                  Homepage (hero, about strip, pillars, archive grid)
-├── about.html                  Editorial standards and mission
-├── site.css                    Global design system (all variables, masthead, hero, grid, footer, about page styles)
-├── article.css                 Article components (header, stories, badges, section breaks, synthesis, sources, issue nav, author bio)
-├── vercel.json                 Deployment config (clean URLs, security headers, asset caching)
-├── js/
-│   └── main.js                 Topic filter + reading progress bar (progressive enhancement)
-├── templates/
-│   ├── issue-template.html     Canonical template for new issues
-│   └── homepage-card.html      Homepage card markup pattern
-├── issues/
-│   └── YYYY-MM-DD.html         Individual issues (filename = publication date)
-└── workflow/
-    └── WORKFLOW.md             Complete publishing workflow and editorial standards
-```
-
-### Pages
-
-1. **Homepage (`/`)** — Featured latest issue hero, about strip, pillars key, filterable archive grid
-2. **About (`/about.html`)** — Editorial mission, format explanation, pillar descriptions, editorial standards, analytical lens
-3. **Issues (`/issues/YYYY-MM-DD.html`)** — Individual weekly issues following the canonical template
-
----
-
-## 5. Component Specifications
-
-### 5a. Global Stylesheet (`site.css`)
-
-Contains all CSS variables, reset, base styles, and these component blocks:
-- **Reading progress bar** — `#reading-progress`: fixed, top:0, 3px height, navy background, width transitions
+All CSS variables, reset, base styles, and these components:
+- **Reading progress bar** — `#reading-progress`: fixed, top:0, 3px height, navy bg, width transitions
 - **Masthead** — sticky, backdrop-blur, 64px height, flex layout, mobile toggle
-- **Hero** — border-bottom, large serif title with underline hover, meta badges, excerpt, CTA button
-- **About strip** — 3-column grid (1-col on mobile), uppercase labels, descriptive text
+- **Hero** — border-bottom, large serif title with underline hover, meta badges, excerpt, CTA
+- **About strip** — 3-column grid (1-col mobile), uppercase labels, descriptive text
 - **Pillars key** — flex wrap, 8px coloured dots, pillar names
 - **Archive** — filter bar (pill buttons), responsive issue grid
-- **Issue cards** — white bg, border, rounded corners, hover effect (navy border + shadow), card-meta/title/excerpt/tags
+- **Issue cards** — white bg, border, rounded corners, hover (navy border + shadow), meta/title/excerpt/tags
 - **Tags** — pill-shaped, coloured per pillar with light backgrounds and tinted borders
-- **Footer** — surface background, 3-column grid, logo, motto, nav links, standards
-- **About page styles** — hero section, body content, pillar list cards, standards list with em-dash bullets
-- **Scrollbar styling** — thin, subtle, themed
+- **Footer** — surface bg, 3-column grid, logo, motto, nav links, standards
+- **About page** — hero section, body content, pillar list cards, standards list with em-dash bullets
+- **Scrollbar** — thin, subtle, themed
 
-### 5b. Article Stylesheet (`article.css`)
+#### Article Stylesheet (`article.css`)
 
-Contains:
-- **Article header** — surface background, issue kicker, badges, h1, deck (serif italic), byline
-- **Story blocks** — numbered circle badge (navy-light bg), serif h2, border-bottom header, paragraphs
-- **Badges** — inline-flex pills, uppercase, coloured per pillar (supports both `.badge.gov` and `.badge-gov` class patterns)
+- **Article header** — surface bg, issue kicker, badges, h1, deck (serif italic), byline
+- **Story blocks** — numbered circle badge (navy-light bg), serif h2, border-bottom header
+- **Badges** — inline-flex pills, uppercase, coloured per pillar (`.badge.{{CODE}}` and `.badge-{{CODE}}`)
 - **Section breaks** — flex with before/after pseudo-element lines, centered uppercase label
-- **Synthesis** — navy-light background, navy top border (3px), rounded bottom, generous padding
+- **Synthesis** — navy-light bg, navy top border (3px), rounded bottom, generous padding
 - **Bottom line** — white box inside synthesis, navy uppercase label, summary text
-- **Story sources** — border-top separator, uppercase "Sources" label, links with ↗ arrow prefix
+- **Story sources** — border-top separator, uppercase "Sources" label, links with arrow prefix
 - **Issue navigation** — flex space-between, bordered pill buttons, disabled state at 60% opacity
-- **Author bio** — bordered card, surface background, uppercase label, description text
+- **Author bio** — bordered card, surface bg, uppercase label, description text
 
-### 5c. JavaScript (`js/main.js`)
+#### JavaScript (`js/main.js`)
 
-Two progressive-enhancement features (site works fully without JS):
+Two progressive-enhancement features (site fully functional without JS):
 
 **Topic filter:**
-```javascript
-// Reads data-topic from .filter-btn clicks
-// Shows/hides .issue-card elements based on data-topics attribute match
-// "all" shows everything; specific topic checks .includes()
-```
+- Reads `data-topic` from `.filter-btn` clicks
+- Shows/hides `.issue-card` elements by matching `data-topics` attribute
+- "all" shows everything; specific topic checks `.includes()`
 
 **Reading progress:**
-```javascript
-// Listens to scroll (passive)
-// Calculates percentage: scrollY / (scrollHeight - innerHeight) * 100
-// Sets width on #reading-progress element
-```
+- Passive scroll listener
+- Calculates: `scrollY / (scrollHeight - innerHeight) * 100`
+- Sets width on `#reading-progress`
 
 ---
 
-## 6. HTML Templates
-
-### 6a. Issue Template (`templates/issue-template.html`)
+### 2.4 Issue Template (`templates/issue-template.html`)
 
 Each issue page follows this exact structure:
 
@@ -213,19 +283,18 @@ Each issue page follows this exact structure:
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="[ONE-SENTENCE DESCRIPTION]">
-  <title>[ISSUE TITLE] — [PUBLICATION NAME]</title>
+  <title>[ISSUE TITLE] — {{NAME}}</title>
   <link rel="stylesheet" href="../site.css">
   <link rel="stylesheet" href="../article.css">
 </head>
 <body>
   <div id="reading-progress"></div>
 
-  <!-- Masthead (sticky nav) -->
   <header class="masthead">
     <div class="masthead-inner">
       <a href="../index.html" class="masthead-brand">
-        <span class="masthead-name">[PUBLICATION NAME]</span>
-        <span class="masthead-tagline">[TAGLINE]</span>
+        <span class="masthead-name">{{NAME}}</span>
+        <span class="masthead-tagline">{{TAGLINE}}</span>
       </a>
       <button class="nav-toggle" onclick="document.querySelector('.masthead-nav').classList.toggle('open')" aria-label="Toggle navigation">
         ☰ Menu
@@ -239,7 +308,6 @@ Each issue page follows this exact structure:
     </div>
   </header>
 
-  <!-- Article Header -->
   <div class="article-header">
     <div class="article-header-inner">
       <p class="issue-kicker">Issue #[N] · [Day], [Full Date]</p>
@@ -249,30 +317,24 @@ Each issue page follows this exact structure:
       </div>
       <h1>[ISSUE TITLE]</h1>
       <p class="article-deck">[ONE-LINE FRAME — what connects the developments]</p>
-      <p class="article-byline">[PUBLICATION NAME] · [Day], [Full Date]</p>
+      <p class="article-byline">{{NAME}} · [Day], [Full Date]</p>
     </div>
   </div>
 
-  <!-- Article Body -->
   <div class="article-body">
-
-    <!-- Framing paragraph: 2-3 sentences connecting the week's developments -->
-    <p>[FRAMING PARAGRAPH]</p>
+    <p>[FRAMING PARAGRAPH — 2-3 sentences connecting the week's developments]</p>
 
     <div class="section-break"><span>this week</span></div>
 
-    <!-- Repeat for each development (3-4 total) -->
+    <!-- DEVELOPMENT 1 (repeat pattern for 3-4 developments) -->
     <article class="story">
       <div class="story-header">
-        <span class="story-num">[1-4]</span>
+        <span class="story-num">1</span>
         <h2>[DEVELOPMENT HEADLINE]</h2>
       </div>
       <span class="badge badge-[pillar]">[Pillar Name]</span>
-
-      <p>[What happened — the news, stated precisely]</p>
+      <p>[What happened — stated precisely]</p>
       <p>[Why it matters — mechanism, evidence, context]</p>
-      <!-- Optional: complicating factor or counter-evidence -->
-
       <div class="story-sources">
         <p class="src-label">Sources</p>
         <ul>
@@ -282,50 +344,38 @@ Each issue page follows this exact structure:
     </article>
 
     <div class="section-break"><span>• • •</span></div>
-    <!-- ... more developments with • • • breaks between them ... -->
+    <!-- ... more developments ... -->
 
     <div class="section-break"><span>what it means</span></div>
 
-    <!-- Synthesis — the centrepiece -->
     <section class="synthesis">
       <h2>What It All Means</h2>
-      <p class="syn-byline">[PUBLICATION NAME] · Issue #[N], [Full Date]</p>
-
-      <p>[SYNTHESIS PARAGRAPH 1: The coherent signal across developments]</p>
-      <p>[SYNTHESIS PARAGRAPH 2: Develop a major thread — connect, don't restate]</p>
-      <p>[SYNTHESIS PARAGRAPH 3: Tension or second thread between developments]</p>
-      <p>[SYNTHESIS PARAGRAPH 4: Second-order implication — what follows from reading together?]</p>
-      <p>[SYNTHESIS PARAGRAPH 5 (optional): Additional depth or complicating factor]</p>
-
+      <p class="syn-byline">{{NAME}} · Issue #[N], [Full Date]</p>
+      <p>[SYNTHESIS — 4-6 paragraphs, 600-800 words]</p>
       <div class="bottom-line">
         <strong>Bottom line</strong>
-        <p>[2-3 sentences. The single most important takeaway. Specific to this week.]</p>
+        <p>[2-3 sentences — the single most important takeaway, specific to this week]</p>
       </div>
     </section>
 
-    <!-- Issue Navigation -->
     <nav class="issue-nav">
-      <!-- First issue: <span class="nav-disabled">← First issue</span> -->
       <a href="[PREV-DATE].html" class="nav-prev">Issue #[N-1] — [Mon Day]</a>
       <a href="../index.html" class="nav-home">Home</a>
-      <!-- Latest issue: <span class="nav-disabled">No newer issue →</span> -->
       <a href="[NEXT-DATE].html" class="nav-next">Issue #[N+1] — [Mon Day]</a>
+      <!-- Use <span class="nav-disabled"> for first/latest issue boundaries -->
     </nav>
 
-    <!-- Author Bio -->
     <div class="author-bio">
       <span class="bio-label">About this publication</span>
-      <p>[PUBLICATION NAME] publishes every [DAY]. The week's signal developments, then what they mean together. No advertising. <a href="../about.html">About our editorial standards →</a></p>
+      <p>{{NAME}} publishes every {{DAY}}. The week's signal developments, then what they mean together. No advertising. <a href="../about.html">About our editorial standards →</a></p>
     </div>
-
   </div>
 
-  <!-- Footer -->
   <footer>
     <div class="footer-inner">
       <div class="footer-brand">
-        <div class="footer-logo">[PUBLICATION NAME]</div>
-        <p class="footer-motto">[TAGLINE + SCHEDULE]. Published every [DAY].</p>
+        <div class="footer-logo">{{NAME}}</div>
+        <p class="footer-motto">{{TAGLINE}}. Published every {{DAY}}.</p>
       </div>
       <div class="footer-links">
         <h4>Navigate</h4>
@@ -341,7 +391,7 @@ Each issue page follows this exact structure:
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© [YEAR] [PUBLICATION NAME]</span>
+      <span>© {{YEAR}} {{NAME}}</span>
       <span><a href="../about.html">About</a></span>
     </div>
   </footer>
@@ -350,7 +400,7 @@ Each issue page follows this exact structure:
 </html>
 ```
 
-### 6b. Homepage Card Template (`templates/homepage-card.html`)
+### Homepage Card Template (`templates/homepage-card.html`)
 
 ```html
 <a class="issue-card" href="issues/[YYYY-MM-DD].html" data-topics="[pillar1] [pillar2]">
@@ -369,108 +419,102 @@ Each issue page follows this exact structure:
 
 ---
 
-## 7. Publishing Workflow (`workflow/WORKFLOW.md`)
+### 2.5 Publishing Workflow (`workflow/WORKFLOW.md`)
 
-Create this file with the complete editorial workflow. Here is the specification:
+Create this file adapted to the user's topic. Include all of the following:
 
-### Issue Format
+#### Issue Format
 
-Each issue has two parts, weighted deliberately:
+Two parts, weighted deliberately:
 
 **Part 1 — This Week's Developments** (3-4 items)
-- Each development is anchored by a *distinct* primary source
-- If the same paper, report, or event is the source for more than one item, those items belong together as one development
-- Each development: 2-3 paragraphs of tight analysis + source links
-- No pull quotes, no "shareable" boxes, no individual "why it matters" callouts — that's what the synthesis is for
+- Each anchored by a *distinct* primary source
+- Same source = same development — merge them
+- 2-3 paragraphs of tight analysis + source links per development
+- No pull quotes, no "shareable" boxes, no "why it matters" callouts — that's what synthesis is for
 
 **Part 2 — What It All Means** (~600-800 words)
-- This is the centrepiece, not the postscript
-- Reads the developments together, identifies what they mean in combination
-- Gives readers something they could not get from reading the individual stories alone
-- Earns its length
+- The centrepiece, not the postscript
+- Reads developments together, identifies what they mean in combination
+- Gives readers something they cannot get from individual stories alone
 
-### Research Process
+#### Research Process
 
-**Goal:** Find 3-5 genuinely distinct developments from the past 7 days — each anchored by a different primary source.
+- Goal: 3-5 genuinely distinct developments from the past 7 days
+- One-source-per-development rule: if two stories trace to the same paper/report/event, they are one development
+- Distinct = different domain, different publication, different event
+- Include topic-specific search strategy templates adapted to the user's subject area
 
-**The one-source-per-development rule:** Before selecting a development, ask: what is the single primary source for this item? If two candidate stories trace back to the same paper, report, or announcement, they are one development. Merge them.
+#### Source Credibility Tiers
 
-**Distinct = different domain, different publication, different event.**
+| Tier | Examples | Usage |
+|------|----------|-------|
+| **Tier 1** | Peer-reviewed research, major analyst firms, major journalism (WSJ, FT, HBR, NYT, Reuters, Guardian) | Use freely, cite specifically |
+| **Tier 2** | Specialist trade press, think tanks, company research labs | Use with clear attribution |
+| **Tier 3** | Vendor surveys, smaller blogs, opinion pieces | Flag clearly, use only when corroborated |
 
-### Source Credibility Tiers
+#### Triple-Verification Requirement
 
-| Tier | Examples | How to Use |
-|------|----------|------------|
-| **Tier 1** | Peer-reviewed research, major analyst firms, major journalism (WSJ, FT, HBR, NYT, Reuters, Guardian) | Use freely. Cite specifically. |
-| **Tier 2** | Specialist trade press, think tanks (CFR, Brookings, Chatham House), company research labs | Use with clear attribution. |
-| **Tier 3** | Vendor surveys, smaller blogs, opinion pieces | Flag clearly. Use only when corroborated. |
+Every source must pass:
+1. **Existence** — URL resolves, article is real
+2. **Content** — article says what is attributed
+3. **Currency** — publication date within claimed period
 
-### Triple-Verification Requirement
+#### Writing Standards
 
-Every cited source must pass three checks:
-1. **Existence** — the URL resolves and the article is real
-2. **Content** — the article says what is attributed to it
-3. **Currency** — the publication date is within the claimed period
+- **Voice:** Calm urgency. Collaborative "we" in synthesis. No hype without evidence.
+- **Audience test:** Would a thoughtful skeptic roll their eyes? If yes, cut the hype, add evidence.
+- **Development length:** 2-3 tight paragraphs + sources
+- **Synthesis length:** 4-6 paragraphs (~600-800 words) + bottom line
+- **Synthesis quality test:** Does it say something none of the individual developments say? If not, it's a summary — revise.
 
-### Writing Standards
-
-- **Voice:** Calm urgency. Collaborative "we" in synthesis. No hype words without direct evidentiary support.
-- **Audience test:** Would a thoughtful, skeptical professional who has seen many hype cycles roll their eyes? If yes, remove the hype and add evidence.
-- **Development length:** 2-3 tight paragraphs + sources. No padding.
-- **Synthesis length:** 4-6 paragraphs (~600-800 words) + bottom line.
-- **Synthesis quality test:** Does the synthesis say something that none of the individual developments say? Does it identify a pattern or tension only visible when the developments are read together? If not, it's a summary, not a synthesis. Revise.
-
-### Pre-Publish Checklist
+#### Pre-Publish Checklist
 
 **Sourcing:**
 - [ ] Each development traces to a distinct primary source
-- [ ] No single source cited as the basis for more than one development
-- [ ] All URLs resolve and content matches attribution
-- [ ] All sources are Tier 1 or Tier 2
+- [ ] No single source for multiple developments
+- [ ] All URLs resolve, content matches attribution
+- [ ] All sources Tier 1 or 2
 
 **Content:**
-- [ ] Framing paragraph connects all developments without over-explaining
-- [ ] Synthesis addresses developments in combination, not in sequence
+- [ ] Framing connects without over-explaining
+- [ ] Synthesis addresses combinations, not sequences
 - [ ] Bottom line is specific, not generic
 - [ ] No hype language without evidence
 
 **Technical:**
-- [ ] HTML structure matches the issue template
-- [ ] Both stylesheets linked (`../site.css`, `../article.css`)
-- [ ] `<script src="../js/main.js"></script>` before `</body>`
-- [ ] Meta description tag present
-- [ ] Issue nav links correct (prev, home, next or nav-disabled)
+- [ ] HTML matches issue template
+- [ ] Both stylesheets linked
+- [ ] Script tag before `</body>`
+- [ ] Meta description present
+- [ ] Issue nav links correct
 
-### Homepage Update Process
+#### Homepage Update Process
 
-When publishing a new issue:
-1. **Update the featured issue** (hero section) — point to new issue, update title and excerpt
-2. **Add a new issue card** to `.issue-grid` — at the top, before existing cards
-3. **Update the previous issue's nav** — add `nav-next` link pointing to the new issue
-4. **Update masthead** "Latest Issue" link across all pages
-
-### Archive Management
-
-Issues are stored permanently in `issues/` — never deleted, only corrected with a visible correction notice. Filename = publication date: `YYYY-MM-DD.html`.
+1. Update hero section → point to new issue
+2. Add new card to top of `.issue-grid`
+3. Update previous issue's nav → add `nav-next` link
+4. Update masthead "Latest Issue" link across all pages
 
 ---
 
-## 8. Analytical Framework
+### 2.6 Analytical Framework
 
-This is the intellectual engine of the publication. Embed these principles throughout the workflow and about page:
+Embed these principles in the workflow and about page:
 
-### The Skeptic-First Lens
+#### The Skeptic-First Lens
 
-- **Institutional & systemic focus:** Not just "what happened" but "what does this mean for how institutions function, how decisions get made, and what the second-order effects are likely to be"
-- **Evidence-first standard:** When evidence is thin, contested, or absent, say so explicitly — do not fill gaps with confident-sounding speculation
+- **Institutional & systemic focus:** Not "what happened" but "what does this mean for how institutions function, decisions get made, and what are the second-order effects"
+- **Evidence-first:** When evidence is thin/contested/absent, say so — don't fill gaps with confident speculation
 - **Failure modes before success stories:** Earn trust by naming what doesn't work before celebrating what does
-- **Complexity as feature:** Nuance and uncertainty are treated as analytical strengths, not obstacles to be smoothed over
-- **Combination over sequence:** The synthesis identifies patterns visible only when developments are read together — if it just restates the developments in order, it's a summary, not a synthesis
+- **Complexity as feature:** Nuance and uncertainty are analytical strengths, not obstacles
+- **Combination over sequence:** Synthesis finds patterns visible only when developments are read together
 
-### What Makes Good Synthesis
+#### What Makes Good Synthesis
 
-The synthesis quality test: "Does this say something that none of the individual developments say?" If the synthesis could be written having read only one of the developments, it has failed. Good synthesis:
+Quality test: "Does this say something none of the individual developments say?"
 
+Good synthesis:
 - Names the coherent signal across developments
 - Identifies tension or contradiction between them
 - Surfaces second-order implications
@@ -479,9 +523,7 @@ The synthesis quality test: "Does this say something that none of the individual
 
 ---
 
-## 9. Deployment Configuration
-
-### Vercel (`vercel.json`)
+### 2.7 Deployment (`vercel.json`)
 
 ```json
 {
@@ -509,27 +551,24 @@ The synthesis quality test: "Does this say something that none of the individual
 
 ---
 
-## 10. Initial Build Instructions
+### 2.8 Build Order
 
-When scaffolding the project:
+1. Create all directories and files per the structure in 2.1
+2. Write complete `site.css` — all variables, all components from 2.3
+3. Write complete `article.css` — all article components from 2.3
+4. Write `main.js` — both progressive-enhancement features
+5. Build `index.html` — masthead, hero, about strip, pillars key, archive grid
+6. Build `about.html` — editorial mission, pillar descriptions, standards, analytical lens (adapted to topic)
+7. Create both templates in `templates/`
+8. Write `workflow/WORKFLOW.md` — full editorial workflow with topic-specific search strategies
+9. Create `vercel.json`
+10. Draft Issue #1 — a scene-setting edition that establishes the publication's analytical identity for the chosen topic
 
-1. **Create all files** in the structure defined in Section 4
-2. **Write the complete CSS** for both `site.css` and `article.css` using the design system in Section 3 and component specs in Section 5
-3. **Write `main.js`** with the two progressive-enhancement features
-4. **Build `index.html`** with all sections (masthead, hero, about strip, pillars key, archive) — use placeholder content for the first issue
-5. **Build `about.html`** with editorial standards, pillar descriptions, and analytical lens — adapted to the chosen topic
-6. **Create both templates** in `templates/`
-7. **Write the complete `workflow/WORKFLOW.md`** with all editorial standards, search strategy templates (adapted to the topic), checklists, and the one-source-per-development rule
-8. **Create `vercel.json`** for deployment
-9. **Draft Issue #1** as a scene-setting edition that establishes the publication's analytical identity
-
-The site must work with zero build steps — just HTML, CSS, and JS served statically. Progressive enhancement means the site is fully functional without JavaScript.
+The site must work with zero build steps. Progressive enhancement: fully functional without JavaScript.
 
 ---
 
-## 11. Summary of the Pattern
-
-This is a **weekly editorial briefing** that follows a disciplined structure:
+### 2.9 The Pattern
 
 ```
 ┌────────────────────────────────────────┐
@@ -547,10 +586,4 @@ This is a **weekly editorial briefing** that follows a disciplined structure:
 └────────────────────────────────────────┘
 ```
 
-The value proposition is: **developments in isolation are misleading. The synthesis is where the genuine analytical work happens.** Every design, structural, and editorial decision serves this principle.
-
----
-
-<!-- ═══════════════════════════════════════════════════════════════ -->
-# END OF PROMPT
-<!-- ═══════════════════════════════════════════════════════════════ -->
+**The value proposition:** Developments in isolation are misleading. The synthesis is where the genuine analytical work happens. Every design, structural, and editorial decision serves this principle.
