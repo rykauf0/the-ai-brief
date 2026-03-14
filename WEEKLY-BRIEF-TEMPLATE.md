@@ -330,7 +330,7 @@ Each issue page follows this exact structure:
 
     <div class="section-break"><span>this week</span></div>
 
-    <!-- DEVELOPMENT 1 (repeat pattern for 3-4 developments) -->
+    <!-- DEVELOPMENT 1 (repeat pattern for 5 developments) -->
     <article class="story">
       <div class="story-header">
         <span class="story-num">1</span>
@@ -358,13 +358,13 @@ Each issue page follows this exact structure:
       <p class="syn-byline">{{NAME}} · Issue #[N], [Full Date]</p>
 
       <h3 class="syn-section syn-good">What's Working</h3>
-      <p>[1-2 paragraphs — genuine progress, earned optimism, things moving in the right direction. Celebrate what the evidence supports without caveating it to death.]</p>
+      <p>[3-5 sentences. Genuine progress backed by evidence. Be specific — name the advance, cite the data.]</p>
 
       <h3 class="syn-section syn-bad">What's Not</h3>
-      <p>[1-2 paragraphs — failures, overpromises, where evidence says "not yet" or "not like that." Name the gaps between claims and reality.]</p>
+      <p>[3-5 sentences. Failures, overpromises, gaps. Name what broke, what underdelivered. Specific, not generic.]</p>
 
       <h3 class="syn-section syn-ugly">What Nobody's Saying</h3>
-      <p>[1-2 paragraphs — uncomfortable truths, perverse incentives, structural problems, things technically working but ethically/socially broken. The stuff that doesn't fit neat narratives.]</p>
+      <p>[3-5 sentences. Uncomfortable truths, perverse incentives, structural problems. The stuff both boosters and critics avoid.]</p>
 
       <div class="bottom-line">
         <strong>Bottom line</strong>
@@ -441,24 +441,24 @@ Create this file adapted to the user's topic. Include all of the following:
 
 Two parts, weighted deliberately:
 
-**Part 1 — This Week's Developments** (3-4 items)
+**Part 1 — This Week's Developments** (5 items)
 - Each anchored by a *distinct* primary source (preferably Tier 1 research)
 - Same source = same development — merge them
 - 2-3 paragraphs of tight analysis + one-line editorial note + source links per development
 - The editorial note signals where this development sits: genuine progress, a setback, or an uncomfortable truth
 - Developments are reported with evidence-weighted honesty — no reflexive optimism or pessimism
 
-**Part 2 — What It All Means** (~600-800 words, three visible sections)
-- The centrepiece, not the postscript
-- **What's Working** — genuine progress, earned optimism backed by evidence
-- **What's Not** — failures, overpromises, where evidence says "not yet"
-- **What Nobody's Saying** — structural problems, perverse incentives, uncomfortable truths
+**Part 2 — What It All Means** (~300-450 words total, three concise sections)
+- The centrepiece, not the postscript — but concise, not exhaustive
+- **What's Working** — 3-5 sentences. Genuine progress backed by evidence
+- **What's Not** — 3-5 sentences. Failures, overpromises, gaps between claims and reality
+- **What Nobody's Saying** — 3-5 sentences. Structural problems, perverse incentives, uncomfortable truths
 - **Bottom Line** — 2-3 sentences that hold all three dimensions together
-- Gives readers something they cannot get from reading individual stories alone
+- Each section earns its space through specificity, not length. Say it once, say it well, move on
 
 #### Research Process
 
-- **Goal:** 3-5 genuinely distinct developments from the past 7 days, grounded in primary research
+- **Goal:** 5 genuinely distinct developments from the past 7 days, grounded in primary research
 - **Research-first:** Start with academic journals, research labs, think tanks, and government reports. Use journalism to find *leads*, then trace back to the primary source.
 - **Development scope is broad:** Developments can come from scientific breakthroughs, academic papers, philosophical/ethical scholarship, social science research, policy analysis, environmental science, clinical trials — any domain where the topic intersects with real-world consequences. This is not a tech news roundup.
 - **One-source-per-development rule:** If two stories trace to the same paper/report/event, they are one development — merge them
@@ -521,7 +521,7 @@ Before writing, confirm:
 
 ```
 Research quality gate:
-- [ ] At least 8-12 candidate sources identified (to select the best 6-10 for 3-4 developments)
+- [ ] At least 10-15 candidate sources identified (to select the best 10-15 for 5 developments)
 - [ ] At least 2 distinct sources per development (primary + corroboration)
 - [ ] Sources span at least 3 of the 4 topic pillars
 - [ ] At least 50% of sources are Tier 1 (primary authority)
@@ -610,7 +610,7 @@ Wait for user confirmation before writing the issue.
 - **Balance test:** Does this issue acknowledge genuine progress *and* genuine problems? If it reads as uniformly optimistic or uniformly pessimistic, the lens isn't doing its job.
 - **Audience test:** Would a thoughtful professional who's seen hype cycles *and* premature dismissals trust this? If it reads like cheerleading or doom, revise.
 - **Development length:** 2-3 tight paragraphs + editorial note + sources
-- **Synthesis length:** 3 sections (What's Working / What's Not / What Nobody's Saying) totalling ~600-800 words + bottom line
+- **Synthesis length:** 3 sections (What's Working / What's Not / What Nobody's Saying) totalling ~300-450 words + bottom line. Each section: 3-5 sentences. Concise and specific, not exhaustive
 - **Synthesis quality test:** Does each section earn its space? Does the bottom line hold all three dimensions together without picking a side? If the synthesis skips any dimension, it's incomplete.
 
 #### Pre-Publish Checklist
@@ -738,13 +738,13 @@ The site must work with zero build steps. Progressive enhancement: fully functio
 
 ```
 ┌────────────────────────────────────────┐
-│  3-4 distinct developments             │
+│  5 distinct developments               │
 │  (research-grounded, one source each)  │
 │  (2-3 paragraphs + editorial note      │
 │   + citations each)                    │
 ├────────────────────────────────────────┤
 │  "What It All Means" synthesis         │
-│  (600-800 words, three sections)       │
+│  (300-450 words, three sections)       │
 │                                        │
 │  ┌── What's Working ──────────────┐    │
 │  │ Genuine progress, earned       │    │
