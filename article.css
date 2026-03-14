@@ -73,18 +73,18 @@
   border-radius: 999px; padding: .2rem .65rem;
   flex-shrink: 0; border: 1px solid transparent;
 }
-.badge.gov    { background: #EBF4F8; color: var(--gov-color);    border-color: rgba(27,94,123,.2); }
+.badge.gov    { background: #EBF0FA; color: var(--gov-color);    border-color: rgba(43,94,167,.2); }
 .badge.work   { background: #EBF4EE; color: var(--work-color);   border-color: rgba(46,110,63,.2); }
 .badge.econ   { background: #FDF6E3; color: var(--econ-color);   border-color: rgba(139,94,0,.2);  }
-.badge.env    { background: #EBF4EB; color: var(--env-color);    border-color: rgba(58,110,58,.2); }
-.badge.soc    { background: #F6EBF4; color: var(--soc-color);    border-color: rgba(123,59,107,.2); }
+.badge.env    { background: #E8F5F1; color: var(--env-color);    border-color: rgba(27,123,94,.2); }
+.badge.soc    { background: #F6EBF4; color: var(--soc-color);    border-color: rgba(139,53,116,.2); }
 
 /* Badge aliases for badge-[pillar] class names */
-.badge-gov    { background: #EBF4F8; color: var(--gov-color);    border-color: rgba(27,94,123,.2); }
+.badge-gov    { background: #EBF0FA; color: var(--gov-color);    border-color: rgba(43,94,167,.2); }
 .badge-work   { background: #EBF4EE; color: var(--work-color);   border-color: rgba(46,110,63,.2); }
 .badge-econ   { background: #FDF6E3; color: var(--econ-color);   border-color: rgba(139,94,0,.2);  }
-.badge-env    { background: #EBF4EB; color: var(--env-color);    border-color: rgba(58,110,58,.2); }
-.badge-soc    { background: #F6EBF4; color: var(--soc-color);    border-color: rgba(123,59,107,.2); }
+.badge-env    { background: #E8F5F1; color: var(--env-color);    border-color: rgba(27,123,94,.2); }
+.badge-soc    { background: #F6EBF4; color: var(--soc-color);    border-color: rgba(139,53,116,.2); }
 
 .story > p {
   font-size: var(--text-base); color: var(--text-2);
