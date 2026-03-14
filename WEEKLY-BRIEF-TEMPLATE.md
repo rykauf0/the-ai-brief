@@ -31,7 +31,7 @@ Ask the user these questions (present as a numbered list they can respond to nat
 I'll set up your weekly briefing site. First, a few questions about your publication:
 
 1. What is the name of your publication?
-   (e.g. "The AI Brief", "The Climate Dispatch", "The Trade Report")
+   (e.g. "3rd Take", "The Climate Dispatch", "The Trade Report")
 
 2. What topic does it cover?
    (e.g. "artificial intelligence", "climate policy", "global trade", "cybersecurity")

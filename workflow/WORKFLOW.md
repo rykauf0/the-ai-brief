@@ -1,6 +1,6 @@
-# The AI Brief — Weekly Publishing Workflow
+# 3rd Take — Weekly Publishing Workflow
 
-**Publication:** The AI Brief
+**Publication:** 3rd Take
 **Cadence:** Every Sunday
 **Audience:** Informed readers — people who follow serious news, want the full picture on AI's real-world impact, and have seen enough hype cycles to value evidence-weighted honesty over reflexive skepticism or uncritical optimism.
 **Format:** 3–4 distinct headline developments (one primary source each) + a substantial analytical synthesis
@@ -152,7 +152,7 @@ The canonical template is **Issue #10** (`issues/2026-03-08.html`). Read that fi
 
   <section class="synthesis">
     <h2>What It All Means</h2>
-    <p class="syn-byline">The AI Brief · Issue #[N], [Date]</p>
+    <p class="syn-byline">3rd Take · Issue #[N], [Date]</p>
     <!-- 4-6 substantive paragraphs connecting the week's developments -->
     <div class="bottom-line">
       <strong>Bottom line</strong>
@@ -169,7 +169,7 @@ The canonical template is **Issue #10** (`issues/2026-03-08.html`). Read that fi
 
   <div class="author-bio">
     <span class="bio-label">About this publication</span>
-    <p>The AI Brief publishes every Sunday. The week's signal developments, then what they mean together. No advertising. <a href="../about.html">About our editorial standards →</a></p>
+    <p>3rd Take publishes every Sunday. The week's signal developments, then what they mean together. No advertising. <a href="../about.html">About our editorial standards →</a></p>
   </div>
 
 </div>
@@ -243,4 +243,4 @@ Issues are stored permanently in `issues/` — never deleted, only corrected wit
 
 ---
 
-*The AI Brief exists to reduce noise to signal. The readers are experienced and skeptical. One source = one development. The analytical work belongs in the synthesis.*
+*3rd Take exists to reduce noise to signal. The readers are experienced and skeptical. One source = one development. The analytical work belongs in the synthesis.*
