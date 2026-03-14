@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Citation Date Validator for The AI Brief
+Citation Date Validator for 3rd Take
 
 Checks that all citation URLs in issue HTML files have publication dates
 within ±7 days of the issue date. Citations tagged with
