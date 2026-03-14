@@ -1,4 +1,4 @@
-# The AI Brief — Project Instructions
+# 3rd Take — Project Instructions
 
 ## What This Is
 
