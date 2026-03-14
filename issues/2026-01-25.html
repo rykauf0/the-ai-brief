@@ -13,8 +13,16 @@
   <header class="masthead">
     <div class="masthead-inner">
       <a href="../index.html" class="masthead-brand">
-        <span class="masthead-logo"><span class="masthead-logo-num">3rd</span><span class="masthead-logo-sep"></span><span class="masthead-logo-word">Take</span></span>
-        <span class="masthead-tagline">The full picture</span>
+        <svg class="masthead-icon" viewBox="0 0 36 36" width="30" height="30" aria-hidden="true">
+          <polygon points="18,3 33,30 3,30" fill="none" stroke="#1B3A6B" stroke-width="2.5" stroke-linejoin="round"/>
+          <line x1="10" y1="23" x2="26" y2="23" stroke="#2E6E3F" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="12.5" y1="18" x2="23.5" y2="18" stroke="#8B3A3A" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="15" y1="13" x2="21" y2="13" stroke="#6B4E00" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <span class="masthead-wordmark">
+          <span class="masthead-title"><span class="masthead-title-num">3rd</span> Take</span>
+          <span class="masthead-tagline">The full picture</span>
+        </span>
       </a>
       <button class="nav-toggle" onclick="document.querySelector('.masthead-nav').classList.toggle('open')" aria-label="Toggle navigation">
         ☰ Menu
@@ -34,7 +42,8 @@
       <div class="article-header-badges">
         <span class="badge badge-econ">Economy</span>
         <span class="badge badge-gov">Governance</span>
-        <span class="badge badge-tech">Technology</span>
+        <span class="badge badge-work">Work</span>
+        <span class="badge badge-soc">Society</span>
       </div>
       <h1>DeepSeek Changes the Calculus</h1>
       <p class="article-deck">A Chinese AI lab built frontier-class reasoning models for $6 million. The cost equation that structured every assumption about the AI race has inverted.</p>
@@ -53,7 +62,7 @@
         <span class="story-num">1</span>
         <h2>DeepSeek R1 breaks the cost equation for frontier AI</h2>
       </div>
-      <span class="badge badge-econ">Economy & Markets</span>
+      <span class="badge badge-econ">Economy</span>
 
       <p>DeepSeek, a Chinese AI lab backed by quantitative trading firm High-Flyer, released R1 in January 2026. The disclosed training cost was $6 million. Comparable American models — OpenAI's o3, Anthropic's Claude — required estimated training costs of $100–500 million. The performance gap was negligible: R1 matched or exceeded frontier models on reasoning benchmarks, multimodal tasks, and coding. The market reaction was immediate and severe. Nvidia's stock fell 17% on January 27, shedding approximately $600 billion in market capitalization in a single day. The signal was unambiguous: the assumption that frontier AI required frontier resources was wrong.</p>
 
@@ -80,7 +89,7 @@
         <span class="story-num">2</span>
         <h2>Anthropic launches Claude Cowork — the shift from chat to agency</h2>
       </div>
-      <span class="badge badge-tech">Technology & Platforms</span>
+      <span class="badge badge-soc">Society</span>
 
       <p>In the week of January 19, Anthropic expanded Claude Cowork — its autonomous "computer agent" — from research preview to Team and Enterprise plans, signalling a production-grade commitment to the product. Cowork represents a structural departure from the chatbot paradigm that has dominated AI deployment since ChatGPT's release. Rather than responding to user prompts, it observes the user's screen, understands context, and completes repetitive, multi-step work without waiting for instruction. The same week, Anthropic published a new 23,000-word constitution for Claude — the first time a major AI lab formally addressed the possibility that its model may have some form of consciousness or moral status.</p>
 
@@ -107,7 +116,7 @@
         <span class="story-num">3</span>
         <h2>Cursor's autonomous agents build production software in days</h2>
       </div>
-      <span class="badge badge-tech">Technology & Development</span>
+      <span class="badge badge-work">Work</span>
 
       <p>Cursor, a developer-focused AI IDE, documented its autonomous coding agents building functional applications in dramatically compressed timeframes. Most remarkably, the agents constructed a web browser from scratch in under a week — a project that would normally require months of engineering. The browser rendered Google and other major sites with only minor visual glitches, demonstrating that AI-directed autonomous development is no longer a research topic but an operational reality.</p>
 
@@ -134,7 +143,7 @@
         <span class="story-num">4</span>
         <h2>US export controls on AI chips no longer work — new strategy needed</h2>
       </div>
-      <span class="badge badge-gov">Governance & Policy</span>
+      <span class="badge badge-gov">Governance</span>
 
       <p>The US has maintained strict export controls on advanced AI chips since 2022 — specifically Nvidia H100 and H200 GPUs — premised on a straightforward security logic: frontier AI requires frontier compute, so restrict compute access and you restrict frontier capability. DeepSeek invalidated that assumption with empirical evidence. An architecture optimized for efficiency can achieve frontier performance with chips well below the export control threshold.</p>
 
