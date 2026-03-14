@@ -236,6 +236,6 @@
   font-family: var(--sans);
   font-weight: 600;
 }
-.syn-good { color: #2E6E3F; }
-.syn-bad { color: #8B3A3A; }
-.syn-ugly { color: #6B4E00; }
+.syn-good { color: var(--lens-good); }
+.syn-bad { color: var(--lens-bad); }
+.syn-ugly { color: var(--lens-ugly); }
