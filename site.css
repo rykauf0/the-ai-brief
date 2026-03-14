@@ -32,7 +32,7 @@
   --gov-color:   #2B5EA7;   /* medium blue */
   --work-color:  #2E6E3F;   /* forest green */
   --econ-color:  #8B5E00;   /* warm gold */
-  --env-color:   #1B7B5E;   /* teal green */
+  --env-color:   #1A7FA0;   /* ocean blue */
   --soc-color:   #8B3574;   /* plum */
 
   /* Three-lens colours — the visual signature */
@@ -413,7 +413,7 @@ img { max-width: 100%; display: block; }
 .tag.gov    { color: var(--gov-color);    background: #EBF0FA; border-color: rgba(43,94,167,.15); }
 .tag.work   { color: var(--work-color);   background: #EBF4EE; border-color: rgba(46,110,63,.15); }
 .tag.econ   { color: var(--econ-color);   background: #FDF6E3; border-color: rgba(139,94,0,.15);  }
-.tag.env    { color: var(--env-color);    background: #E8F5F1; border-color: rgba(27,123,94,.15); }
+.tag.env    { color: var(--env-color);    background: #E8F2F6; border-color: rgba(26,127,160,.15); }
 .tag.soc    { color: var(--soc-color);    background: #F6EBF4; border-color: rgba(139,53,116,.15); }
 
 /* ── Footer ─────────────────────────────────────────────────── */
