@@ -14,8 +14,16 @@
   <header class="masthead">
     <div class="masthead-inner">
       <a href="index.html" class="masthead-brand">
-        <span class="masthead-logo"><span class="masthead-logo-num">3rd</span><span class="masthead-logo-sep"></span><span class="masthead-logo-word">Take</span></span>
-        <span class="masthead-tagline">The full picture</span>
+        <svg class="masthead-icon" viewBox="0 0 36 36" width="30" height="30" aria-hidden="true">
+          <polygon points="18,3 33,30 3,30" fill="none" stroke="#1B3A6B" stroke-width="2.5" stroke-linejoin="round"/>
+          <line x1="10" y1="23" x2="26" y2="23" stroke="#2E6E3F" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="12.5" y1="18" x2="23.5" y2="18" stroke="#8B3A3A" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="15" y1="13" x2="21" y2="13" stroke="#6B4E00" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <span class="masthead-wordmark">
+          <span class="masthead-title"><span class="masthead-title-num">3rd</span> Take</span>
+          <span class="masthead-tagline">The full picture</span>
+        </span>
       </a>
       <button class="nav-toggle" onclick="document.querySelector('.masthead-nav').classList.toggle('open')" aria-label="Toggle navigation">
         ☰ Menu
@@ -64,29 +72,36 @@
       <li>
         <span class="pillar-dot" style="background:var(--gov-color)"></span>
         <div class="pillar-desc">
-          <strong>Governance &amp; Policy</strong>
-          <span>AI regulation, government adoption, institutional accountability, and the rule of law as intelligent systems become embedded in public infrastructure.</span>
+          <strong>Governance</strong>
+          <span>AI regulation, export controls, institutional accountability, and the rule of law as intelligent systems become embedded in public infrastructure.</span>
         </div>
       </li>
       <li>
         <span class="pillar-dot" style="background:var(--work-color)"></span>
         <div class="pillar-desc">
-          <strong>Work &amp; Organizations</strong>
-          <span>How AI reshapes how organizations function, how leaders manage, what gets automated, and what the next generation of professional work looks like.</span>
+          <strong>Work</strong>
+          <span>How AI reshapes organizations, what gets automated, workforce displacement, professional skills, and what the next generation of work looks like.</span>
         </div>
       </li>
       <li>
         <span class="pillar-dot" style="background:var(--econ-color)"></span>
         <div class="pillar-desc">
-          <strong>Economy &amp; Society</strong>
-          <span>The macroeconomic picture: productivity, labour markets, inequality, cost of living, and who benefits from — or bears the cost of — the AI transition.</span>
+          <strong>Economy</strong>
+          <span>The macroeconomic picture: productivity, capital investment, market dynamics, infrastructure costs, and the business model shifts driving the AI transition.</span>
         </div>
       </li>
       <li>
         <span class="pillar-dot" style="background:var(--env-color)"></span>
         <div class="pillar-desc">
-          <strong>Environment &amp; Planet</strong>
+          <strong>Environment</strong>
           <span>The energy and water footprint of the AI build-out, the trade-offs with climate commitments, and AI's contested role in climate solutions.</span>
+        </div>
+      </li>
+      <li>
+        <span class="pillar-dot" style="background:var(--soc-color)"></span>
+        <div class="pillar-desc">
+          <strong>Society</strong>
+          <span>Healthcare, education, inequality, ethics, and the human impact of AI on communities, vulnerable populations, and public welfare.</span>
         </div>
       </li>
     </ul>

@@ -14,12 +14,16 @@
   <header class="masthead">
     <div class="masthead-inner">
       <a href="index.html" class="masthead-brand">
-        <span class="masthead-logo">
-          <span class="masthead-logo-num">3rd</span>
-          <span class="masthead-logo-sep"></span>
-          <span class="masthead-logo-word">Take</span>
+        <svg class="masthead-icon" viewBox="0 0 36 36" width="30" height="30" aria-hidden="true">
+          <polygon points="18,3 33,30 3,30" fill="none" stroke="#1B3A6B" stroke-width="2.5" stroke-linejoin="round"/>
+          <line x1="10" y1="23" x2="26" y2="23" stroke="#2E6E3F" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="12.5" y1="18" x2="23.5" y2="18" stroke="#8B3A3A" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="15" y1="13" x2="21" y2="13" stroke="#6B4E00" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <span class="masthead-wordmark">
+          <span class="masthead-title"><span class="masthead-title-num">3rd</span> Take</span>
+          <span class="masthead-tagline">The full picture</span>
         </span>
-        <span class="masthead-tagline">The full picture</span>
       </a>
       <button class="nav-toggle" onclick="document.querySelector('.masthead-nav').classList.toggle('open')" aria-label="Open navigation">
         ☰ Menu
@@ -44,7 +48,7 @@
         <div class="hero-meta">
           <span class="hero-date">March 8, 2026</span>
           <span class="hero-badge">Issue 10</span>
-          <span>Work &amp; Economy &middot; Governance</span>
+          <span>Work &middot; Governance &middot; Environment</span>
         </div>
         <p class="hero-excerpt">
           New research on white-collar job displacement arrives the same week governments are still debating definitions.
@@ -73,10 +77,11 @@
   <!-- Pillars Key -->
   <div class="pillars-key">
     <div class="pillars-key-inner">
-      <span class="pk-item"><span class="pk-dot" style="background:var(--gov-color)"></span>Governance &amp; Policy</span>
-      <span class="pk-item"><span class="pk-dot" style="background:var(--work-color)"></span>Work &amp; Organizations</span>
-      <span class="pk-item"><span class="pk-dot" style="background:var(--econ-color)"></span>Economy &amp; Society</span>
-      <span class="pk-item"><span class="pk-dot" style="background:var(--env-color)"></span>Environment &amp; Planet</span>
+      <span class="pk-item"><span class="pk-dot" style="background:var(--gov-color)"></span>Governance</span>
+      <span class="pk-item"><span class="pk-dot" style="background:var(--work-color)"></span>Work</span>
+      <span class="pk-item"><span class="pk-dot" style="background:var(--econ-color)"></span>Economy</span>
+      <span class="pk-item"><span class="pk-dot" style="background:var(--env-color)"></span>Environment</span>
+      <span class="pk-item"><span class="pk-dot" style="background:var(--soc-color)"></span>Society</span>
     </div>
   </div>
 
@@ -90,12 +95,13 @@
         <button class="filter-btn" data-topic="work">Work</button>
         <button class="filter-btn" data-topic="econ">Economy</button>
         <button class="filter-btn" data-topic="env">Environment</button>
+        <button class="filter-btn" data-topic="soc">Society</button>
       </div>
     </div>
 
     <div class="issue-grid">
 
-      <a class="issue-card" href="issues/2026-03-08.html" data-topics="work econ gov">
+      <a class="issue-card" href="issues/2026-03-08.html" data-topics="work env gov econ">
         <div class="card-meta">
           <span class="card-date">March 8, 2026</span>
           <span class="card-num">No. 10</span>
@@ -104,8 +110,8 @@
         <p class="card-excerpt">New research shows white-collar displacement accelerating. Entry-level hiring contracts. Policy still debating definitions while the data arrives.</p>
         <div class="card-tags">
           <span class="tag work">Work</span>
-          <span class="tag econ">Economy</span>
           <span class="tag gov">Governance</span>
+          <span class="tag env">Environment</span>
         </div>
       </a>
 
@@ -123,7 +129,7 @@
         </div>
       </a>
 
-      <a class="issue-card" href="issues/2026-02-22.html" data-topics="env econ gov">
+      <a class="issue-card" href="issues/2026-02-22.html" data-topics="env">
         <div class="card-meta">
           <span class="card-date">February 22, 2026</span>
           <span class="card-num">No. 8</span>
@@ -132,12 +138,10 @@
         <p class="card-excerpt">Data centres overtake aviation in energy consumption. Water stress reaches critical levels. The sustainability claims don't hold.</p>
         <div class="card-tags">
           <span class="tag env">Environment</span>
-          <span class="tag econ">Economy</span>
-          <span class="tag gov">Governance</span>
         </div>
       </a>
 
-      <a class="issue-card" href="issues/2026-02-15.html" data-topics="work gov econ">
+      <a class="issue-card" href="issues/2026-02-15.html" data-topics="soc gov">
         <div class="card-meta">
           <span class="card-date">February 15, 2026</span>
           <span class="card-num">No. 7</span>
@@ -145,13 +149,12 @@
         <p class="card-title">Healthcare AI at the Inflection Point</p>
         <p class="card-excerpt">Diagnostic AI outperforms specialists in narrow domains. But hospitals can't afford the infrastructure — and regulators are behind.</p>
         <div class="card-tags">
-          <span class="tag work">Work</span>
+          <span class="tag soc">Society</span>
           <span class="tag gov">Governance</span>
-          <span class="tag econ">Economy</span>
         </div>
       </a>
 
-      <a class="issue-card" href="issues/2026-02-08.html" data-topics="gov econ work">
+      <a class="issue-card" href="issues/2026-02-08.html" data-topics="econ work">
         <div class="card-meta">
           <span class="card-date">February 8, 2026</span>
           <span class="card-num">No. 6</span>
@@ -159,13 +162,12 @@
         <p class="card-title">The Model Race Accelerates</p>
         <p class="card-excerpt">Three frontier model releases in six weeks. Capability gains outpace safety frameworks. What the acceleration means for institutions.</p>
         <div class="card-tags">
-          <span class="tag gov">Governance</span>
           <span class="tag econ">Economy</span>
           <span class="tag work">Work</span>
         </div>
       </a>
 
-      <a class="issue-card" href="issues/2026-02-01.html" data-topics="gov econ work">
+      <a class="issue-card" href="issues/2026-02-01.html" data-topics="gov work">
         <div class="card-meta">
           <span class="card-date">February 1, 2026</span>
           <span class="card-num">No. 5</span>
@@ -174,12 +176,11 @@
         <p class="card-excerpt">The International AI Safety Report lands with 100 researchers behind it. The EU AI Act begins enforcement. What each approach will mean in practice.</p>
         <div class="card-tags">
           <span class="tag gov">Governance</span>
-          <span class="tag econ">Economy</span>
           <span class="tag work">Work</span>
         </div>
       </a>
 
-      <a class="issue-card" href="issues/2026-01-25.html" data-topics="econ gov work">
+      <a class="issue-card" href="issues/2026-01-25.html" data-topics="econ gov work soc">
         <div class="card-meta">
           <span class="card-date">January 25, 2026</span>
           <span class="card-num">No. 4</span>
@@ -193,7 +194,7 @@
         </div>
       </a>
 
-      <a class="issue-card" href="issues/2026-01-18.html" data-topics="econ gov env">
+      <a class="issue-card" href="issues/2026-01-18.html" data-topics="work gov env">
         <div class="card-meta">
           <span class="card-date">January 18, 2026</span>
           <span class="card-num">No. 3</span>
@@ -201,13 +202,13 @@
         <p class="card-title">The Week Everyone Admitted the Problem</p>
         <p class="card-excerpt">At Davos, AI leaders warned half of entry-level jobs could vanish within years. The honesty was unprecedented — the absence of a plan was not.</p>
         <div class="card-tags">
-          <span class="tag work">Workforce</span>
+          <span class="tag work">Work</span>
           <span class="tag gov">Governance</span>
           <span class="tag env">Environment</span>
         </div>
       </a>
 
-      <a class="issue-card" href="issues/2026-01-11.html" data-topics="work econ gov">
+      <a class="issue-card" href="issues/2026-01-11.html" data-topics="work soc econ">
         <div class="card-meta">
           <span class="card-date">January 11, 2026</span>
           <span class="card-num">No. 2</span>
@@ -216,12 +217,12 @@
         <p class="card-excerpt">Physical AI arrives at scale. Humanoid robots move from demonstrations to early deployments. The timeline for labour market disruption shortens.</p>
         <div class="card-tags">
           <span class="tag work">Work</span>
+          <span class="tag soc">Society</span>
           <span class="tag econ">Economy</span>
-          <span class="tag gov">Governance</span>
         </div>
       </a>
 
-      <a class="issue-card" href="issues/2026-01-04.html" data-topics="gov work econ">
+      <a class="issue-card" href="issues/2026-01-04.html" data-topics="gov econ env">
         <div class="card-meta">
           <span class="card-date">January 4, 2026</span>
           <span class="card-num">No. 1</span>
@@ -230,8 +231,8 @@
         <p class="card-excerpt">Where AI actually stands entering the year — past the hype, past the fear — and the five dynamics worth watching in the months ahead.</p>
         <div class="card-tags">
           <span class="tag gov">Governance</span>
-          <span class="tag work">Work</span>
           <span class="tag econ">Economy</span>
+          <span class="tag env">Environment</span>
         </div>
       </a>
 

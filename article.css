@@ -77,12 +77,14 @@
 .badge.work   { background: #EBF4EE; color: var(--work-color);   border-color: rgba(46,110,63,.2); }
 .badge.econ   { background: #FDF6E3; color: var(--econ-color);   border-color: rgba(139,94,0,.2);  }
 .badge.env    { background: #EBF4EB; color: var(--env-color);    border-color: rgba(58,110,58,.2); }
+.badge.soc    { background: #F6EBF4; color: var(--soc-color);    border-color: rgba(123,59,107,.2); }
 
 /* Badge aliases for badge-[pillar] class names */
 .badge-gov    { background: #EBF4F8; color: var(--gov-color);    border-color: rgba(27,94,123,.2); }
 .badge-work   { background: #EBF4EE; color: var(--work-color);   border-color: rgba(46,110,63,.2); }
 .badge-econ   { background: #FDF6E3; color: var(--econ-color);   border-color: rgba(139,94,0,.2);  }
 .badge-env    { background: #EBF4EB; color: var(--env-color);    border-color: rgba(58,110,58,.2); }
+.badge-soc    { background: #F6EBF4; color: var(--soc-color);    border-color: rgba(123,59,107,.2); }
 
 .story > p {
   font-size: var(--text-base); color: var(--text-2);
