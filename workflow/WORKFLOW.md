@@ -80,7 +80,30 @@ AI regulation [current week]
 Every cited source must pass three checks:
 1. **Existence** — the URL resolves and the article is real
 2. **Content** — the article says what is attributed to it
-3. **Currency** — the publication date is within the claimed period
+3. **Currency** — the publication date is within ±7 days of the issue date
+
+### Citation Date Rule
+
+**Core citations** must be published within ±7 days of the issue's Sunday date. This is the fundamental constraint for a weekly lookback — every source should be from that week.
+
+**Background citations** are the sole exception: foundational research papers, landmark policy documents, or reference material that provides essential context for a development but was not published that week. These must be tagged with `data-type="background"` on the `<li>` element:
+
+```html
+<li data-type="background"><a href="[URL]">[Publication], "[Title]"</a></li>
+```
+
+Background citations should be rare (0–2 per issue). If you're tagging more than 2 sources as background, the development may not belong in this week's issue.
+
+### Automated Validation
+
+Run the citation date validator before publishing:
+
+```bash
+python3 workflow/validate-citations.py                    # all issues
+python3 workflow/validate-citations.py issues/YYYY-MM-DD.html  # one issue
+```
+
+The validator checks all URL-embedded dates against the ±7 day window and flags violations. Background-tagged citations are reported but not counted as failures.
 
 ---
 
@@ -173,6 +196,8 @@ The canonical template is **Issue #10** (`issues/2026-03-08.html`). Read that fi
 - [ ] No single source cited as the basis for more than one development
 - [ ] All URLs resolve and content matches attribution
 - [ ] All sources are Tier 1 or Tier 2
+- [ ] `python3 workflow/validate-citations.py issues/YYYY-MM-DD.html` passes with 0 failures
+- [ ] All citations published within ±7 days of the issue date (background sources tagged)
 
 **Content**
 - [ ] Framing paragraph connects all developments without over-explaining

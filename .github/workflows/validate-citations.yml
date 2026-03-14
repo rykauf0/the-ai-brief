@@ -1,0 +1,23 @@
+name: Validate Citations
+
+on:
+  push:
+    paths:
+      - 'issues/*.html'
+  pull_request:
+    paths:
+      - 'issues/*.html'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate citation dates
+        run: python3 workflow/validate-citations.py

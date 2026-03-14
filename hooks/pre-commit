@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+#
+# Pre-commit hook: validates citation dates in any staged issue HTML files.
+# Blocks the commit if any citation falls outside the ±7 day window.
+#
+# Install: cp hooks/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
+#
+
+# Get list of staged issue HTML files
+STAGED_ISSUES=$(git diff --cached --name-only --diff-filter=ACM | grep '^issues/.*\.html$')
+
+if [ -z "$STAGED_ISSUES" ]; then
+    exit 0  # No issue files staged, nothing to validate
+fi
+
+echo "🔍 Validating citation dates in staged issues..."
+
+# Run the validator on each staged issue file
+FAILED=0
+for file in $STAGED_ISSUES; do
+    if [ -f "$file" ]; then
+        python3 workflow/validate-citations.py "$file"
+        if [ $? -ne 0 ]; then
+            FAILED=1
+        fi
+    fi
+done
+
+if [ $FAILED -ne 0 ]; then
+    echo ""
+    echo "✗ Commit blocked: citation date validation failed."
+    echo "  Fix the citations above, then try again."
+    echo "  If a source is intentionally old, tag it with data-type=\"background\"."
+    exit 1
+fi
+
+echo "✓ All citation dates validated."
+exit 0
