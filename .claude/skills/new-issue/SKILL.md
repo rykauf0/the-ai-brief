@@ -1,16 +1,13 @@
-# Skill: New Issue
-
-Research, draft, and validate a new weekly issue of 3rd Take.
-
-## When to Use
-
-Invoke with `/new-issue` on publication day (Sunday) or when preparing the next issue.
-
-## Instructions
+---
+name: new-issue
+description: Research, draft, and validate a new weekly issue of 3rd Take. Use on Sunday or when preparing the next issue.
+disable-model-invocation: true
+allowed-tools: Read, Grep, Glob, Edit, Write, WebSearch, WebFetch, Bash(python3 workflow/validate-citations.py*), Agent, AskUserQuestion
+---
 
 You are the editorial engine for 3rd Take, a weekly AI newsletter. Your job is to research the week's most significant AI developments, verify every source, draft a complete issue, and validate it — then stop for the editor's review before publishing.
 
-### Step 1 — Determine Issue Metadata
+## Step 1 — Determine Issue Metadata
 
 1. Read `index.html` to find the latest issue number and date.
 2. Calculate the next issue:
@@ -19,7 +16,7 @@ You are the editorial engine for 3rd Take, a weekly AI newsletter. Your job is t
    - **Citation window:** issue date minus 7 days through issue date plus 7 days
 3. Confirm these details with the user before proceeding.
 
-### Step 2 — Research the Week
+## Step 2 — Research the Week
 
 Search for 3-5 genuinely distinct AI developments from the past 7 days. Use these search patterns:
 
@@ -41,7 +38,7 @@ AI safety [current week]
 - Aim for coverage across at least 3 of the 4 pillars: Governance, Work, Economy, Environment
 - Seek balance: genuine progress AND genuine problems. If all candidates are good news or all bad, keep researching.
 
-### Step 3 — Verify Every Source (Citations Verification Gate)
+## Step 3 — Verify Every Source (Citations Verification Gate)
 
 For each candidate source, run these checks:
 
@@ -77,7 +74,7 @@ Proceed to drafting? (yes / flag concerns)
 
 **Wait for user approval before proceeding to Step 4.**
 
-### Step 4 — Draft the Issue
+## Step 4 — Draft the Issue
 
 1. Read `issues/2026-03-08.html` (the canonical Issue #10) to match structure exactly.
 2. Read `templates/issue-template.html` for the blank template.
@@ -101,7 +98,7 @@ Proceed to drafting? (yes / flag concerns)
 - Issue nav: `nav-prev` links to previous issue, `nav-disabled` for "No newer issue"
 - Background citations (if any, max 0-2) tagged with `data-type="background"` on the `<li>`
 
-### Step 5 — Validate Citations
+## Step 5 — Validate Citations
 
 Run the citation date validator:
 
@@ -114,7 +111,7 @@ The validator **must pass with 0 failures**. If it fails:
 2. Either find replacement sources within the window, or tag as `data-type="background"` if they are genuinely foundational (max 0-2)
 3. Re-run the validator until it passes
 
-### Step 6 — Present for Review
+## Step 6 — Present for Review
 
 Tell the user:
 
