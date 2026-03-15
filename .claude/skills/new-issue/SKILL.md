@@ -1,7 +1,6 @@
 ---
 name: new-issue
 description: Research, draft, and validate a new weekly issue of 3rd Take. Use on Sunday or when preparing the next issue.
-disable-model-invocation: true
 allowed-tools: Read, Grep, Glob, Edit, Write, WebSearch, WebFetch, Bash(python3 workflow/validate-citations.py*), Agent, AskUserQuestion
 ---
 
