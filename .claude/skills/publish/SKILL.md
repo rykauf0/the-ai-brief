@@ -1,7 +1,6 @@
 ---
 name: publish
 description: Update homepage, previous issue nav, commit, and push a reviewed issue. Use after reviewing a draft from /new-issue.
-disable-model-invocation: true
 allowed-tools: Read, Grep, Glob, Edit, Write, Bash(python3 workflow/validate-citations.py*), Bash(git *)
 ---
 
