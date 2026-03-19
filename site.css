@@ -22,6 +22,7 @@
   /* Accent — deep navy for authority */
   --navy:       #1B3A6B;
   --navy-light: #EEF3FB;
+  --navy-dark:  #0d2a52;
   --navy-mid:   rgba(27,58,107,0.12);
 
   /* Warm accent — dates, highlights */
@@ -77,7 +78,7 @@ body {
 }
 
 a { color: var(--navy); text-decoration: underline; text-underline-offset: 3px; transition: color .15s; }
-a:hover { color: #0d2a52; }
+a:hover { color: var(--navy-dark); }
 img { max-width: 100%; display: block; }
 
 /* ── Reading Progress ───────────────────────────────────────── */
@@ -144,16 +145,16 @@ img { max-width: 100%; display: block; }
 .masthead-nav a:hover { color: var(--text); }
 
 .masthead-cta {
-  font-size: var(--text-sm) !important;
-  font-weight: 600 !important;
-  background: var(--navy) !important;
-  color: #fff !important;
-  border-radius: var(--r) !important;
-  padding: .45rem 1.1rem !important;
-  text-decoration: none !important;
-  transition: background .15s !important;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  background: var(--navy);
+  color: #fff;
+  border-radius: var(--r);
+  padding: .45rem 1.1rem;
+  text-decoration: none;
+  transition: background .15s;
 }
-.masthead-cta:hover { background: #0d2a52 !important; color: #fff !important; }
+.masthead-cta:hover { background: var(--navy-dark); color: #fff; }
 
 /* Mobile nav */
 .nav-toggle {
@@ -242,7 +243,7 @@ img { max-width: 100%; display: block; }
   transition: background .15s;
 }
 .hero-read::after { content: ' →'; }
-.hero-read:hover { background: #0d2a52; color: #fff; }
+.hero-read:hover { background: var(--navy-dark); color: #fff; }
 
 /* Hero Lens Preview */
 .hero-lens {
