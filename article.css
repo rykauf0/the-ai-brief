@@ -72,8 +72,8 @@
   letter-spacing: .04em; text-transform: uppercase;
   border-radius: 999px; padding: .2rem .65rem;
   flex-shrink: 0; border: 1px solid transparent;
-  margin-bottom: .6rem;
 }
+.story > .badge + p { margin-top: .65rem; }
 .badge-gov    { background: #EBF0FA; color: var(--gov-color);    border-color: rgba(43,94,167,.15); }
 .badge-work   { background: #EBF4EE; color: var(--work-color);   border-color: rgba(46,110,63,.15); }
 .badge-econ   { background: #FDF6E3; color: var(--econ-color);   border-color: rgba(139,94,0,.15);  }
