@@ -3,182 +3,108 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About — 3rd Take: The Signal in AI</title>
-  <meta name="description" content="3rd Take is a weekly AI brief — the full picture on what's working, what's not, and what nobody's saying. Published every Sunday.">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="About — 3rd Take">
-  <meta property="og:description" content="3rd Take is a weekly AI brief — the full picture on what's working, what's not, and what nobody's saying. Published every Sunday.">
-  <meta property="og:url" content="https://site-build-seven.vercel.app/about">
-  <meta property="og:site_name" content="3rd Take">
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="About — 3rd Take">
-  <meta name="twitter:description" content="3rd Take is a weekly AI brief — the full picture on what's working, what's not, and what nobody's saying.">
-  <!-- Canonical -->
-  <link rel="canonical" href="https://site-build-seven.vercel.app/about">
-  <link rel="stylesheet" href="site.css?v=3">
-  <link rel="stylesheet" href="article.css?v=3">
+  <title>About — Ryan Kaufman</title>
+  <meta name="description" content="Operator perspective on AI transformation inside regulated organizations. Frameworks and essays grounded in institutional experience, not commentary.">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div id="reading-progress"></div>
 
-  <header class="masthead">
-    <div class="masthead-inner">
-      <a href="index.html" class="masthead-brand">
-        <svg class="masthead-icon" viewBox="0 0 20 20" width="22" height="22" aria-hidden="true">
-          <circle cx="10" cy="6.5" r="5" fill="#2E6E3F" opacity="0.55"/>
-          <circle cx="6.5" cy="12" r="5" fill="#8B3A3A" opacity="0.55"/>
-          <circle cx="13.5" cy="12" r="5" fill="#6B4E00" opacity="0.55"/>
-        </svg>
-        <span class="masthead-wordmark">
-          <span class="masthead-title">3rd Take</span>
-          <span class="masthead-tagline">The signal in AI</span>
-        </span>
-      </a>
-      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
-        ☰ Menu
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">Ryan <span>Kaufman</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="frameworks.html">Frameworks</a></li>
+        <li><a href="diagnostic.html">Diagnostic</a></li>
+        <li><a href="articles.html">Articles</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
       </button>
-      <nav class="masthead-nav">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="index.html#archive">Archive</a>
-        <a href="issues/2026-03-15.html" class="masthead-cta">Latest Issue →</a>
-      </nav>
     </div>
-  </header>
+  </nav>
 
-  <!-- About hero -->
-  <div class="about-hero">
-    <div class="about-hero-inner">
-      <p class="page-label">About this publication</p>
-      <h1>What it is and why it exists</h1>
-      <p class="lede">
-        AI generates more noise than almost any subject in recent memory.
-        3rd Take cuts through it with a single discipline applied to every development:
-        what's genuinely working, what isn't, and what's being left unsaid.
-        Five developments a week, rigorously sourced, with a synthesis of what they mean in combination.
-      </p>
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <span class="hero-label">About</span>
+      <h1>Operator, not commentator.</h1>
+      <p class="lead">I build AI transformation infrastructure inside regulated organizations. The frameworks and essays on this site come from that work — pattern recognition from the inside, not observation from the outside.</p>
     </div>
-  </div>
+  </section>
 
-  <!-- About body -->
-  <div class="about-body">
+  <!-- Positioning -->
+  <section>
+    <div class="container about-content">
+      <h2>Where This Comes From</h2>
+      <p>This work is rooted in operational experience inside high-governance, risk-aware institutional environments. The kind of places where "move fast and break things" is not an option, where every AI deployment touches compliance, where leadership needs a credible answer before approving anything beyond a pilot.</p>
+      <p>The frameworks on this site are not theoretical. They are diagnostic tools built from watching the same failure patterns repeat: pilots that never scale, governance that blocks instead of accelerates, accountability that evaporates when outputs come from a model instead of a person.</p>
 
-    <h2>The Format</h2>
-    <p>
-      Each Sunday edition covers five significant AI developments from the preceding week,
-      each anchored by a distinct primary source. Every edition closes with a "What It All Means"
-      synthesis — where the developments are read together to identify larger patterns, tensions,
-      and second-order implications.
-    </p>
-    <p>
-      The format is deliberate. Individual AI developments, taken in isolation, are often
-      misleading — either overhyped or underweighted. The synthesis is where
-      the genuine analytical work happens.
-    </p>
+      <div class="divider"></div>
 
-    <h2>What We Cover</h2>
-    <ul class="pillars-about">
-      <li>
-        <span class="pillar-dot" style="background:var(--gov-color)"></span>
-        <div class="pillar-desc">
-          <strong>Governance</strong>
-          <span>AI regulation, export controls, institutional accountability, and the rule of law as intelligent systems become embedded in public infrastructure.</span>
+      <h2>What I Think About</h2>
+      <p>Most AI transformation efforts fail not because the tools are wrong, but because the institutional infrastructure around them was never built. Leaders approve pilots, teams build demos, and then nothing changes at scale. The gap is not technology — it is the system of work.</p>
+
+      <div class="approach-grid">
+        <div class="approach-card">
+          <h4>Institutional Infrastructure</h4>
+          <p>The governance scaffolding, accountability structures, and risk frameworks that make leadership confidence rational — not the AI tools themselves.</p>
         </div>
-      </li>
-      <li>
-        <span class="pillar-dot" style="background:var(--work-color)"></span>
-        <div class="pillar-desc">
-          <strong>Work</strong>
-          <span>How AI reshapes organizations, what gets automated, workforce displacement, professional skills, and what the next generation of work looks like.</span>
+        <div class="approach-card">
+          <h4>Judgment-Led Accountability</h4>
+          <p>AI generates outputs. Humans make decisions. When an AI-assisted process goes wrong, accountability stays with people, not models.</p>
         </div>
-      </li>
-      <li>
-        <span class="pillar-dot" style="background:var(--econ-color)"></span>
-        <div class="pillar-desc">
-          <strong>Economy</strong>
-          <span>The macroeconomic picture: productivity, capital investment, market dynamics, infrastructure costs, and the business model shifts driving the AI transition.</span>
+        <div class="approach-card">
+          <h4>Governance That Accelerates</h4>
+          <p>Clear guardrails remove hesitation. The fastest-moving programs are the ones where everyone knows the boundaries.</p>
         </div>
-      </li>
-      <li>
-        <span class="pillar-dot" style="background:var(--env-color)"></span>
-        <div class="pillar-desc">
-          <strong>Environment</strong>
-          <span>The energy and water footprint of the AI build-out, the trade-offs with climate commitments, and AI's contested role in climate solutions.</span>
+        <div class="approach-card">
+          <h4>Thin-Slice Before Scale</h4>
+          <p>Earn the right to scale. Start with the smallest version that tests the real hypothesis. Most experiments should not scale — and that is discipline, not failure.</p>
         </div>
-      </li>
-      <li>
-        <span class="pillar-dot" style="background:var(--soc-color)"></span>
-        <div class="pillar-desc">
-          <strong>Society</strong>
-          <span>Healthcare, education, inequality, ethics, and the human impact of AI on communities, vulnerable populations, and public welfare.</span>
-        </div>
-      </li>
-    </ul>
-
-    <h2>The Full Picture Lens</h2>
-    <p>
-      This publication applies an organizational and systemic lens to AI — asking not just
-      "what happened" but "what does this mean for how institutions function, how decisions
-      get made, and what the second-order effects are likely to be."
-    </p>
-    <p>
-      Our analytical framework is The Full Picture Lens. Every synthesis examines three dimensions:
-    </p>
-    <ul class="standards-list">
-      <li><strong>What's Working</strong> — Genuine progress backed by evidence. When something works, we say so — no reflexive caveats.</li>
-      <li><strong>What's Not</strong> — Failures, overpromises, and gaps between claims and reality. Named specifically, not generically.</li>
-      <li><strong>What Nobody's Saying</strong> — Uncomfortable truths, perverse incentives, and structural problems that don't fit neat narratives.</li>
-    </ul>
-    <p>
-      The principles behind this lens:
-    </p>
-    <ul class="standards-list">
-      <li><strong>Balance as discipline</strong> — not "both sides" centrism, but evidence-weighted honesty.</li>
-      <li><strong>Good news earns its place</strong> — real progress deserves recognition, not dismissal.</li>
-      <li><strong>Bad news earns specificity</strong> — failures are named precisely, not gestured at.</li>
-      <li><strong>Ugly truths earn their name</strong> — structural problems and perverse incentives are surfaced, not smoothed over.</li>
-      <li><strong>Research-grounded, not news-driven</strong> — academic sources and primary evidence are prioritized over press coverage.</li>
-    </ul>
-
-    <h2>Publishing Schedule</h2>
-    <p>
-      New editions every Sunday. The archive runs from January 4, 2026 to the present.
-    </p>
-
-    <div style="margin-top:2rem;padding:1rem 1.1rem;background:var(--navy-light);border:1px solid var(--border);border-left:3px solid var(--navy);border-radius:0 var(--r) var(--r) 0;">
-      <p style="font-family:var(--sans);font-size:var(--text-sm);color:var(--text-2);margin:0;">
-        Start with the <a href="issues/2026-01-04.html" style="color:var(--navy)">first edition from January 4, 2026</a>,
-        or go directly to the <a href="issues/2026-03-08.html" style="color:var(--navy)">latest issue</a>.
-      </p>
-    </div>
-
-  </div>
-
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <div class="footer-logo">3rd Take</div>
-        <p class="footer-motto">The full picture on artificial intelligence — good, bad, and ugly. Published every Sunday.</p>
       </div>
-      <div class="footer-links">
-        <h4>Navigate</h4>
+
+      <div class="tip">
+        <p>If your AI program has a "change management problem," look at the operating model first. The issue is rarely resistance — it is that people do not know what is expected of them in the new system of work.</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <h2>Who This Is For</h2>
+      <p>Senior leaders and operators in regulated organizations who are responsible for making AI transformation work — not just launching it. People who need frameworks they can use in a meeting, evidence they can cite in a briefing, and thinking that holds up under institutional scrutiny.</p>
+
+      <div class="not-for">
+        <h3>This is not for:</h3>
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="index.html#archive">All Editions</a></li>
-          <li><a href="issues/2026-03-08.html">Latest Issue</a></li>
+          <li>Anyone looking for hot takes on the latest AI model release</li>
+          <li>Organizations that want adoption metrics without behavior change</li>
+          <li>Leaders who think AI transformation is a one-quarter technology project</li>
+          <li>People optimizing for impressions instead of institutional credibility</li>
         </ul>
       </div>
+
+      <div class="bottom-line">
+        <h4>Bottom Line</h4>
+        <p>This is a disciplined intellectual capital build, not a content marketing play. Operator credibility rooted in institutional proof, not commentary. Designed for citation and invitation, not virality.</p>
+      </div>
     </div>
-    <div class="footer-bottom">
-      <span>© 2026 3rd Take</span>
-      <span><a href="index.html">Home</a> · <a href="issues/2026-03-08.html">Latest Issue</a></span>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-brand">Ryan Kaufman</span>
+      <ul class="footer-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="frameworks.html">Frameworks</a></li>
+        <li><a href="diagnostic.html">Diagnostic</a></li>
+        <li><a href="articles.html">Articles</a></li>
+      </ul>
     </div>
   </footer>
 
-  <script src="js/main.js?v=2"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

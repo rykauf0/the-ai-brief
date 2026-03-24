@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Transformation Readiness Diagnostic — Ryan Kaufman</title>
+  <meta name="description" content="A 25-question diagnostic that measures your organization's operating model readiness for AI — not your tech stack. Takes 8 minutes.">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ===== Diagnostic-specific styles ===== */
+
+    /* --- Landing Section --- */
+    .diag-landing { text-align: left; }
+    .diag-landing .lead { max-width: 55ch; }
+    .diag-stats { display: flex; gap: 2.5rem; margin: 2.5rem 0; flex-wrap: wrap; }
+    .diag-stat { text-align: left; }
+    .diag-stat .num { font-family: Georgia, serif; font-size: 2rem; color: var(--gold); display: block; line-height: 1; }
+    .diag-stat .label { font-size: 0.78rem; color: var(--slate); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.25rem; display: block; }
+
+    /* --- Progress Bar --- */
+    .diag-progress { position: fixed; top: 64px; left: 0; right: 0; z-index: 99; height: 3px; background: var(--charcoal); }
+    .diag-progress-fill { height: 100%; background: var(--gold); transition: width 0.4s ease; width: 0%; }
+
+    /* --- Question Container --- */
+    .diag-container { max-width: 680px; margin: 0 auto; padding: 0 1.5rem; }
+    .diag-section { display: none; }
+    .diag-section.active { display: block; }
+
+    /* --- Dimension Header --- */
+    .dim-header { margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+    .dim-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); margin-bottom: 0.5rem; display: block; }
+    .dim-title { font-family: Georgia, serif; font-size: 1.5rem; color: var(--off-white); margin-bottom: 0.5rem; }
+    .dim-desc { font-size: 0.9rem; color: var(--slate); }
+    .q-counter { font-size: 0.78rem; color: var(--slate); margin-bottom: 0.75rem; display: block; }
+
+    /* --- Question Card --- */
+    .q-card { padding: 8rem 0 6rem; min-height: 70vh; display: flex; flex-direction: column; justify-content: center; }
+    .q-text { font-family: Georgia, serif; font-size: 1.35rem; color: var(--off-white); line-height: 1.5; margin-bottom: 2rem; max-width: 55ch; }
+
+    /* --- Answer Options --- */
+    .q-options { display: flex; flex-direction: column; gap: 0.75rem; }
+    .q-option { background: var(--charcoal); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: flex-start; gap: 1rem; }
+    .q-option:hover { border-color: rgba(212, 168, 67, 0.3); transform: translateX(4px); }
+    .q-option.selected { border-color: var(--gold); background: rgba(212, 168, 67, 0.08); }
+    .q-score { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.82rem; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .q-option[data-score="0"] .q-score { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+    .q-option[data-score="1"] .q-score { background: rgba(251, 191, 36, 0.15); color: #fbbf24; }
+    .q-option[data-score="2"] .q-score { background: rgba(74, 222, 128, 0.15); color: #4ade80; }
+    .q-option-text { font-size: 0.95rem; color: var(--light-slate); line-height: 1.5; }
+    .q-option.selected .q-option-text { color: var(--off-white); }
+
+    /* --- Navigation --- */
+    .diag-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+    .diag-nav .btn { min-width: 140px; text-align: center; }
+    .btn-back { background: transparent; color: var(--slate); border: 1px solid var(--border); }
+    .btn-back:hover { border-color: var(--slate); color: var(--off-white); }
+
+    /* --- Results --- */
+    .results-header { text-align: center; padding: 8rem 0 3rem; }
+    .results-header h1 { font-size: 2.4rem; margin-bottom: 1rem; }
+    .results-header .lead { margin: 0 auto; }
+
+    .tier-badge { display: inline-block; padding: 0.5rem 1.5rem; border-radius: 100px; font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.5rem; }
+    .tier-0 { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+    .tier-1 { background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); }
+    .tier-2 { background: rgba(96, 165, 250, 0.15); color: #60a5fa; border: 1px solid rgba(96, 165, 250, 0.3); }
+    .tier-3 { background: rgba(74, 222, 128, 0.15); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.3); }
+
+    .overall-score { font-family: Georgia, serif; font-size: 4rem; color: var(--gold); line-height: 1; }
+    .overall-label { font-size: 0.82rem; color: var(--slate); text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* --- Radar Chart --- */
+    .radar-wrap { display: flex; justify-content: center; padding: 3rem 0; }
+    .radar-wrap canvas { max-width: 420px; width: 100%; }
+
+    /* --- Dimension Results --- */
+    .dim-results { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin: 2rem 0; }
+    .dim-result-card { background: var(--charcoal); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem; }
+    .dim-result-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+    .dim-result-name { font-family: Georgia, serif; font-size: 1.15rem; color: var(--off-white); }
+    .dim-result-score { font-family: Georgia, serif; font-size: 1.8rem; color: var(--gold); }
+    .dim-bar { height: 6px; background: var(--dark-slate); border-radius: 3px; margin-bottom: 1rem; overflow: hidden; }
+    .dim-bar-fill { height: 100%; border-radius: 3px; transition: width 1s ease; }
+    .dim-bar-fill.low { background: #f87171; }
+    .dim-bar-fill.mid { background: #fbbf24; }
+    .dim-bar-fill.high { background: #4ade80; }
+    .dim-result-insight { font-size: 0.92rem; color: var(--slate); line-height: 1.6; }
+
+    /* --- Imbalance Warning --- */
+    .imbalance-warn { background: rgba(251, 191, 36, 0.08); border: 1px solid rgba(251, 191, 36, 0.2); border-left: 3px solid #fbbf24; padding: 1.5rem 2rem; border-radius: 0 var(--radius-lg) var(--radius-lg) 0; margin: 2rem 0; }
+    .imbalance-warn h4 { color: #fbbf24; }
+
+    /* --- Email Gate --- */
+    .email-gate { background: var(--charcoal); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2.5rem; text-align: center; margin: 3rem 0; }
+    .email-gate h3 { margin-bottom: 0.75rem; }
+    .email-gate p { color: var(--slate); font-size: 0.92rem; margin: 0 auto 1.5rem; max-width: 45ch; }
+    .email-row { display: flex; gap: 0.75rem; max-width: 400px; margin: 0 auto; }
+    .email-row input { flex: 1; }
+    .skip-link { display: block; margin-top: 1rem; font-size: 0.82rem; color: var(--slate); cursor: pointer; }
+    .skip-link:hover { color: var(--off-white); }
+
+    /* --- Actions --- */
+    .results-actions { display: flex; gap: 1rem; justify-content: center; margin: 3rem 0; flex-wrap: wrap; }
+
+    /* --- Responsive --- */
+    @media (max-width: 768px) {
+      .q-card { padding: 6rem 0 4rem; min-height: auto; }
+      .q-text { font-size: 1.15rem; }
+      .overall-score { font-size: 3rem; }
+      .diag-stats { gap: 1.5rem; }
+      .email-row { flex-direction: column; }
+      .radar-wrap canvas { max-width: 300px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">Ryan <span>Kaufman</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="frameworks.html">Frameworks</a></li>
+        <li><a href="diagnostic.html" class="active">Diagnostic</a></li>
+        <li><a href="articles.html">Articles</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Progress Bar -->
+  <div class="diag-progress" id="progressBar" style="display:none;">
+    <div class="diag-progress-fill" id="progressFill"></div>
+  </div>
+
+  <!-- ========== LANDING ========== -->
+  <section class="diag-section active" id="landing">
+    <div class="page-header diag-landing">
+      <div class="container">
+        <span class="hero-label">Diagnostic</span>
+        <h1>Can your organization absorb what AI delivers?</h1>
+        <p class="lead">Most AI readiness assessments measure your tech stack. This one measures the operating model — the governance, accountability, and learning infrastructure that determines whether AI initiatives scale or stall.</p>
+
+        <div class="diag-stats">
+          <div class="diag-stat">
+            <span class="num">25</span>
+            <span class="label">Questions</span>
+          </div>
+          <div class="diag-stat">
+            <span class="num">8</span>
+            <span class="label">Minutes</span>
+          </div>
+          <div class="diag-stat">
+            <span class="num">5</span>
+            <span class="label">Dimensions</span>
+          </div>
+        </div>
+
+        <a href="#" class="btn btn-primary" onclick="startDiagnostic(); return false;">Begin the Diagnostic</a>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="not-for">
+        <h3>This is not:</h3>
+        <ul>
+          <li>A technology maturity assessment — we do not measure your cloud infrastructure or model selection</li>
+          <li>A benchmarking tool that ranks you against competitors</li>
+          <li>A sales funnel disguised as a diagnostic</li>
+        </ul>
+      </div>
+
+      <div class="tip">
+        <p>This diagnostic works best when answered by someone who sees how AI decisions actually get made inside their organization — not how the strategy deck describes it.</p>
+      </div>
+
+      <div class="bottom-line">
+        <h4>What You Will Get</h4>
+        <p>A gap map across five operating model dimensions — showing where your institutional infrastructure supports AI adoption and where it creates silent friction. Each gap maps to a specific framework and a concrete next step.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== QUESTIONS ========== -->
+  <section class="diag-section" id="questions">
+    <div class="diag-container">
+      <div id="questionArea"></div>
+      <div class="diag-nav">
+        <button class="btn btn-back" id="btnBack" onclick="prevQuestion()">Back</button>
+        <button class="btn btn-primary" id="btnNext" onclick="nextQuestion()" disabled>Next</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== RESULTS ========== -->
+  <section class="diag-section" id="results">
+    <div class="results-header">
+      <div class="container">
+        <span class="hero-label">Your Results</span>
+        <div id="tierBadge"></div>
+        <h1 id="tierName"></h1>
+        <div style="margin: 1.5rem 0;">
+          <span class="overall-score" id="totalScore"></span>
+          <span class="overall-label"> / 50</span>
+        </div>
+        <p class="lead" id="tierDesc"></p>
+      </div>
+    </div>
+
+    <div class="container-wide">
+      <div class="radar-wrap">
+        <canvas id="radarChart" width="420" height="420"></canvas>
+      </div>
+    </div>
+
+    <div class="container">
+      <div id="imbalanceWarn"></div>
+
+      <span class="section-label">Dimension Breakdown</span>
+      <div class="dim-results" id="dimResults"></div>
+
+      <!-- Email Gate -->
+      <div class="email-gate" id="emailGate">
+        <h3>Get your detailed action plan</h3>
+        <p>We will send your full results with framework-specific recommendations for your lowest-scoring dimension.</p>
+        <div class="email-row">
+          <input type="email" id="emailInput" placeholder="your@email.com" class="form-group">
+          <button class="btn btn-primary" onclick="submitEmail()">Send</button>
+        </div>
+        <span class="skip-link" onclick="skipEmail()">Skip — show me the recommendations now</span>
+      </div>
+
+      <!-- Recommendations (hidden until email or skip) -->
+      <div id="recommendations" style="display:none;">
+        <span class="section-label">What to Do This Week</span>
+        <div id="recoContent"></div>
+
+        <div class="bottom-line" style="margin-top: 3rem;">
+          <h4>Bottom Line</h4>
+          <p id="bottomLineText"></p>
+        </div>
+      </div>
+
+      <div class="results-actions">
+        <button class="btn btn-ghost" onclick="retake()">Take It Again</button>
+        <button class="btn btn-primary" onclick="shareResults()">Copy Share Link</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-brand">Ryan Kaufman</span>
+      <ul class="footer-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="frameworks.html">Frameworks</a></li>
+        <li><a href="diagnostic.html">Diagnostic</a></li>
+        <li><a href="articles.html">Articles</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+  /* ============================================
+     AI Transformation Readiness Diagnostic
+     Client-side scoring engine
+     ============================================ */
+
+  const DIMENSIONS = [
+    {
+      id: 'work-architecture',
+      name: 'Work Architecture',
+      label: 'Dimension 1 of 5',
+      desc: 'Whether workflows have been redesigned for AI — or AI has been bolted onto existing processes.',
+      framework: 'Maps to: Operating Model Design (P1 + P7)',
+      questions: [
+        {
+          text: 'When a team adopts an AI tool, what typically changes about how the work gets done?',
+          options: [
+            { score: 0, text: 'Nothing structural changes — the AI tool gets added to the existing workflow as an extra step.' },
+            { score: 1, text: 'Some teams experiment with new workflows, but there is no systematic process for redesigning work.' },
+            { score: 2, text: 'There is a deliberate process for mapping how work should change — roles, handoffs, decision points — before the tool goes live.' }
+          ]
+        },
+        {
+          text: 'Who decides how AI outputs get integrated into existing business processes?',
+          options: [
+            { score: 0, text: 'Individual employees figure it out on their own.' },
+            { score: 1, text: 'Team leads make local decisions, but there is no cross-functional coordination.' },
+            { score: 2, text: 'There is a defined process where process owners, subject matter experts, and governance jointly redesign the workflow.' }
+          ]
+        },
+        {
+          text: 'How are roles and responsibilities adjusted when AI handles part of a task?',
+          options: [
+            { score: 0, text: 'They are not adjusted — people do the same job plus review AI output.' },
+            { score: 1, text: 'Some role adjustments happen informally, but job descriptions and performance expectations have not changed.' },
+            { score: 2, text: 'Role definitions, decision rights, and performance criteria are formally updated to reflect the new human-AI workflow.' }
+          ]
+        },
+        {
+          text: 'When we look at where AI tools are being used, what pattern do we see?',
+          options: [
+            { score: 0, text: 'AI tools cluster around individual productivity — writing, summarizing, searching — not core business processes.' },
+            { score: 1, text: 'A few teams have applied AI to substantive workflows, but most usage remains at the personal productivity level.' },
+            { score: 2, text: 'AI is embedded in core business processes with clear before/after workflow documentation showing how the work fundamentally changed.' }
+          ]
+        },
+        {
+          text: 'If we removed all AI tools tomorrow, what would break?',
+          options: [
+            { score: 0, text: 'Very little — people would go back to doing things the old way with minimal disruption.' },
+            { score: 1, text: 'Some teams would slow down, but the underlying processes would still function.' },
+            { score: 2, text: 'Specific workflows would need to be restructured because they were redesigned around AI capabilities — removing the tool means redesigning the process.' }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'learning-velocity',
+      name: 'Learning Velocity',
+      label: 'Dimension 2 of 5',
+      desc: 'Whether your organization runs tight learning loops — or just deploys and hopes.',
+      framework: 'Maps to: R4 Loop (Reframe → Run → Review → Refine)',
+      questions: [
+        {
+          text: 'When an AI-generated output contains errors, what typically happens?',
+          options: [
+            { score: 0, text: 'Someone fixes it and moves on. There is no systematic review of why the error occurred.' },
+            { score: 1, text: 'The error gets flagged in a team channel or standup, but there is no formal process for capturing what we learned.' },
+            { score: 2, text: 'A documented learning loop fires — the prompt, process, or workflow gets updated based on what we found.' }
+          ]
+        },
+        {
+          text: 'How does knowledge about effective AI use spread across teams?',
+          options: [
+            { score: 0, text: 'It does not. Teams operate in silos and rediscover the same lessons independently.' },
+            { score: 1, text: 'Informally — through Slack threads, lunch conversations, or the occasional all-hands demo.' },
+            { score: 2, text: 'There is a structured mechanism: shared prompt libraries, regular cross-team reviews, or coaching routines that transfer learning systematically.' }
+          ]
+        },
+        {
+          text: 'How often do teams revisit and improve their AI workflows after initial deployment?',
+          options: [
+            { score: 0, text: 'Rarely or never — once something is deployed, attention moves to the next project.' },
+            { score: 1, text: 'Occasionally, when something visibly breaks or a team member champions an improvement.' },
+            { score: 2, text: 'Regularly — there are scheduled review cadences where teams assess what is working, what is not, and what should change.' }
+          ]
+        },
+        {
+          text: 'When someone discovers a better way to use an AI tool, what happens next?',
+          options: [
+            { score: 0, text: 'They keep using it that way. It stays with them.' },
+            { score: 1, text: 'They might share it in a meeting or message, but there is no system for scaling the insight.' },
+            { score: 2, text: 'There is a clear path from individual discovery to documented best practice — including who updates the standard and how others get trained.' }
+          ]
+        },
+        {
+          text: 'How would you describe your organization\'s approach to AI training and skill development?',
+          options: [
+            { score: 0, text: 'One-time training sessions or self-service courses. Once trained, people are on their own.' },
+            { score: 1, text: 'Training exists, and there are some follow-up resources, but ongoing coaching or practice is rare.' },
+            { score: 2, text: 'Training is the starting point, not the destination — there are coaching routines, practice sessions, and feedback loops that build skill over time.' }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'governance-guardrails',
+      name: 'Governance & Guardrails',
+      label: 'Dimension 3 of 5',
+      desc: 'Whether governance enables speed — or creates invisible friction that slows everything down.',
+      framework: 'Maps to: R4 Review Step + Governance-First Adoption (P3)',
+      questions: [
+        {
+          text: 'When a team wants to deploy an AI capability into a production workflow, what does the approval process look like?',
+          options: [
+            { score: 0, text: 'There is no clear approval process — teams either skip it or get stuck in ad hoc negotiations with legal and compliance.' },
+            { score: 1, text: 'There is a process, but it was designed for traditional IT projects and does not map well to AI-specific risks.' },
+            { score: 2, text: 'There is a purpose-built review process that evaluates AI-specific risks — data quality, output reliability, accountability — and has clear criteria for approval.' }
+          ]
+        },
+        {
+          text: 'How do teams verify the quality of AI-generated outputs before they reach a customer or decision-maker?',
+          options: [
+            { score: 0, text: 'Verification is informal and inconsistent — it depends on who is using the tool and how careful they feel like being.' },
+            { score: 1, text: 'Some teams have verification steps, but the rigor varies and there are no organization-wide standards.' },
+            { score: 2, text: 'Verification protocols are defined for each use case — specifying what gets checked, by whom, against what standard, and how exceptions are handled.' }
+          ]
+        },
+        {
+          text: 'How would you describe the relationship between governance and AI adoption speed in your organization?',
+          options: [
+            { score: 0, text: 'Governance is seen as the enemy of speed — teams either avoid it or resent the delays it causes.' },
+            { score: 1, text: 'Governance is accepted as necessary, but teams work around it when they can because it slows things down.' },
+            { score: 2, text: 'Governance actually accelerates adoption — clear guardrails mean teams spend less time debating what is allowed and more time building within safe boundaries.' }
+          ]
+        },
+        {
+          text: 'If an AI-assisted process produced a harmful or inaccurate output that reached a client, how quickly could your organization trace what happened?',
+          options: [
+            { score: 0, text: 'We would struggle to reconstruct what happened — there are no audit trails for AI-assisted work.' },
+            { score: 1, text: 'We could probably figure it out, but it would require manual investigation and the trail would be incomplete.' },
+            { score: 2, text: 'AI-assisted workflows have logging and audit mechanisms that allow us to trace inputs, outputs, verification steps, and approvals.' }
+          ]
+        },
+        {
+          text: 'How are AI-related policies and guidelines communicated to people who actually use AI tools?',
+          options: [
+            { score: 0, text: 'Policies exist in a document somewhere, but most people who use AI tools have never read them.' },
+            { score: 1, text: 'Policies are communicated during onboarding or training, but they are not embedded in the tools or workflows where decisions get made.' },
+            { score: 2, text: 'Guidelines are integrated into the workflow itself — through prompts, checklists, or tool configurations that make the right behavior the default behavior.' }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'portfolio-discipline',
+      name: 'Portfolio Discipline',
+      label: 'Dimension 4 of 5',
+      desc: 'Whether your organization knows when to stop, refine, or scale — or just lets everything run.',
+      framework: 'Maps to: SRPS Gate (Stop / Refine / Pilot / Scale)',
+      questions: [
+        {
+          text: 'How does your organization decide which AI experiments earn the right to scale?',
+          options: [
+            { score: 0, text: 'There is no formal decision process — experiments either fade away or scale based on executive enthusiasm.' },
+            { score: 1, text: 'There are informal reviews, but the criteria for scaling versus stopping are not clearly defined.' },
+            { score: 2, text: 'There are explicit decision gates with defined criteria — including when to stop — and a named person or group who makes the call.' }
+          ]
+        },
+        {
+          text: 'In the last 12 months, how many AI initiatives has your organization deliberately stopped?',
+          options: [
+            { score: 0, text: 'None — or we are not sure. Projects tend to linger rather than get formally stopped.' },
+            { score: 1, text: 'A few, but stopping felt like failure rather than a healthy portfolio decision.' },
+            { score: 2, text: 'Multiple — and stopping was treated as evidence of good decision-making, not as a failure to celebrate.' }
+          ]
+        },
+        {
+          text: 'When an AI pilot is launched, what does the experiment design look like?',
+          options: [
+            { score: 0, text: 'Pilots are loosely defined — "let\'s try this and see what happens" — without clear hypotheses or success criteria.' },
+            { score: 1, text: 'There are usually stated goals, but the scope is often too large and the success criteria are vague.' },
+            { score: 2, text: 'Pilots are thin-sliced: smallest possible scope, specific hypothesis, defined metrics, and a pre-committed timeline for the decision gate.' }
+          ]
+        },
+        {
+          text: 'How does your organization manage the total portfolio of AI initiatives?',
+          options: [
+            { score: 0, text: 'There is no portfolio view — different teams run their own initiatives without central visibility.' },
+            { score: 1, text: 'There is some tracking, but it is retrospective reporting rather than active portfolio management.' },
+            { score: 2, text: 'There is an active portfolio management process that balances exploration and scale, allocates resources deliberately, and makes trade-off decisions.' }
+          ]
+        },
+        {
+          text: 'What happens between a successful pilot and production deployment?',
+          options: [
+            { score: 0, text: 'There is a gap — successful pilots stall because there is no clear path to production.' },
+            { score: 1, text: 'There is a path, but it requires navigating a different set of stakeholders and processes than the pilot did.' },
+            { score: 2, text: 'The path from pilot to production is designed in advance — including governance requirements, infrastructure needs, and accountability assignment — so scaling is a planned transition, not a surprise.' }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'leadership-accountability',
+      name: 'Leadership Accountability',
+      label: 'Dimension 5 of 5',
+      desc: 'Whether leaders own AI outcomes — or have outsourced accountability to the tools.',
+      framework: 'Maps to: Judgment Accountability Map + Two-Speed Model',
+      questions: [
+        {
+          text: 'For your most important AI-assisted processes, can you name the person who is accountable for the quality of the output?',
+          options: [
+            { score: 0, text: 'No — accountability is diffuse. If something goes wrong, it is unclear who owns the problem.' },
+            { score: 1, text: 'There is usually someone informally responsible, but it is not formally defined or documented.' },
+            { score: 2, text: 'Yes — every AI-assisted process has a named accountable person who owns the outcome, not just the tool.' }
+          ]
+        },
+        {
+          text: 'How do senior leaders engage with AI transformation beyond approving budgets?',
+          options: [
+            { score: 0, text: 'They approve budgets and occasionally ask for updates, but are not involved in how AI changes work.' },
+            { score: 1, text: 'They participate in steering committees and receive regular updates, but decisions about work redesign happen below them.' },
+            { score: 2, text: 'They actively engage in operating model decisions — including how roles change, what governance looks like, and how accountability is assigned.' }
+          ]
+        },
+        {
+          text: 'When an AI initiative fails or underperforms, what does the leadership response look like?',
+          options: [
+            { score: 0, text: 'Blame or silence — either someone gets blamed or the failure is quietly buried.' },
+            { score: 1, text: 'There is acknowledgment, but no structured process for understanding what went wrong at the system level.' },
+            { score: 2, text: 'There is a learning review that examines the system, not just the people — what was the hypothesis, what did we learn, and what changes to the operating model?' }
+          ]
+        },
+        {
+          text: 'How does your organization distinguish between work that AI can do autonomously and work that requires human judgment?',
+          options: [
+            { score: 0, text: 'It does not — the boundary is determined by whatever the tool can technically do, not by a deliberate design choice.' },
+            { score: 1, text: 'There is informal understanding within teams, but no documented framework for where human judgment is required.' },
+            { score: 2, text: 'There is a deliberate two-speed design: defined automation zones where AI operates with minimal oversight, and judgment zones where human verification and decision-making are required.' }
+          ]
+        },
+        {
+          text: 'If a regulator or board member asked "how do you govern AI decision-making?", how confident would you be in the answer?',
+          options: [
+            { score: 0, text: 'Not confident — we would need to assemble the answer from scattered policies and hope it holds together.' },
+            { score: 1, text: 'Somewhat confident — we have policies in place, but the gap between policy and practice is larger than we would like to admit.' },
+            { score: 2, text: 'Confident — we have documented governance, named accountability, audit trails, and real examples of the system working as designed.' }
+          ]
+        }
+      ]
+    }
+  ];
+
+  const TIERS = [
+    {
+      name: 'Tool-Bolted',
+      range: [0, 15],
+      className: 'tier-0',
+      desc: 'AI has been layered onto existing processes without structural change. The tools are present, but the operating model has not adapted. This creates high risk of disappointment — and a growing gap between what leadership expects and what the organization can deliver.',
+      bottomLine: 'The gap is not in your technology. It is in the operating model underneath it. Before investing in more AI capabilities, invest in the institutional infrastructure — governance, accountability, work redesign — that makes those capabilities sustainable. Start with one workflow. Redesign how the work gets done, not just which tool does it.'
+    },
+    {
+      name: 'Experiment-Rich',
+      range: [16, 28],
+      className: 'tier-1',
+      desc: 'Your organization is running pilots and building momentum, but structural gaps in governance, accountability, or learning infrastructure mean those experiments are unlikely to scale without intervention. The risk here is not lack of activity — it is lack of the institutional infrastructure that converts experiments into sustained value.',
+      bottomLine: 'You have the energy. What you need now is the infrastructure to convert experiments into sustained value. Focus on closing your weakest dimension — that is where scaling will stall first. One strong governance framework or one functioning learning loop will do more for your AI program than ten new pilots.'
+    },
+    {
+      name: 'System-Building',
+      range: [29, 40],
+      className: 'tier-2',
+      desc: 'Operating model changes are underway. Your organization has moved beyond individual tool adoption into institutional redesign — governance, accountability, and learning loops are becoming real. The challenge now is consistency: ensuring the infrastructure works across teams and survives leadership transitions.',
+      bottomLine: 'You are building the right things. The risk now is inconsistency — the gap between your strongest and weakest dimensions. Close the imbalances. Make sure what works in one team becomes what works everywhere. The organizations that scale AI are the ones that make the infrastructure boring and reliable.'
+    },
+    {
+      name: 'Absorption-Ready',
+      range: [41, 50],
+      className: 'tier-3',
+      desc: 'Your organization has built the institutional infrastructure to absorb AI at scale. Governance enables rather than blocks. Learning loops are habits, not events. Accountability is assigned, not assumed. This does not mean every AI initiative will succeed — it means your operating model can handle the ones that do not.',
+      bottomLine: 'Your operating model is ready. The work now is maintaining it — ensuring the infrastructure you built stays current as AI capabilities evolve. The organizations that sustain their advantage are the ones that treat governance, learning, and accountability as living systems, not one-time implementations.'
+    }
+  ];
+
+  const DIM_INSIGHTS = {
+    'work-architecture': {
+      low: 'AI is being bolted onto existing processes without structural change. Teams are doing the same work with an extra step. Until workflows are deliberately redesigned — roles, handoffs, decision points — AI will add complexity without proportional value.',
+      mid: 'Some workflow redesign is happening, but it is inconsistent. The risk is that successful local experiments cannot scale because the surrounding processes have not adapted. Focus on documenting the before/after of your best redesigns and using them as templates.',
+      high: 'Work has been deliberately restructured around AI capabilities. This is the foundation everything else builds on. Maintain it by ensuring new AI deployments always go through a workflow redesign process, not just a tool deployment process.'
+    },
+    'learning-velocity': {
+      low: 'Your organization deploys AI but does not systematically learn from using it. Errors get fixed individually instead of feeding back into process improvement. This is the most common gap — and the one that compounds fastest. Without learning loops, every team makes the same mistakes independently.',
+      mid: 'Learning happens, but it is informal and team-dependent. The gap between your best teams and your average teams is probably growing. Focus on one specific mechanism — shared prompt libraries, regular review cadences, or structured coaching — and make it a habit.',
+      high: 'Tight learning loops are a habit. Knowledge transfers across teams. Errors improve the system, not just the output. This is rare and valuable — it is the engine that makes every other dimension improve over time.'
+    },
+    'governance-guardrails': {
+      low: 'Governance is either absent or actively hindering adoption. Teams are either operating without guardrails (creating risk) or working around governance (creating the same risk more slowly). The fix is not more rules — it is better-designed rules that enable speed instead of blocking it.',
+      mid: 'Governance exists but was not designed for AI-specific risks. The gap between policy and practice is real and growing. Focus on verification protocols for your highest-risk use cases — define what gets checked, by whom, and against what standard.',
+      high: 'Governance is enabling speed rather than blocking it. Clear guardrails mean teams spend less time debating what is allowed and more time building. This is the governance-first approach working as designed.'
+    },
+    'portfolio-discipline': {
+      low: 'There is no system for deciding what earns the right to scale. Experiments either linger indefinitely or scale based on executive enthusiasm rather than evidence. The most important intervention is making "stop" a normal, healthy portfolio decision.',
+      mid: 'Some portfolio management exists, but the criteria for stop/refine/pilot/scale decisions are not sharp enough. Focus on pre-committing to decision gates before launching the next pilot — including explicit criteria for when to stop.',
+      high: 'Portfolio discipline is strong. Stopping is normal. Scaling is a deliberate decision backed by evidence. This is what separates organizations that generate value from AI from those that generate activity.'
+    },
+    'leadership-accountability': {
+      low: 'Accountability for AI outcomes is diffuse — nobody clearly owns the results. This is the dimension that determines whether everything else matters. Without named accountability, governance becomes theater and learning loops have no forcing function.',
+      mid: 'Some accountability exists, but it is informal. The two-speed design — knowing where AI operates autonomously versus where human judgment is required — is still developing. Focus on naming one accountable person for each of your top five AI-assisted processes.',
+      high: 'Leaders own outcomes, not just budgets. The two-speed model is clear. If a regulator asked how you govern AI, you could answer with specifics. This is what institutional confidence looks like.'
+    }
+  };
+
+  const DIM_RECOS = {
+    'work-architecture': [
+      'Pick your single most-used AI tool. Map the workflow it touches — every step, handoff, and decision. Circle the steps that have not changed since before the tool existed.',
+      'For that same workflow, run a 30-minute session with the team: "If we designed this process from scratch knowing AI could handle X, what would we do differently?"',
+      'Document one before/after workflow redesign and share it as a template for other teams considering similar changes.'
+    ],
+    'learning-velocity': [
+      'Start one cross-team review cadence — even biweekly, even 30 minutes. Agenda: what broke, what we learned, what changes.',
+      'Create a shared prompt library or process playbook for your three most common AI use cases. Keep it lightweight — the goal is to stop teams from rediscovering the same lessons.',
+      'Assign one person per team as a "learning steward" — not a title, just a responsibility to capture and share what the team discovers each sprint.'
+    ],
+    'governance-guardrails': [
+      'For your highest-risk AI use case, write a one-page verification protocol: what gets checked, by whom, against what standard, how exceptions are escalated.',
+      'Run a 60-minute governance design session: bring together one AI user, one risk person, and one process owner. Map the current approval path. Identify the single biggest bottleneck.',
+      'Add audit logging to one AI-assisted workflow. It does not need to be sophisticated — even a shared document tracking inputs, outputs, and reviewer decisions creates traceability.'
+    ],
+    'portfolio-discipline': [
+      'List every active AI initiative. For each one, answer: what is the hypothesis, what would make us stop, and who makes the stop/scale decision?',
+      'Formally stop one initiative that has been lingering without clear momentum. Communicate the decision as evidence of portfolio discipline, not failure.',
+      'Before launching your next AI pilot, pre-commit to a decision gate — a specific date, specific criteria, and a named decision-maker.'
+    ],
+    'leadership-accountability': [
+      'For your top five AI-assisted processes, name one accountable person for each. Write it down. Share it. This is the single highest-leverage action for this dimension.',
+      'Schedule a leadership working session (not a briefing) on one specific topic: where does human judgment remain required in our AI-assisted workflows, and who owns that judgment?',
+      'Draft a one-page answer to the question: "How does our organization govern AI decision-making?" If the answer does not hold together, that is your roadmap.'
+    ]
+  };
+
+  /* --- State --- */
+  let currentQ = 0;
+  let answers = new Array(25).fill(null);
+
+  /* --- Functions --- */
+  function startDiagnostic() {
+    document.getElementById('landing').classList.remove('active');
+    document.getElementById('questions').classList.add('active');
+    document.getElementById('progressBar').style.display = 'block';
+    currentQ = 0;
+    renderQuestion();
+    window.scrollTo(0, 0);
+  }
+
+  function renderQuestion() {
+    const dimIdx = Math.floor(currentQ / 5);
+    const qIdx = currentQ % 5;
+    const dim = DIMENSIONS[dimIdx];
+    const q = dim.questions[qIdx];
+
+    document.getElementById('progressFill').style.width = ((currentQ + 1) / 25 * 100) + '%';
+    document.getElementById('btnBack').style.visibility = currentQ === 0 ? 'hidden' : 'visible';
+    document.getElementById('btnNext').textContent = currentQ === 24 ? 'See Results' : 'Next';
+    document.getElementById('btnNext').disabled = answers[currentQ] === null;
+
+    let html = '<div class="q-card">';
+    html += '<div class="dim-header">';
+    html += '<span class="dim-label">' + dim.label + ' — ' + dim.name + '</span>';
+    html += '<span class="q-counter">Question ' + (currentQ + 1) + ' of 25</span>';
+    html += '</div>';
+    html += '<p class="q-text">' + q.text + '</p>';
+    html += '<div class="q-options">';
+    q.options.forEach((opt, i) => {
+      const selected = answers[currentQ] === opt.score ? ' selected' : '';
+      html += '<div class="q-option' + selected + '" data-score="' + opt.score + '" onclick="selectAnswer(' + currentQ + ',' + opt.score + ',this)">';
+      html += '<span class="q-score">' + opt.score + '</span>';
+      html += '<span class="q-option-text">' + opt.text + '</span>';
+      html += '</div>';
+    });
+    html += '</div></div>';
+
+    document.getElementById('questionArea').innerHTML = html;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function selectAnswer(qIndex, score, el) {
+    answers[qIndex] = score;
+    document.querySelectorAll('.q-option').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    document.getElementById('btnNext').disabled = false;
+  }
+
+  function nextQuestion() {
+    if (answers[currentQ] === null) return;
+    if (currentQ === 24) {
+      showResults();
+      return;
+    }
+    currentQ++;
+    renderQuestion();
+  }
+
+  function prevQuestion() {
+    if (currentQ === 0) return;
+    currentQ--;
+    renderQuestion();
+  }
+
+  function showResults() {
+    document.getElementById('questions').classList.remove('active');
+    document.getElementById('results').classList.add('active');
+    document.getElementById('progressBar').style.display = 'none';
+
+    // Calculate scores
+    const dimScores = DIMENSIONS.map((dim, i) => {
+      const start = i * 5;
+      let total = 0;
+      for (let j = 0; j < 5; j++) total += (answers[start + j] || 0);
+      return { id: dim.id, name: dim.name, score: total };
+    });
+    const totalScore = dimScores.reduce((sum, d) => sum + d.score, 0);
+
+    // Determine tier
+    let tier = TIERS[0];
+    for (const t of TIERS) {
+      if (totalScore >= t.range[0] && totalScore <= t.range[1]) { tier = t; break; }
+    }
+
+    // Render header
+    document.getElementById('tierBadge').innerHTML = '<span class="tier-badge ' + tier.className + '">' + tier.name + '</span>';
+    document.getElementById('tierName').textContent = tier.name;
+    document.getElementById('totalScore').textContent = totalScore;
+    document.getElementById('tierDesc').textContent = tier.desc;
+
+    // Draw radar
+    setTimeout(() => drawRadar(dimScores), 100);
+
+    // Imbalance detection
+    const scores = dimScores.map(d => d.score);
+    const maxS = Math.max(...scores), minS = Math.min(...scores);
+    if (maxS - minS > 4) {
+      const highest = dimScores.find(d => d.score === maxS);
+      const lowest = dimScores.find(d => d.score === minS);
+      document.getElementById('imbalanceWarn').innerHTML =
+        '<div class="imbalance-warn"><h4>Imbalance Detected</h4>' +
+        '<p>Your strongest dimension (' + highest.name + ': ' + highest.score + '/10) is significantly ahead of your weakest (' + lowest.name + ': ' + lowest.score + '/10). ' +
+        'This pattern often means one part of the operating model is evolving faster than the rest — creating friction when initiatives try to scale across the gap. The weakest dimension is usually where scaling stalls first.</p></div>';
+    } else {
+      document.getElementById('imbalanceWarn').innerHTML = '';
+    }
+
+    // Dimension cards
+    let dimHtml = '';
+    dimScores.forEach(d => {
+      const pct = (d.score / 10) * 100;
+      const level = d.score <= 3 ? 'low' : d.score <= 6 ? 'mid' : 'high';
+      const insight = DIM_INSIGHTS[d.id][level];
+      dimHtml += '<div class="dim-result-card">';
+      dimHtml += '<div class="dim-result-header"><span class="dim-result-name">' + d.name + '</span><span class="dim-result-score">' + d.score + '<span style="font-size:0.9rem;color:var(--slate)">/10</span></span></div>';
+      dimHtml += '<div class="dim-bar"><div class="dim-bar-fill ' + level + '" style="width:' + pct + '%"></div></div>';
+      dimHtml += '<p class="dim-result-insight">' + insight + '</p>';
+      dimHtml += '</div>';
+    });
+    document.getElementById('dimResults').innerHTML = dimHtml;
+
+    // Bottom line
+    document.getElementById('bottomLineText').textContent = tier.bottomLine;
+
+    // Pre-build recommendations
+    const weakest = dimScores.reduce((a, b) => a.score < b.score ? a : b);
+    const recos = DIM_RECOS[weakest.id];
+    let recoHtml = '<div class="not-for" style="border-left-color: var(--gold);"><h3>Focus area: ' + weakest.name + '</h3><p style="color:var(--slate);font-size:0.9rem;margin-bottom:1rem;">Your lowest-scoring dimension. These three actions address the specific gaps the diagnostic surfaced.</p><ul>';
+    recos.forEach(r => { recoHtml += '<li>' + r + '</li>'; });
+    recoHtml += '</ul></div>';
+    document.getElementById('recoContent').innerHTML = recoHtml;
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function drawRadar(dimScores) {
+    const canvas = document.getElementById('radarChart');
+    const ctx = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = 420 * dpr;
+    canvas.height = 420 * dpr;
+    ctx.scale(dpr, dpr);
+
+    const cx = 210, cy = 210, maxR = 160;
+    const n = 5;
+    const angleStep = (2 * Math.PI) / n;
+    const startAngle = -Math.PI / 2;
+
+    // Grid
+    [0.2, 0.4, 0.6, 0.8, 1.0].forEach(pct => {
+      ctx.beginPath();
+      for (let i = 0; i <= n; i++) {
+        const angle = startAngle + i * angleStep;
+        const x = cx + Math.cos(angle) * maxR * pct;
+        const y = cy + Math.sin(angle) * maxR * pct;
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+      ctx.strokeStyle = 'rgba(148,163,184,0.15)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    });
+
+    // Axis lines and labels
+    ctx.font = '11px system-ui, sans-serif';
+    ctx.fillStyle = '#94A3B8';
+    ctx.textAlign = 'center';
+    dimScores.forEach((d, i) => {
+      const angle = startAngle + i * angleStep;
+      const x = cx + Math.cos(angle) * maxR;
+      const y = cy + Math.sin(angle) * maxR;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(x, y);
+      ctx.strokeStyle = 'rgba(148,163,184,0.1)';
+      ctx.stroke();
+
+      // Labels
+      const lx = cx + Math.cos(angle) * (maxR + 25);
+      const ly = cy + Math.sin(angle) * (maxR + 25);
+      const words = d.name.split(' ');
+      if (words.length > 1) {
+        ctx.fillText(words[0], lx, ly - 6);
+        ctx.fillText(words.slice(1).join(' '), lx, ly + 8);
+      } else {
+        ctx.fillText(d.name, lx, ly + 3);
+      }
+    });
+
+    // Data polygon
+    ctx.beginPath();
+    dimScores.forEach((d, i) => {
+      const angle = startAngle + i * angleStep;
+      const r = (d.score / 10) * maxR;
+      const x = cx + Math.cos(angle) * r;
+      const y = cy + Math.sin(angle) * r;
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    });
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(212,168,67,0.15)';
+    ctx.fill();
+    ctx.strokeStyle = '#D4A843';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Data points
+    dimScores.forEach((d, i) => {
+      const angle = startAngle + i * angleStep;
+      const r = (d.score / 10) * maxR;
+      const x = cx + Math.cos(angle) * r;
+      const y = cy + Math.sin(angle) * r;
+      ctx.beginPath();
+      ctx.arc(x, y, 4, 0, 2 * Math.PI);
+      ctx.fillStyle = '#D4A843';
+      ctx.fill();
+    });
+  }
+
+  function submitEmail() {
+    const email = document.getElementById('emailInput').value;
+    if (email && email.includes('@')) {
+      // In production: send to Supabase or email service
+      console.log('Email captured:', email);
+    }
+    document.getElementById('emailGate').style.display = 'none';
+    document.getElementById('recommendations').style.display = 'block';
+    document.getElementById('recommendations').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function skipEmail() {
+    document.getElementById('emailGate').style.display = 'none';
+    document.getElementById('recommendations').style.display = 'block';
+    document.getElementById('recommendations').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function retake() {
+    answers = new Array(25).fill(null);
+    currentQ = 0;
+    document.getElementById('results').classList.remove('active');
+    document.getElementById('landing').classList.add('active');
+    document.getElementById('emailGate').style.display = 'block';
+    document.getElementById('recommendations').style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function shareResults() {
+    const text = 'I just took the AI Transformation Readiness Diagnostic — it measures operating model readiness, not tech stack maturity. Highly recommend for anyone leading AI initiatives in a regulated environment.';
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector('.results-actions .btn-primary');
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = 'Copy Share Link'; }, 2000);
+      });
+    }
+  }
+  </script>
+</body>
+</html>
