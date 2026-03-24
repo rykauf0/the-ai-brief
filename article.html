@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">Article — Ryan Kaufman</title>
+  <meta name="description" id="page-description" content="">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .article-body {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    .article-body h1 { font-size: 2.4rem; margin-bottom: 0.5rem; }
+    .article-body h2 { font-size: 1.6rem; margin: 2rem 0 0.75rem; }
+    .article-body h3 { font-size: 1.25rem; margin: 1.5rem 0 0.5rem; }
+    .article-body p { margin-bottom: 1.2rem; font-size: 1.05rem; }
+    .article-body ul, .article-body ol { margin-bottom: 1.2rem; padding-left: 1.5rem; }
+    .article-body li { margin-bottom: 0.5rem; font-size: 1.02rem; }
+    .article-body blockquote {
+      border-left: 3px solid var(--gold);
+      padding-left: 1.25rem;
+      margin: 1.5rem 0;
+      color: var(--slate);
+      font-style: italic;
+      font-size: 1.05rem;
+    }
+    .article-body code {
+      background: var(--charcoal);
+      padding: 0.15rem 0.4rem;
+      border-radius: 3px;
+      font-size: 0.88em;
+      color: var(--gold);
+    }
+    .article-body pre {
+      background: var(--charcoal);
+      padding: 1.25rem;
+      border-radius: var(--radius);
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--border);
+    }
+    .article-body pre code { background: none; padding: 0; }
+    .article-body strong { color: var(--off-white); }
+    .article-body hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2.5rem 0;
+    }
+    .article-body a { color: var(--gold); text-decoration: underline; }
+    .article-body a:hover { color: var(--off-white); }
+
+    .article-meta {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .article-meta .date {
+      font-size: 0.85rem;
+      color: var(--slate);
+    }
+
+    .article-thesis {
+      font-size: 1.2rem;
+      color: var(--slate);
+      font-style: italic;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      max-width: 55ch;
+    }
+
+    .article-back {
+      display: inline-block;
+      margin-top: 3rem;
+      font-size: 0.88rem;
+      color: var(--slate);
+      text-decoration: none;
+    }
+    .article-back:hover { color: var(--gold); }
+    .article-back::before { content: "\2190 "; }
+
+    .loading-state {
+      text-align: center;
+      padding: 4rem 0;
+      color: var(--slate);
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">Ryan <span>Kaufman</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="frameworks.html">Frameworks</a></li>
+        <li><a href="diagnostic.html">Diagnostic</a></li>
+        <li><a href="articles.html">Articles</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Article Content -->
+  <section class="page-header" style="padding-bottom: 0;">
+    <div class="container">
+      <div id="article-content" class="article-body">
+        <div class="loading-state">Loading article...</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <a href="articles.html" class="article-back">Back to all articles</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-brand">Ryan Kaufman</span>
+      <ul class="footer-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="frameworks.html">Frameworks</a></li>
+        <li><a href="diagnostic.html">Diagnostic</a></li>
+        <li><a href="articles.html">Articles</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/markdown.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const slug = new URLSearchParams(window.location.search).get('slug');
+      const container = document.getElementById('article-content');
+
+      if (!slug) {
+        container.innerHTML = '<div class="loading-state">No article specified. <a href="articles.html">Browse articles</a></div>';
+        return;
+      }
+
+      try {
+        const { data } = await supabase.from('articles').select('*', {
+          eq: { slug, status: 'published' }
+        });
+
+        if (!data || !data.length) {
+          container.innerHTML = '<div class="loading-state">Article not found. <a href="articles.html">Browse articles</a></div>';
+          return;
+        }
+
+        const article = data[0];
+        const date = new Date(article.created_at).toLocaleDateString('en-US', {
+          year: 'numeric', month: 'long', day: 'numeric'
+        });
+
+        document.getElementById('page-title').textContent = `${article.title} — Ryan Kaufman`;
+        document.getElementById('page-description').content = article.thesis || '';
+
+        const tagsHtml = (article.tags || []).map(t =>
+          `<span class="tag">${t}</span>`
+        ).join('');
+
+        container.innerHTML = `
+          <h1>${escapeHtml(article.title)}</h1>
+          ${article.thesis ? `<p class="article-thesis">${escapeHtml(article.thesis)}</p>` : ''}
+          <div class="article-meta">
+            <span class="date">${date}</span>
+            ${tagsHtml}
+          </div>
+          <div class="article-content-body">
+            ${parseMarkdown(article.content)}
+          </div>
+        `;
+      } catch (err) {
+        console.error(err);
+        container.innerHTML = '<div class="loading-state">Error loading article. <a href="articles.html">Browse articles</a></div>';
+      }
+    });
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+  </script>
+</body>
+</html>

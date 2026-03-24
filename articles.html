@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Articles — Ryan Kaufman</title>
+  <meta name="description" content="Essays on AI transformation, institutional infrastructure, governance, and accountability for leaders in regulated organizations.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">Ryan <span>Kaufman</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="frameworks.html">Frameworks</a></li>
+        <li><a href="diagnostic.html">Diagnostic</a></li>
+        <li><a href="articles.html">Articles</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <span class="hero-label">Articles</span>
+      <h1>Thinking in public.</h1>
+      <p class="lead">Essays on AI transformation for leaders in regulated organizations. No hot takes — operating principles that hold up under institutional scrutiny.</p>
+    </div>
+  </section>
+
+  <!-- Articles -->
+  <section>
+    <div class="container-wide">
+
+      <!-- Filter Bar -->
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="operating-model">Operating Model</button>
+        <button class="filter-btn" data-filter="governance">Governance</button>
+        <button class="filter-btn" data-filter="accountability">Accountability</button>
+        <button class="filter-btn" data-filter="leadership">Leadership</button>
+        <button class="filter-btn" data-filter="infrastructure">Infrastructure</button>
+      </div>
+
+      <!-- Article Grid -->
+      <div id="articles-grid" class="articles-grid">
+        <p style="color: var(--slate); font-style: italic;">Loading articles...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-brand">Ryan Kaufman</span>
+      <ul class="footer-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="frameworks.html">Frameworks</a></li>
+        <li><a href="diagnostic.html">Diagnostic</a></li>
+        <li><a href="articles.html">Articles</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script>
+    // Fallback articles aligned with charter essay plan
+    const fallbackArticles = [
+      { title: 'The Sprint Operating Model', slug: '', thesis: 'Most organizations run AI pilots without a system for deciding what earns the right to scale. The Sprint-to-Scale model provides the five components that bridge experiment to production — and the failure modes that emerge when any of them is skipped.', tags: ['operating-model', 'governance'], status: 'published' },
+      { title: 'Why >10% Pilot-to-Production Is the Wrong Goal', slug: '', thesis: 'Measuring AI success by pilot conversion rate misses the point entirely. The right question is not how many pilots scaled, but whether the ones that did had the institutional infrastructure to sustain value and manage risk.', tags: ['governance', 'accountability'], status: 'published' },
+      { title: 'The Confidence Infrastructure Gap', slug: '', thesis: 'AI transformation stalls not because leaders lack courage, but because organizations have not built the governance scaffolding, accountability structures, and risk frameworks that make leadership confidence rational.', tags: ['infrastructure', 'leadership'], status: 'published' }
+    ];
+
+    function renderArticles(articles) {
+      const grid = document.getElementById('articles-grid');
+      if (!articles.length) {
+        grid.innerHTML = '<p style="color: var(--slate); font-style: italic;">No articles published yet.</p>';
+        return;
+      }
+
+      grid.innerHTML = articles.map(article => {
+        const tags = article.tags || [];
+        const tagsAttr = tags.join(',');
+        const tagsHtml = tags.map(t => {
+          const label = t.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+          return '<span class="tag">' + label + '</span>';
+        }).join('');
+        const href = article.slug ? 'article.html?slug=' + encodeURIComponent(article.slug) : '#';
+        const isLink = article.slug ? 'a' : 'div';
+
+        return '<' + isLink + ' class="article-card" data-tags="' + tagsAttr + '"' +
+          (article.slug ? ' href="' + href + '" style="text-decoration:none;"' : '') + '>' +
+          '<div class="tag-row">' + tagsHtml + '</div>' +
+          '<h3>' + escapeHtml(article.title) + '</h3>' +
+          '<p>' + escapeHtml(article.thesis || '') + '</p>' +
+          '<span class="read-more">Read more</span>' +
+          '</' + isLink + '>';
+      }).join('');
+
+      bindFilters();
+    }
+
+    function bindFilters() {
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const cards = document.querySelectorAll('.article-card');
+      filterBtns.forEach(btn => {
+        btn.onclick = () => {
+          const filter = btn.dataset.filter;
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          cards.forEach(card => {
+            if (filter === 'all') { card.style.display = ''; return; }
+            const tags = card.dataset.tags ? card.dataset.tags.split(',') : [];
+            card.style.display = tags.includes(filter) ? '' : 'none';
+          });
+        };
+      });
+    }
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const { data } = await supabase.from('articles').select('*', {
+          eq: { status: 'published' },
+          order: 'created_at.desc'
+        });
+        if (data && data.length > 0) {
+          renderArticles(data);
+        } else {
+          renderArticles(fallbackArticles);
+        }
+      } catch (err) {
+        console.error('Supabase fetch failed, using fallbacks:', err);
+        renderArticles(fallbackArticles);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -3,321 +3,161 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>3rd Take — The Signal in AI</title>
-  <meta name="description" content="Five developments. One synthesis. What's working, what's not, and what nobody's saying. Every Sunday.">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="3rd Take — The Signal in AI">
-  <meta property="og:description" content="Five developments. One synthesis. What's working, what's not, and what nobody's saying. Every Sunday.">
-  <meta property="og:url" content="https://site-build-seven.vercel.app">
-  <meta property="og:site_name" content="3rd Take">
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="3rd Take — The Signal in AI">
-  <meta name="twitter:description" content="Five developments. One synthesis. What's working, what's not, and what nobody's saying. Every Sunday.">
-  <!-- Canonical -->
-  <link rel="canonical" href="https://site-build-seven.vercel.app">
-  <!-- Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "3rd Take",
-    "description": "The signal in AI. Five developments. One synthesis. What's working, what's not, and what nobody's saying. Every Sunday.",
-    "url": "https://site-build-seven.vercel.app"
-  }
-  </script>
-  <link rel="stylesheet" href="site.css?v=3">
-  <link rel="stylesheet" href="article.css?v=3">
+  <title>Ryan Kaufman — AI Transformation for Regulated Organizations</title>
+  <meta name="description" content="Frameworks, essays, and operational thinking on why AI transformation stalls inside regulated organizations — and what the institutional infrastructure to fix it actually looks like.">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div id="reading-progress"></div>
 
-  <header class="masthead">
-    <div class="masthead-inner">
-      <a href="index.html" class="masthead-brand">
-        <svg class="masthead-icon" viewBox="0 0 20 20" width="22" height="22" aria-hidden="true">
-          <circle cx="10" cy="6.5" r="5" fill="#2E6E3F" opacity="0.55"/>
-          <circle cx="6.5" cy="12" r="5" fill="#8B3A3A" opacity="0.55"/>
-          <circle cx="13.5" cy="12" r="5" fill="#6B4E00" opacity="0.55"/>
-        </svg>
-        <span class="masthead-wordmark">
-          <span class="masthead-title">3rd Take</span>
-          <span class="masthead-tagline">The signal in AI</span>
-        </span>
-      </a>
-      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
-        ☰ Menu
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">Ryan <span>Kaufman</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="frameworks.html">Frameworks</a></li>
+        <li><a href="diagnostic.html">Diagnostic</a></li>
+        <li><a href="articles.html">Articles</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
       </button>
-      <nav class="masthead-nav">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="#archive">Archive</a>
-        <a href="issues/2026-03-22.html" class="masthead-cta">Latest Issue</a>
-      </nav>
     </div>
-  </header>
+  </nav>
 
-  <main>
-  <!-- Featured issue -->
+  <!-- Hero -->
   <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-feature">
-        <p class="hero-label">Latest Edition &mdash; March 22, 2026</p>
-        <h1 class="hero-title">
-          <a href="issues/2026-03-22.html">The Preemption Doctrine</a>
-        </h1>
-        <div class="hero-meta">
-          <span class="hero-date">March 22, 2026</span>
-          <span class="hero-badge">Issue 12</span>
-          <span>Governance &middot; Work &middot; Economy &middot; Society &middot; Environment</span>
-        </div>
-        <p class="hero-excerpt">
-          The White House moves to preempt state AI laws. Karpathy&rsquo;s AI agents run 700 experiments overnight. NVIDIA projects $1 trillion in orders.
-          Americans trust AI less than almost any other country &mdash; and the electricity bills are arriving.
-        </p>
-        <a href="issues/2026-03-22.html" class="hero-read">Read this issue</a>
+    <div class="container">
+      <span class="hero-label">AI Transformation in Regulated Organizations</span>
+      <h1>AI does not stall at pilots because leaders lack courage.</h1>
+      <p class="lead">It stalls because organizations have not built the institutional infrastructure that makes leadership confidence rational — the governance scaffolding, accountability structures, and risk frameworks that answer three questions: Is this ready? Who owns it? What do we do if it breaks?</p>
+      <div class="hero-cta">
+        <a href="frameworks.html" class="btn btn-primary">See the Frameworks</a>
+        <a href="articles.html" class="btn btn-ghost">Read the Essays</a>
       </div>
-      <div class="hero-lens">
-        <div class="hero-lens-header">This week's full picture</div>
-        <div class="hero-lens-item lens-good">
-          <span class="hero-lens-label">What's Working</span>
-          <p>Autoresearch demonstrates AI agents conducting real scientific work &mdash; 700 experiments in two days, with transferable improvements, on a single GPU. The White House framework is the first attempt at a unified federal AI policy.</p>
+    </div>
+  </section>
+
+  <!-- Value Props -->
+  <section>
+    <div class="container-wide">
+      <span class="section-label">What This Work Addresses</span>
+      <div class="value-grid">
+        <div class="value-card">
+          <div class="value-icon">&#9670;</div>
+          <h3>The Confidence Gap</h3>
+          <p>Leaders approve pilots but cannot approve production — not because they lack vision, but because the governance and accountability infrastructure does not exist yet.</p>
         </div>
-        <div class="hero-lens-item lens-bad">
-          <span class="hero-lens-label">What's Not</span>
-          <p>Federal preemption without federal capacity. Stripping states of regulatory authority while declining to create a federal regulator is a regulatory vacuum, not deregulation. Electricity costs up 42% since 2019.</p>
+        <div class="value-card">
+          <div class="value-icon">&#9670;</div>
+          <h3>Operating Model, Not Tool Rollout</h3>
+          <p>AI transformation fails when treated as a technology project. It succeeds when leaders redesign how work gets done — roles, routines, decision rights, accountability.</p>
         </div>
-        <div class="hero-lens-item lens-ugly">
-          <span class="hero-lens-label">What Nobody's Saying</span>
-          <p>The trust chasm &mdash; 87% in China, 32% in the US &mdash; reflects how these societies experience AI: as national strategy with shared benefits, or as corporate extraction with distributed costs.</p>
+        <div class="value-card">
+          <div class="value-icon">&#9670;</div>
+          <h3>Governance That Accelerates</h3>
+          <p>The fastest-moving AI programs are not the ones with the fewest rules. They are the ones with the clearest guardrails — because clarity removes hesitation.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Pillars Key -->
-  <div class="pillars-key">
-    <div class="pillars-key-inner">
-      <span class="pk-item"><span class="pk-dot" style="background:var(--gov-color)"></span>Governance</span>
-      <span class="pk-item"><span class="pk-dot" style="background:var(--work-color)"></span>Work</span>
-      <span class="pk-item"><span class="pk-dot" style="background:var(--econ-color)"></span>Economy</span>
-      <span class="pk-item"><span class="pk-dot" style="background:var(--env-color)"></span>Environment</span>
-      <span class="pk-item"><span class="pk-dot" style="background:var(--soc-color)"></span>Society</span>
-    </div>
-  </div>
-
-  <!-- Archive -->
-  <section id="archive" class="archive">
-    <div class="archive-header">
-      <span class="archive-label">All editions &mdash; January to March 2026</span>
-      <div class="filter-bar">
-        <button class="filter-btn active" data-topic="all">All</button>
-        <button class="filter-btn" data-topic="gov">Governance</button>
-        <button class="filter-btn" data-topic="work">Work</button>
-        <button class="filter-btn" data-topic="econ">Economy</button>
-        <button class="filter-btn" data-topic="env">Environment</button>
-        <button class="filter-btn" data-topic="soc">Society</button>
-      </div>
-    </div>
-
-    <div class="issue-grid">
-
-      <a class="issue-card" href="issues/2026-03-22.html" data-topics="gov work econ soc env">
-        <div class="card-meta">
-          <span class="card-date">March 22, 2026</span>
-          <span class="card-num">No. 12</span>
-        </div>
-        <p class="card-title">The Preemption Doctrine</p>
-        <p class="card-excerpt">The White House preempts state AI laws, Karpathy&rsquo;s agents run 700 experiments overnight, NVIDIA projects $1 trillion in orders, and the AI trust chasm widens.</p>
-        <div class="card-tags">
-          <span class="tag gov">Governance</span>
-          <span class="tag work">Work</span>
-          <span class="tag econ">Economy</span>
-          <span class="tag soc">Society</span>
-          <span class="tag env">Environment</span>
-        </div>
-      </a>
-
-      <a class="issue-card" href="issues/2026-03-15.html" data-topics="gov work econ soc env">
-        <div class="card-meta">
-          <span class="card-date">March 15, 2026</span>
-          <span class="card-num">No. 11</span>
-        </div>
-        <p class="card-title">The Bill Comes Due</p>
-        <p class="card-excerpt">The Pentagon blacklists an AI company, a court draws the first legal line on AI agents, AI deepfakes hit elections and war zones, and $667 billion in AI spending produces no macro productivity gains.</p>
-        <div class="card-tags">
-          <span class="tag gov">Governance</span>
-          <span class="tag work">Work</span>
-          <span class="tag econ">Economy</span>
-          <span class="tag soc">Society</span>
-          <span class="tag env">Environment</span>
-        </div>
-      </a>
-
-      <a class="issue-card" href="issues/2026-03-08.html" data-topics="work env gov econ">
-        <div class="card-meta">
-          <span class="card-date">March 8, 2026</span>
-          <span class="card-num">No. 10</span>
-        </div>
-        <p class="card-title">The Jobs Question Gets Real</p>
-        <p class="card-excerpt">New research shows white-collar displacement accelerating. Entry-level hiring contracts. Policy still debating definitions while the data arrives.</p>
-        <div class="card-tags">
-          <span class="tag work">Work</span>
-          <span class="tag gov">Governance</span>
-          <span class="tag env">Environment</span>
-        </div>
-      </a>
-
-      <a class="issue-card" href="issues/2026-03-01.html" data-topics="work econ gov">
-        <div class="card-meta">
-          <span class="card-date">March 1, 2026</span>
-          <span class="card-num">No. 9</span>
-        </div>
-        <p class="card-title">The Automation Math Doesn't Add Up — Yet</p>
-        <p class="card-excerpt">McKinsey says 30% of work hours could be automated by 2030. The productivity gains aren't showing up. What the gap means for workers and policy.</p>
-        <div class="card-tags">
-          <span class="tag work">Work</span>
-          <span class="tag econ">Economy</span>
-          <span class="tag gov">Governance</span>
-        </div>
-      </a>
-
-      <a class="issue-card" href="issues/2026-02-22.html" data-topics="env">
-        <div class="card-meta">
-          <span class="card-date">February 22, 2026</span>
-          <span class="card-num">No. 8</span>
-        </div>
-        <p class="card-title">The Environmental Reckoning</p>
-        <p class="card-excerpt">Data centres overtake aviation in energy consumption. Water stress reaches critical levels. The sustainability claims don't hold.</p>
-        <div class="card-tags">
-          <span class="tag env">Environment</span>
-        </div>
-      </a>
-
-      <a class="issue-card" href="issues/2026-02-15.html" data-topics="soc gov">
-        <div class="card-meta">
-          <span class="card-date">February 15, 2026</span>
-          <span class="card-num">No. 7</span>
-        </div>
-        <p class="card-title">Healthcare AI at the Inflection Point</p>
-        <p class="card-excerpt">Diagnostic AI outperforms specialists in narrow domains. But hospitals can't afford the infrastructure — and regulators are behind.</p>
-        <div class="card-tags">
-          <span class="tag soc">Society</span>
-          <span class="tag gov">Governance</span>
-        </div>
-      </a>
-
-      <a class="issue-card" href="issues/2026-02-08.html" data-topics="econ gov work">
-        <div class="card-meta">
-          <span class="card-date">February 8, 2026</span>
-          <span class="card-num">No. 6</span>
-        </div>
-        <p class="card-title">The Model Race Inflects</p>
-        <p class="card-excerpt">Three frontier models launch in one week. A landmark safety report warns capability outpaces safeguards. Only 1 in 50 AI investments delivers transformational value.</p>
-        <div class="card-tags">
-          <span class="tag econ">Economy</span>
-          <span class="tag gov">Governance</span>
-          <span class="tag work">Work</span>
-        </div>
-      </a>
-
-      <a class="issue-card" href="issues/2026-02-01.html" data-topics="gov work">
-        <div class="card-meta">
-          <span class="card-date">February 1, 2026</span>
-          <span class="card-num">No. 5</span>
-        </div>
-        <p class="card-title">AI Safety Governance Takes Shape — Slowly</p>
-        <p class="card-excerpt">The International AI Safety Report lands with 100 researchers behind it. The EU AI Act begins enforcement. What each approach will mean in practice.</p>
-        <div class="card-tags">
-          <span class="tag gov">Governance</span>
-          <span class="tag work">Work</span>
-        </div>
-      </a>
-
-      <a class="issue-card" href="issues/2026-01-25.html" data-topics="econ gov work soc">
-        <div class="card-meta">
-          <span class="card-date">January 25, 2026</span>
-          <span class="card-num">No. 4</span>
-        </div>
-        <p class="card-title">DeepSeek Changes the Calculus</p>
-        <p class="card-excerpt">A Chinese lab releases a model matching frontier performance at a fraction of the cost. The implications for AI economics are significant.</p>
-        <div class="card-tags">
-          <span class="tag econ">Economy</span>
-          <span class="tag gov">Governance</span>
-          <span class="tag work">Work</span>
-        </div>
-      </a>
-
-      <a class="issue-card" href="issues/2026-01-18.html" data-topics="work gov env">
-        <div class="card-meta">
-          <span class="card-date">January 18, 2026</span>
-          <span class="card-num">No. 3</span>
-        </div>
-        <p class="card-title">The Week Everyone Admitted the Problem</p>
-        <p class="card-excerpt">At Davos, AI leaders warned half of entry-level jobs could vanish within years. The honesty was unprecedented — the absence of a plan was not.</p>
-        <div class="card-tags">
-          <span class="tag work">Work</span>
-          <span class="tag gov">Governance</span>
-          <span class="tag env">Environment</span>
-        </div>
-      </a>
-
-      <a class="issue-card" href="issues/2026-01-11.html" data-topics="work soc econ">
-        <div class="card-meta">
-          <span class="card-date">January 11, 2026</span>
-          <span class="card-num">No. 2</span>
-        </div>
-        <p class="card-title">CES and the Robot Moment</p>
-        <p class="card-excerpt">Physical AI arrives at scale. Humanoid robots move from demonstrations to early deployments. The timeline for labour market disruption shortens.</p>
-        <div class="card-tags">
-          <span class="tag work">Work</span>
-          <span class="tag soc">Society</span>
-          <span class="tag econ">Economy</span>
-        </div>
-      </a>
-
-      <a class="issue-card" href="issues/2026-01-04.html" data-topics="gov econ env">
-        <div class="card-meta">
-          <span class="card-date">January 4, 2026</span>
-          <span class="card-num">No. 1</span>
-        </div>
-        <p class="card-title">Scene-Setting for 2026</p>
-        <p class="card-excerpt">Where AI actually stands entering the year — past the hype, past the fear — and the five dynamics worth watching in the months ahead.</p>
-        <div class="card-tags">
-          <span class="tag gov">Governance</span>
-          <span class="tag econ">Economy</span>
-          <span class="tag env">Environment</span>
-        </div>
-      </a>
-
-    </div>
-  </section>
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <div class="footer-logo">3rd Take</div>
-        <p class="footer-motto">The full picture on artificial intelligence — good, bad, and ugly. Published every Sunday. No advertising, no sponsorship.</p>
-      </div>
-      <div class="footer-links">
-        <h4>Navigate</h4>
+  <!-- This Is Not -->
+  <section>
+    <div class="container">
+      <div class="not-for">
+        <h3>This is not:</h3>
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="#archive">All Editions</a></li>
-          <li><a href="issues/2026-03-22.html">Latest Issue</a></li>
+          <li>A LinkedIn growth strategy or personal brand exercise</li>
+          <li>Commentary from the sidelines — this comes from operating inside institutional environments</li>
+          <li>Advice to "move faster" without explaining the infrastructure that makes speed safe</li>
+          <li>Hot takes, threads, or carousel posts — operator credibility, not influencer metrics</li>
         </ul>
       </div>
+      <div class="tip">
+        <p>If your organization has tried AI pilots that stalled after launch, the problem is rarely the tool. It is almost always the institutional infrastructure around it.</p>
+      </div>
     </div>
-    <div class="footer-bottom">
-      <span>&copy; 2026 3rd Take</span>
-      <span><a href="about.html">About</a></span>
+  </section>
+
+  <!-- Featured Articles -->
+  <section>
+    <div class="container-wide">
+      <span class="section-label">Recent Thinking</span>
+      <h2>Featured Articles</h2>
+      <div id="featured-grid" class="articles-grid featured-articles" style="margin-top: 2rem;">
+        <!-- Dynamically loaded from Supabase -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom Line -->
+  <section>
+    <div class="container">
+      <div class="bottom-line">
+        <h4>Bottom Line</h4>
+        <p>AI will not transform your organization. Your institutional infrastructure will. Frameworks, essays, and a whitepaper on what it actually takes to move from pilots to production inside a regulated organization.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-brand">Ryan Kaufman</span>
+      <ul class="footer-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="frameworks.html">Frameworks</a></li>
+        <li><a href="diagnostic.html">Diagnostic</a></li>
+        <li><a href="articles.html">Articles</a></li>
+      </ul>
     </div>
   </footer>
 
-  <script src="js/main.js?v=2"></script>
+  <script src="js/main.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script>
+    const featuredFallback = [
+      { title: 'The Sprint Operating Model', tags: ['operating-model', 'governance'], thesis: 'Most organizations run AI pilots without a system for deciding what earns the right to scale. The Sprint-to-Scale model provides the five components that bridge experiment to production.' },
+      { title: 'Why >10% Pilot-to-Production Is the Wrong Goal', tags: ['governance', 'accountability'], thesis: 'Measuring AI success by pilot conversion rate misses the point. The right question is not how many pilots scaled, but whether the ones that did had the institutional infrastructure to sustain.' },
+      { title: 'The Confidence Infrastructure Gap', tags: ['governance', 'leadership'], thesis: 'AI transformation stalls not because leaders lack courage, but because organizations have not built the governance scaffolding that makes leadership confidence rational.' }
+    ];
+
+    function renderFeatured(articles) {
+      const grid = document.getElementById('featured-grid');
+      grid.innerHTML = articles.slice(0, 3).map(a => {
+        const tagsHtml = (a.tags || []).map(t => {
+          const label = t.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+          return '<span class="tag">' + label + '</span>';
+        }).join('');
+        const href = a.slug ? 'article.html?slug=' + encodeURIComponent(a.slug) : 'articles.html';
+        return '<a href="' + href + '" class="article-card" style="text-decoration:none;">' +
+          '<div class="tag-row">' + tagsHtml + '</div>' +
+          '<h3>' + escapeHtml(a.title) + '</h3>' +
+          '<p>' + escapeHtml(a.thesis || '') + '</p>' +
+          '<span class="read-more">Read more</span></a>';
+      }).join('');
+    }
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const { data } = await supabase.from('articles').select('*', {
+          eq: { status: 'published' },
+          order: 'created_at.desc',
+          limit: 3
+        });
+        renderFeatured(data && data.length ? data : featuredFallback);
+      } catch (err) {
+        renderFeatured(featuredFallback);
+      }
+    });
+  </script>
 </body>
 </html>
