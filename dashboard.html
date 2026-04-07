@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Macro Regime Index — Ryan Kaufman</title>
+<style>
+  :root {
+    --navy: #0B1120;
+    --charcoal: #1C2333;
+    --dark-slate: #2D3748;
+    --slate: #94A3B8;
+    --light-slate: #CBD5E1;
+    --off-white: #F8FAFC;
+    --gold: #D4A843;
+    --gold-dim: rgba(212,168,67,0.15);
+    --red: #f87171;
+    --orange: #fbbf24;
+    --blue: #60a5fa;
+    --green: #4ade80;
+    --radius-sm: 6px;
+    --radius-md: 12px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--navy);
+    color: var(--off-white);
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── TYPOGRAPHY ──────────────────────────────── */
+  h1, h2, h3 { font-family: Georgia, serif; font-weight: normal; }
+  h1 { font-size: clamp(1.8rem, 5vw, 3rem); }
+  h2 { font-size: 1.4rem; color: var(--light-slate); letter-spacing: 0.04em; text-transform: uppercase; font-size: 0.85rem; }
+  h3 { font-size: 1.15rem; }
+
+  /* ── LAYOUT ──────────────────────────────────── */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* ── NAV ─────────────────────────────────────── */
+  nav {
+    background: var(--charcoal);
+    border-bottom: 1px solid rgba(212,168,67,0.2);
+    padding: 1rem 0;
+    position: sticky; top: 0; z-index: 100;
+  }
+  nav .inner {
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;
+  }
+  nav .brand { font-family: Georgia, serif; font-size: 1.1rem; color: var(--gold); text-decoration: none; }
+  nav .brand span { color: var(--light-slate); font-family: system-ui; font-size: 0.85rem; margin-left: 0.75rem; }
+  .settings-btn {
+    background: none; border: 1px solid var(--dark-slate); color: var(--slate);
+    cursor: pointer; border-radius: var(--radius-sm); padding: 0.4rem 0.75rem;
+    font-size: 0.85rem; display: flex; align-items: center; gap: 0.4rem;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .settings-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ── HERO ─────────────────────────────────────── */
+  .hero {
+    padding: 4rem 0 3rem;
+    text-align: center;
+    background: linear-gradient(180deg, rgba(212,168,67,0.04) 0%, transparent 100%);
+    border-bottom: 1px solid rgba(212,168,67,0.1);
+  }
+  .hero-label {
+    font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.5rem;
+  }
+  .hero h1 { color: var(--off-white); margin-bottom: 2.5rem; }
+  .last-updated { color: var(--slate); font-size: 0.82rem; margin-top: 1rem; }
+
+  /* ── GAUGE ───────────────────────────────────── */
+  .gauge-wrap { position: relative; display: inline-block; }
+  #gaugeCanvas { display: block; }
+  .gauge-center {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -20%);
+    text-align: center; pointer-events: none;
+  }
+  .gauge-score {
+    font-family: Georgia, serif;
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-weight: normal;
+    line-height: 1;
+  }
+  .gauge-label {
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 0.25rem;
+  }
+
+  /* ── SECTIONS ─────────────────────────────────── */
+  section { padding: 3rem 0; }
+  .section-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 1.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--dark-slate);
+  }
+  .section-header h2 { color: var(--slate); }
+
+  /* ── PILLAR CARDS ─────────────────────────────── */
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  .pillar-card {
+    background: var(--charcoal);
+    border: 1px solid var(--dark-slate);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.5rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .pillar-card:hover { border-color: rgba(212,168,67,0.3); transform: translateY(-2px); }
+  .pillar-card-header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 0.75rem;
+  }
+  .pillar-name { font-family: Georgia, serif; font-size: 1rem; color: var(--off-white); }
+  .pillar-weight { font-size: 0.75rem; color: var(--slate); margin-top: 0.15rem; }
+  .pillar-score-num {
+    font-family: Georgia, serif; font-size: 1.8rem;
+    line-height: 1;
+  }
+  .score-bar-track {
+    height: 6px; background: var(--dark-slate);
+    border-radius: 3px; overflow: hidden; margin: 0.75rem 0;
+  }
+  .score-bar-fill {
+    height: 100%; border-radius: 3px;
+    transition: width 1s cubic-bezier(0.4,0,0.2,1);
+  }
+  .pillar-key-indicator { font-size: 0.78rem; color: var(--slate); }
+  .pillar-key-indicator strong { color: var(--light-slate); }
+
+  /* ── CHART ───────────────────────────────────── */
+  .chart-wrap {
+    background: var(--charcoal);
+    border: 1px solid var(--dark-slate);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    position: relative;
+  }
+  #trendCanvas { width: 100%; display: block; }
+
+  /* ── INDICATOR TABLE ──────────────────────────── */
+  .table-controls {
+    display: flex; gap: 0.5rem; align-items: center;
+    flex-wrap: wrap;
+  }
+  .expand-btn {
+    background: none; border: 1px solid var(--dark-slate);
+    color: var(--slate); cursor: pointer;
+    border-radius: var(--radius-sm); padding: 0.35rem 0.85rem;
+    font-size: 0.82rem; transition: border-color 0.2s, color 0.2s;
+  }
+  .expand-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .table-wrap {
+    background: var(--charcoal);
+    border: 1px solid var(--dark-slate);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+  table { width: 100%; border-collapse: collapse; }
+  thead { background: var(--dark-slate); }
+  th {
+    padding: 0.75rem 1rem; text-align: left;
+    font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--slate); cursor: pointer; user-select: none;
+    white-space: nowrap;
+  }
+  th:hover { color: var(--gold); }
+  th .sort-arrow { margin-left: 0.3rem; opacity: 0.4; }
+  th.sorted .sort-arrow { opacity: 1; color: var(--gold); }
+  td {
+    padding: 0.7rem 1rem;
+    border-top: 1px solid var(--dark-slate);
+    font-size: 0.85rem;
+    color: var(--light-slate);
+  }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  .change-up { color: var(--green); }
+  .change-down { color: var(--red); }
+  .change-neutral { color: var(--slate); }
+  .pillar-badge {
+    display: inline-block; padding: 0.15rem 0.5rem;
+    border-radius: 3px; font-size: 0.72rem;
+    background: var(--dark-slate); color: var(--slate);
+  }
+  .zscore { font-family: monospace; font-size: 0.8rem; }
+
+  /* ── SKELETON LOADERS ─────────────────────────── */
+  .skeleton {
+    background: linear-gradient(90deg, var(--charcoal) 25%, var(--dark-slate) 50%, var(--charcoal) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: var(--radius-sm);
+  }
+  @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+  .skel-card { height: 140px; border-radius: var(--radius-md); }
+  .skel-chart { height: 320px; border-radius: var(--radius-md); }
+
+  /* ── MODAL ───────────────────────────────────── */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(11,17,32,0.85);
+    backdrop-filter: blur(4px);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.2s;
+  }
+  .modal-overlay.active { opacity: 1; pointer-events: all; }
+  .modal {
+    background: var(--charcoal);
+    border: 1px solid rgba(212,168,67,0.3);
+    border-radius: var(--radius-md);
+    padding: 2rem 2.5rem;
+    max-width: 480px; width: 90%;
+    transform: translateY(20px);
+    transition: transform 0.2s;
+  }
+  .modal-overlay.active .modal { transform: translateY(0); }
+  .modal h3 { color: var(--off-white); margin-bottom: 0.5rem; }
+  .modal p { color: var(--slate); font-size: 0.88rem; margin-bottom: 1.5rem; line-height: 1.6; }
+  .modal input {
+    width: 100%; background: var(--dark-slate); border: 1px solid var(--dark-slate);
+    color: var(--off-white); border-radius: var(--radius-sm);
+    padding: 0.65rem 1rem; font-size: 0.9rem; font-family: monospace;
+    outline: none; transition: border-color 0.2s;
+    margin-bottom: 1rem;
+  }
+  .modal input:focus { border-color: var(--gold); }
+  .modal input::placeholder { color: var(--slate); }
+  .modal-actions { display: flex; gap: 0.75rem; justify-content: flex-end; }
+  .btn-primary {
+    background: var(--gold); color: var(--navy);
+    border: none; border-radius: var(--radius-sm);
+    padding: 0.6rem 1.4rem; font-size: 0.88rem; font-weight: 600;
+    cursor: pointer; transition: opacity 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.88; }
+  .btn-ghost {
+    background: none; border: 1px solid var(--dark-slate);
+    color: var(--slate); border-radius: var(--radius-sm);
+    padding: 0.6rem 1.2rem; font-size: 0.88rem;
+    cursor: pointer; transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--slate); color: var(--light-slate); }
+  .modal-note {
+    font-size: 0.78rem; color: var(--slate);
+    margin-top: 1rem; padding-top: 1rem;
+    border-top: 1px solid var(--dark-slate);
+  }
+  .modal-note a { color: var(--gold); }
+
+  /* ── STATUS BAR ───────────────────────────────── */
+  .status-bar {
+    background: var(--charcoal);
+    border: 1px solid var(--dark-slate);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.5rem;
+    margin-bottom: 2rem;
+    display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+  }
+  .status-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--slate); flex-shrink: 0;
+  }
+  .status-dot.fetching { background: var(--gold); animation: pulse 1.2s ease-in-out infinite; }
+  .status-dot.done { background: var(--green); }
+  .status-dot.error { background: var(--red); }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .status-text { font-size: 0.83rem; color: var(--slate); flex: 1; }
+  .progress-items { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .progress-chip {
+    font-size: 0.72rem; padding: 0.15rem 0.5rem;
+    border-radius: 3px; background: var(--dark-slate); color: var(--slate);
+  }
+  .progress-chip.done { background: rgba(74,222,128,0.12); color: var(--green); }
+  .progress-chip.fetching { background: rgba(212,168,67,0.12); color: var(--gold); }
+  .progress-chip.error { background: rgba(248,113,113,0.12); color: var(--red); }
+
+  /* ── FOOTER ───────────────────────────────────── */
+  footer {
+    border-top: 1px solid var(--dark-slate);
+    padding: 2rem 0;
+    text-align: center;
+    color: var(--slate);
+    font-size: 0.82rem;
+  }
+  footer a { color: var(--gold); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  /* ── RESPONSIVE ───────────────────────────────── */
+  @media (max-width: 768px) {
+    .pillars-grid { grid-template-columns: 1fr 1fr; }
+    table { font-size: 0.78rem; }
+    th, td { padding: 0.6rem 0.75rem; }
+    .hero { padding: 2.5rem 0 2rem; }
+    .modal { padding: 1.5rem; }
+  }
+  @media (max-width: 480px) {
+    .pillars-grid { grid-template-columns: 1fr; }
+    .section-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+    .table-controls { width: 100%; justify-content: flex-end; }
+  }
+
+  /* ── REGIME ZONE LEGEND ───────────────────────── */
+  .zone-legend {
+    display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center;
+    margin-top: 1.25rem;
+  }
+  .zone-item {
+    display: flex; align-items: center; gap: 0.4rem;
+    font-size: 0.75rem; color: var(--slate);
+  }
+  .zone-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── REFRESH BTN ──────────────────────────────── */
+  .refresh-btn {
+    background: none; border: 1px solid var(--dark-slate);
+    color: var(--slate); cursor: pointer;
+    border-radius: var(--radius-sm); padding: 0.35rem 0.85rem;
+    font-size: 0.82rem; display: flex; align-items: center; gap: 0.4rem;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .refresh-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .refresh-btn.spinning svg { animation: spin 1s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── CHART LEGEND ─────────────────────────────── */
+  .chart-legend {
+    display: flex; gap: 1.25rem; flex-wrap: wrap;
+    margin-top: 1rem; font-size: 0.75rem; color: var(--slate);
+  }
+  .chart-legend-item { display: flex; align-items: center; gap: 0.4rem; }
+  .chart-legend-line { width: 20px; height: 2px; border-radius: 1px; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="inner">
+    <a href="https://rykauf.com" class="brand">Ryan Kaufman <span>/ Macro Regime Index</span></a>
+    <button class="settings-btn" onclick="openSettings()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+      </svg>
+      FRED API Key
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="container">
+    <div class="hero-label">Live Dashboard</div>
+    <h1>Macro Regime Index</h1>
+    <div class="gauge-wrap">
+      <canvas id="gaugeCanvas" width="320" height="200"></canvas>
+      <div class="gauge-center">
+        <div class="gauge-score" id="gaugeScore" style="color: var(--gold);">—</div>
+        <div class="gauge-label" id="gaugeLabel" style="color: var(--slate);">Loading…</div>
+      </div>
+    </div>
+    <div class="zone-legend">
+      <div class="zone-item"><div class="zone-dot" style="background:#f87171"></div>Contraction (0-25)</div>
+      <div class="zone-item"><div class="zone-dot" style="background:#fbbf24"></div>Caution (25-45)</div>
+      <div class="zone-item"><div class="zone-dot" style="background:#D4A843"></div>Neutral (45-55)</div>
+      <div class="zone-item"><div class="zone-dot" style="background:#60a5fa"></div>Expansion (55-75)</div>
+      <div class="zone-item"><div class="zone-dot" style="background:#4ade80"></div>Overheating (75-100)</div>
+    </div>
+    <div class="last-updated" id="lastUpdated">Fetching data…</div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<main class="container">
+
+  <!-- STATUS BAR -->
+  <section style="padding-bottom: 0;">
+    <div class="status-bar" id="statusBar">
+      <div class="status-dot fetching" id="statusDot"></div>
+      <div class="status-text" id="statusText">Initializing data fetch…</div>
+      <div class="progress-items" id="progressItems"></div>
+    </div>
+  </section>
+
+  <!-- PILLAR BREAKDOWN -->
+  <section>
+    <div class="section-header">
+      <h2>Pillar Breakdown</h2>
+      <button class="refresh-btn" id="refreshBtn" onclick="startFetch()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/>
+          <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+        </svg>
+        Refresh
+      </button>
+    </div>
+    <div class="pillars-grid" id="pillarsGrid">
+      <!-- skeleton -->
+      <div class="skeleton skel-card"></div>
+      <div class="skeleton skel-card"></div>
+      <div class="skeleton skel-card"></div>
+      <div class="skeleton skel-card"></div>
+      <div class="skeleton skel-card"></div>
+      <div class="skeleton skel-card"></div>
+    </div>
+  </section>
+
+  <!-- TREND CHART -->
+  <section>
+    <div class="section-header">
+      <h2>Historical Trend</h2>
+      <span style="font-size:0.78rem;color:var(--slate)">Based on available FRED monthly data</span>
+    </div>
+    <div class="chart-wrap" id="chartWrap">
+      <div class="skeleton skel-chart" id="chartSkeleton"></div>
+      <canvas id="trendCanvas" style="display:none;"></canvas>
+      <div class="chart-legend" id="chartLegend" style="display:none;">
+        <div class="chart-legend-item"><div class="chart-legend-line" style="background:var(--gold)"></div> Composite Score</div>
+        <div class="chart-legend-item"><div class="chart-legend-line" style="background:rgba(96,165,250,0.5)"></div> Expansion Zone</div>
+        <div class="chart-legend-item"><div class="chart-legend-line" style="background:rgba(248,113,113,0.3)"></div> Contraction Zone</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDICATOR TABLE -->
+  <section>
+    <div class="section-header">
+      <h2>All Indicators (19)</h2>
+      <div class="table-controls">
+        <button class="expand-btn" onclick="toggleTable()">
+          <span id="expandBtnLabel">Show All</span>
+        </button>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table id="indicatorTable">
+        <thead>
+          <tr>
+            <th onclick="sortTable('name')">Indicator <span class="sort-arrow">↕</span></th>
+            <th onclick="sortTable('value')">Latest Value <span class="sort-arrow">↕</span></th>
+            <th onclick="sortTable('change')">1M Change <span class="sort-arrow">↕</span></th>
+            <th onclick="sortTable('zscore')">Z-Score <span class="sort-arrow">↕</span></th>
+            <th onclick="sortTable('pillar')">Pillar <span class="sort-arrow">↕</span></th>
+          </tr>
+        </thead>
+        <tbody id="indicatorBody">
+          <tr><td colspan="5" style="text-align:center;color:var(--slate);padding:2rem;">Fetching indicator data…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <p>Methodology is transparent and open. Data from <a href="https://fred.stlouisfed.org/" target="_blank">FRED</a>, <a href="https://gdeltproject.org/" target="_blank">GDELT</a>, <a href="https://alternative.me/crypto/fear-and-greed-index/" target="_blank">Alternative.me</a>.</p>
+  <p style="margin-top:0.5rem"><a href="/">← Ryan Kaufman</a></p>
+</footer>
+
+<!-- API KEY MODAL -->
+<div class="modal-overlay" id="apiModal">
+  <div class="modal">
+    <h3>FRED API Key Required</h3>
+    <p>This dashboard fetches live macroeconomic data directly from the St. Louis Fed (FRED). A free API key is required.</p>
+    <input type="text" id="apiKeyInput" placeholder="e.g. abcdef1234567890abcdef1234567890" autocomplete="off" />
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="closeModal()" id="cancelBtn" style="display:none">Cancel</button>
+      <button class="btn-primary" onclick="saveApiKey()">Save &amp; Load Data</button>
+    </div>
+    <div class="modal-note">
+      Get a free key at <a href="https://fred.stlouisfed.org/docs/api/api_key.html" target="_blank">fred.stlouisfed.org</a>.
+      Your key is stored only in your browser's localStorage.
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════════════
+// CONFIGURATION
+// ══════════════════════════════════════════════════════════════════
+
+const PILLARS = [
+  { id: 'growth',      name: 'Growth',            weight: 0.20 },
+  { id: 'employment',  name: 'Employment',         weight: 0.20 },
+  { id: 'financial',   name: 'Financial Stress',   weight: 0.20 },
+  { id: 'inflation',   name: 'Inflation',          weight: 0.15 },
+  { id: 'sentiment',   name: 'Sentiment',          weight: 0.15 },
+  { id: 'policy',      name: 'Policy Uncertainty', weight: 0.10 },
+];
+
+const INDICATORS = [
+  // Growth (higher = better)
+  { id: 'GDPC1',       name: 'Real GDP Growth',           pillar: 'growth',     inverted: false, inflationTarget: false, unit: '%',   seriesId: 'A191RL1Q225SBEA' },
+  { id: 'NAPM',        name: 'ISM Manufacturing PMI',     pillar: 'growth',     inverted: false, inflationTarget: false, unit: '',    seriesId: 'NAPM' },
+  { id: 'RSAFS',       name: 'Retail Sales (YoY)',        pillar: 'growth',     inverted: false, inflationTarget: false, unit: '%',   seriesId: 'MRTSSM44000USS' },
+  { id: 'INDPRO',      name: 'Industrial Production',     pillar: 'growth',     inverted: false, inflationTarget: false, unit: 'idx', seriesId: 'INDPRO' },
+
+  // Employment (inverted: higher = worse)
+  { id: 'UNRATE',      name: 'Unemployment Rate',         pillar: 'employment', inverted: true,  inflationTarget: false, unit: '%',   seriesId: 'UNRATE' },
+  { id: 'ICSA',        name: 'Initial Jobless Claims',    pillar: 'employment', inverted: true,  inflationTarget: false, unit: 'K',   seriesId: 'ICSA' },
+  { id: 'PAYEMS',      name: 'Nonfarm Payrolls',          pillar: 'employment', inverted: false, inflationTarget: false, unit: 'K',   seriesId: 'PAYEMS' },
+
+  // Financial Stress (inverted: higher = worse)
+  { id: 'BAMLH0A0HYM2',name: 'High Yield Spread',        pillar: 'financial',  inverted: true,  inflationTarget: false, unit: '%',   seriesId: 'BAMLH0A0HYM2' },
+  { id: 'VIXCLS',      name: 'VIX Volatility Index',     pillar: 'financial',  inverted: true,  inflationTarget: false, unit: '',    seriesId: 'VIXCLS' },
+  { id: 'STLFSI4',     name: 'St. Louis FSI',            pillar: 'financial',  inverted: true,  inflationTarget: false, unit: 'idx', seriesId: 'STLFSI4' },
+
+  // Inflation (deviation from 2% = worse)
+  { id: 'CPIAUCSL',    name: 'CPI (YoY)',                pillar: 'inflation',  inverted: false, inflationTarget: true,  unit: '%',   seriesId: 'CPIAUCSL' },
+  { id: 'CPILFESL',    name: 'Core CPI (YoY)',           pillar: 'inflation',  inverted: false, inflationTarget: true,  unit: '%',   seriesId: 'CPILFESL' },
+  { id: 'T5YIE',       name: '5-Year Breakeven Inflation',pillar: 'inflation',  inverted: false, inflationTarget: true,  unit: '%',   seriesId: 'T5YIE' },
+
+  // Sentiment (higher = better)
+  { id: 'UMCSENT',     name: 'U. Michigan Sentiment',    pillar: 'sentiment',  inverted: false, inflationTarget: false, unit: 'idx', seriesId: 'UMCSENT' },
+  { id: 'USSLIND',     name: 'Leading Economic Index',   pillar: 'sentiment',  inverted: false, inflationTarget: false, unit: 'idx', seriesId: 'USSLIND' },
+  { id: 'FNG',         name: 'Crypto Fear & Greed',      pillar: 'sentiment',  inverted: false, inflationTarget: false, unit: '',    seriesId: null, source: 'fng' },
+  { id: 'GDELT',       name: 'GDELT Econ. Tone',         pillar: 'sentiment',  inverted: false, inflationTarget: false, unit: '',    seriesId: null, source: 'gdelt' },
+
+  // Policy Uncertainty (inverted: higher = worse)
+  { id: 'USEPUINDXD',  name: 'Econ. Policy Uncertainty', pillar: 'policy',    inverted: true,  inflationTarget: false, unit: 'idx', seriesId: 'USEPUINDXD' },
+  { id: 'FEDFUNDS',    name: 'Fed Funds Rate',           pillar: 'policy',     inverted: true,  inflationTarget: false, unit: '%',   seriesId: 'FEDFUNDS' },
+  { id: 'T10Y2Y',      name: 'Yield Curve (10Y-2Y)',     pillar: 'policy',     inverted: false, inflationTarget: false, unit: '%',   seriesId: 'T10Y2Y' },
+];
+
+// ══════════════════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════════════════
+
+const state = {
+  apiKey: null,
+  indicatorData: {},   // seriesId -> { values: [{date, value}], latest, prev, zscore }
+  pillarScores: {},
+  compositeScore: null,
+  history: [],          // [{date, score}] for trend chart
+  fetchStatus: {},      // indicator id -> 'fetching' | 'done' | 'error'
+  tableExpanded: false,
+  tableSortKey: null,
+  tableSortDir: 1,
+};
+
+// ══════════════════════════════════════════════════════════════════
+// API KEY MANAGEMENT
+// ══════════════════════════════════════════════════════════════════
+
+function openSettings() {
+  document.getElementById('cancelBtn').style.display = 'inline-flex';
+  document.getElementById('apiKeyInput').value = state.apiKey || '';
+  showModal();
+}
+
+function showModal() {
+  document.getElementById('apiModal').classList.add('active');
+  setTimeout(() => document.getElementById('apiKeyInput').focus(), 100);
+}
+
+function closeModal() {
+  document.getElementById('apiModal').classList.remove('active');
+}
+
+function saveApiKey() {
+  const key = document.getElementById('apiKeyInput').value.trim();
+  if (!key) { document.getElementById('apiKeyInput').style.borderColor = 'var(--red)'; return; }
+  state.apiKey = key;
+  localStorage.setItem('fred_api_key', key);
+  closeModal();
+  startFetch();
+}
+
+document.getElementById('apiKeyInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') saveApiKey();
+  document.getElementById('apiKeyInput').style.borderColor = '';
+});
+
+// ══════════════════════════════════════════════════════════════════
+// FETCH ORCHESTRATION
+// ══════════════════════════════════════════════════════════════════
+
+async function startFetch() {
+  // Reset
+  state.indicatorData = {};
+  state.pillarScores = {};
+  state.compositeScore = null;
+  state.history = [];
+  INDICATORS.forEach(i => state.fetchStatus[i.id] = 'fetching');
+  updateStatusBar();
+  renderPillarsSkeleton();
+  renderTableLoading();
+
+  // Fetch all in parallel
+  const promises = INDICATORS.map(ind => fetchIndicator(ind));
+  await Promise.allSettled(promises);
+
+  // Compute scores
+  computeScores();
+  updateStatusBar('done');
+  renderGauge(state.compositeScore);
+  renderPillars();
+  renderTable();
+  renderTrendChart();
+  document.getElementById('lastUpdated').textContent =
+    'Last updated: ' + new Date().toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' });
+}
+
+// ══════════════════════════════════════════════════════════════════
+// DATA FETCHING
+// ══════════════════════════════════════════════════════════════════
+
+async function fetchIndicator(ind) {
+  try {
+    let data;
+    if (ind.source === 'fng') {
+      data = await fetchFNG();
+    } else if (ind.source === 'gdelt') {
+      data = await fetchGDELT();
+    } else {
+      data = await fetchFRED(ind.seriesId);
+    }
+    if (data && data.length >= 2) {
+      const zs = computeZScore(data);
+      state.indicatorData[ind.id] = {
+        values: data,
+        latest: data[data.length - 1].value,
+        prev:   data[data.length - 2].value,
+        zscore: zs,
+      };
+      state.fetchStatus[ind.id] = 'done';
+    } else {
+      state.fetchStatus[ind.id] = 'error';
+    }
+  } catch(e) {
+    console.warn(`Failed to fetch ${ind.id}:`, e.message);
+    state.fetchStatus[ind.id] = 'error';
+  }
+  updateStatusBar();
+}
+
+async function fetchFRED(seriesId) {
+  const endDate = new Date();
+  const startDate = new Date();
+  startDate.setFullYear(endDate.getFullYear() - 5);
+
+  const fmt = d => d.toISOString().slice(0, 10);
+  const url = `https://api.stlouisfed.org/fred/series/observations?series_id=${seriesId}&api_key=${state.apiKey}&file_type=json&observation_start=${fmt(startDate)}&observation_end=${fmt(endDate)}&frequency=m&aggregation_method=avg`;
+
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const json = await res.json();
+
+  if (!json.observations) throw new Error('No observations');
+  return json.observations
+    .filter(o => o.value !== '.')
+    .map(o => ({ date: o.date, value: parseFloat(o.value) }))
+    .filter(o => !isNaN(o.value));
+}
+
+async function fetchFNG() {
+  const res = await fetch('https://api.alternative.me/fng/?limit=30');
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const json = await res.json();
+  if (!json.data) throw new Error('No data');
+  return json.data
+    .slice().reverse()
+    .map(d => ({
+      date: new Date(d.timestamp * 1000).toISOString().slice(0, 10),
+      value: parseFloat(d.value),
+    }));
+}
+
+async function fetchGDELT() {
+  // GDELT public tone API — returns mood scores for economic news
+  const url = 'https://api.gdeltproject.org/api/v2/doc/doc?query=economy%20united%20states&mode=tonechart&format=json&TIMESPAN=12m';
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const text = await res.text();
+  // GDELT returns JSONP-ish — parse as JSON
+  let json;
+  try { json = JSON.parse(text); } catch(e) { throw new Error('Invalid JSON from GDELT'); }
+  if (!json.tonechart) throw new Error('No tonechart');
+  return json.tonechart
+    .filter(d => d.avgtone !== undefined)
+    .map(d => ({
+      date: d.date ? String(d.date).replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3') : '',
+      value: parseFloat(d.avgtone),
+    }))
+    .filter(d => !isNaN(d.value));
+}
+
+// ══════════════════════════════════════════════════════════════════
+// COMPUTATION
+// ══════════════════════════════════════════════════════════════════
+
+function computeZScore(series) {
+  const vals = series.map(d => d.value);
+  const n = vals.length;
+  const mean = vals.reduce((a, b) => a + b, 0) / n;
+  const std = Math.sqrt(vals.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / n);
+  if (std === 0) return 0;
+  const latest = vals[vals.length - 1];
+  return (latest - mean) / std;
+}
+
+function normalizeZScore(z) {
+  // Map z-score to 0-100 using logistic function
+  return 100 / (1 + Math.exp(-z * 0.8));
+}
+
+function computeScores() {
+  const pillarRaw = {};
+  const pillarCounts = {};
+  PILLARS.forEach(p => { pillarRaw[p.id] = 0; pillarCounts[p.id] = 0; });
+
+  INDICATORS.forEach(ind => {
+    const d = state.indicatorData[ind.id];
+    if (!d) return;
+
+    let z = d.zscore;
+    if (ind.inverted) z = -z;
+    if (ind.inflationTarget) {
+      // Penalize deviation from 2% target
+      const val = d.latest;
+      const dev = Math.abs(val - 2);
+      // Large deviation = negative z-score
+      z = -dev;
+    }
+
+    const normalized = normalizeZScore(z);
+    pillarRaw[ind.pillar] = (pillarRaw[ind.pillar] || 0) + normalized;
+    pillarCounts[ind.pillar]++;
+  });
+
+  let composite = 0;
+  let totalWeight = 0;
+  PILLARS.forEach(p => {
+    if (pillarCounts[p.id] > 0) {
+      const avg = pillarRaw[p.id] / pillarCounts[p.id];
+      state.pillarScores[p.id] = { score: avg, count: pillarCounts[p.id] };
+      composite += avg * p.weight;
+      totalWeight += p.weight;
+    }
+  });
+
+  state.compositeScore = totalWeight > 0 ? composite / totalWeight : 50;
+
+  // Build simple "history" from the shared monthly series
+  // Use unemployment as the backbone timeline (most reliable monthly data)
+  buildHistory();
+}
+
+function buildHistory() {
+  // Find the indicator with the longest FRED series
+  let backbone = null;
+  let maxLen = 0;
+  INDICATORS.forEach(ind => {
+    const d = state.indicatorData[ind.id];
+    if (d && d.values.length > maxLen) {
+      maxLen = d.values.length;
+      backbone = ind;
+    }
+  });
+  if (!backbone) return;
+
+  const dates = state.indicatorData[backbone.id].values.map(v => v.date);
+  // For each date, compute what the composite would have been
+  // We use a rolling window approach: for each month, use the z-score up to that point
+  const history = [];
+
+  dates.forEach((date, idx) => {
+    if (idx < 12) return; // need at least 12 months of history
+    let compositeAt = 0;
+    let totalWeight = 0;
+    const pillarRaw = {};
+    const pillarCounts = {};
+    PILLARS.forEach(p => { pillarRaw[p.id] = 0; pillarCounts[p.id] = 0; });
+
+    INDICATORS.forEach(ind => {
+      const d = state.indicatorData[ind.id];
+      if (!d || !d.values) return;
+
+      // Find value at this date or closest before
+      const slice = d.values.filter(v => v.date <= date);
+      if (slice.length < 5) return;
+
+      const vals = slice.map(v => v.value);
+      const mean = vals.reduce((a,b) => a+b, 0) / vals.length;
+      const std = Math.sqrt(vals.reduce((a,b) => a + Math.pow(b-mean, 2), 0) / vals.length);
+      if (std === 0) return;
+
+      let z = (vals[vals.length - 1] - mean) / std;
+      if (ind.inverted) z = -z;
+      if (ind.inflationTarget) {
+        z = -Math.abs(vals[vals.length-1] - 2);
+      }
+
+      const norm = normalizeZScore(z);
+      pillarRaw[ind.pillar] = (pillarRaw[ind.pillar] || 0) + norm;
+      pillarCounts[ind.pillar]++;
+    });
+
+    PILLARS.forEach(p => {
+      if (pillarCounts[p.id] > 0) {
+        compositeAt += (pillarRaw[p.id] / pillarCounts[p.id]) * p.weight;
+        totalWeight += p.weight;
+      }
+    });
+
+    if (totalWeight > 0) {
+      history.push({ date, score: compositeAt / totalWeight });
+    }
+  });
+
+  state.history = history;
+}
+
+function getRegimeColor(score) {
+  if (score < 25) return '#f87171';
+  if (score < 45) return '#fbbf24';
+  if (score < 55) return '#D4A843';
+  if (score < 75) return '#60a5fa';
+  return '#4ade80';
+}
+
+function getRegimeLabel(score) {
+  if (score < 25) return 'Contraction / Crisis';
+  if (score < 45) return 'Caution';
+  if (score < 55) return 'Neutral';
+  if (score < 75) return 'Expansion';
+  return 'Overheating';
+}
+
+// ══════════════════════════════════════════════════════════════════
+// GAUGE RENDERING
+// ══════════════════════════════════════════════════════════════════
+
+let gaugeAnimFrame = null;
+let gaugeCurrentScore = 0;
+
+function renderGauge(targetScore) {
+  if (targetScore === null) return;
+  if (gaugeAnimFrame) cancelAnimationFrame(gaugeAnimFrame);
+
+  const start = gaugeCurrentScore;
+  const end = targetScore;
+  const duration = 1200;
+  const startTime = performance.now();
+
+  function animate(now) {
+    const elapsed = now - startTime;
+    const t = Math.min(elapsed / duration, 1);
+    const ease = 1 - Math.pow(1 - t, 3); // ease-out cubic
+    const score = start + (end - start) * ease;
+    gaugeCurrentScore = score;
+    drawGauge(score);
+    if (t < 1) gaugeAnimFrame = requestAnimationFrame(animate);
+  }
+
+  requestAnimationFrame(animate);
+}
+
+function drawGauge(score) {
+  const canvas = document.getElementById('gaugeCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const cx = W / 2, cy = H * 0.82;
+  const R = W * 0.42;
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Gauge arc: from 210° to 330° (210deg spread), left to right
+  const startAngle = Math.PI * (210 / 180);
+  const endAngle   = Math.PI * (330 / 180);
+  const totalSweep = (endAngle - startAngle + 2 * Math.PI) % (2 * Math.PI);
+
+  // Zone bands
+  const zones = [
+    { from: 0,  to: 25,  color: '#f87171' },
+    { from: 25, to: 45,  color: '#fbbf24' },
+    { from: 45, to: 55,  color: '#D4A843' },
+    { from: 55, to: 75,  color: '#60a5fa' },
+    { from: 75, to: 100, color: '#4ade80' },
+  ];
+
+  zones.forEach(z => {
+    const a1 = startAngle + (z.from / 100) * totalSweep;
+    const a2 = startAngle + (z.to   / 100) * totalSweep;
+    ctx.beginPath();
+    ctx.arc(cx, cy, R, a1, a2);
+    ctx.lineWidth = 18;
+    ctx.strokeStyle = z.color + '33'; // dim background
+    ctx.lineCap = 'butt';
+    ctx.stroke();
+  });
+
+  // Track (dark)
+  ctx.beginPath();
+  ctx.arc(cx, cy, R, startAngle, endAngle);
+  ctx.lineWidth = 18;
+  ctx.strokeStyle = 'rgba(45,55,72,0.8)';
+  ctx.lineCap = 'round';
+  ctx.stroke();
+
+  // Filled arc
+  const fillEnd = startAngle + (Math.max(0, Math.min(100, score)) / 100) * totalSweep;
+  const color = getRegimeColor(score);
+  ctx.beginPath();
+  ctx.arc(cx, cy, R, startAngle, fillEnd);
+  ctx.lineWidth = 18;
+  ctx.strokeStyle = color;
+  ctx.lineCap = 'round';
+  ctx.stroke();
+
+  // Glow effect
+  ctx.beginPath();
+  ctx.arc(cx, cy, R, startAngle, fillEnd);
+  ctx.lineWidth = 8;
+  ctx.strokeStyle = color + '55';
+  ctx.lineCap = 'round';
+  ctx.stroke();
+
+  // Needle tip dot
+  const needleAngle = startAngle + (Math.max(0, Math.min(100, score)) / 100) * totalSweep;
+  const nx = cx + R * Math.cos(needleAngle);
+  const ny = cy + R * Math.sin(needleAngle);
+  ctx.beginPath();
+  ctx.arc(nx, ny, 7, 0, Math.PI * 2);
+  ctx.fillStyle = color;
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(nx, ny, 4, 0, Math.PI * 2);
+  ctx.fillStyle = '#fff';
+  ctx.fill();
+
+  // Update DOM
+  document.getElementById('gaugeScore').textContent = Math.round(score);
+  document.getElementById('gaugeScore').style.color = color;
+  document.getElementById('gaugeLabel').textContent = getRegimeLabel(score);
+  document.getElementById('gaugeLabel').style.color = color;
+}
+
+// Draw empty gauge on load
+drawGauge(0);
+
+// ══════════════════════════════════════════════════════════════════
+// PILLAR CARDS
+// ══════════════════════════════════════════════════════════════════
+
+function renderPillarsSkeleton() {
+  const grid = document.getElementById('pillarsGrid');
+  grid.innerHTML = PILLARS.map(() => `<div class="skeleton skel-card"></div>`).join('');
+}
+
+function renderPillars() {
+  const grid = document.getElementById('pillarsGrid');
+  grid.innerHTML = PILLARS.map(p => {
+    const ps = state.pillarScores[p.id];
+    const score = ps ? Math.round(ps.score) : null;
+    const color = score !== null ? getRegimeColor(score) : 'var(--slate)';
+
+    // Find key driving indicator for this pillar
+    const pillarInds = INDICATORS.filter(i => i.pillar === p.id && state.indicatorData[i.id]);
+    let keyInd = null;
+    let maxAbsZ = -Infinity;
+    pillarInds.forEach(i => {
+      const absZ = Math.abs(state.indicatorData[i.id].zscore);
+      if (absZ > maxAbsZ) { maxAbsZ = absZ; keyInd = i; }
+    });
+
+    const keyText = keyInd
+      ? `<strong>${keyInd.name}</strong>: z = ${state.indicatorData[keyInd.id].zscore.toFixed(2)}`
+      : 'No data available';
+
+    return `
+      <div class="pillar-card">
+        <div class="pillar-card-header">
+          <div>
+            <div class="pillar-name">${p.name}</div>
+            <div class="pillar-weight">${(p.weight * 100).toFixed(0)}% weight</div>
+          </div>
+          <div class="pillar-score-num" style="color:${color}">
+            ${score !== null ? score : '—'}
+          </div>
+        </div>
+        <div class="score-bar-track">
+          <div class="score-bar-fill" style="width:${score || 0}%;background:${color}"></div>
+        </div>
+        <div class="pillar-key-indicator">Key driver: ${keyText}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+// ══════════════════════════════════════════════════════════════════
+// TREND CHART
+// ══════════════════════════════════════════════════════════════════
+
+function renderTrendChart() {
+  const skeleton = document.getElementById('chartSkeleton');
+  const canvas = document.getElementById('trendCanvas');
+  const legend = document.getElementById('chartLegend');
+
+  if (state.history.length < 3) {
+    skeleton.textContent = 'Insufficient history to render chart.';
+    skeleton.style.animation = 'none';
+    skeleton.style.background = 'var(--dark-slate)';
+    skeleton.style.display = 'flex';
+    skeleton.style.alignItems = 'center';
+    skeleton.style.justifyContent = 'center';
+    skeleton.style.color = 'var(--slate)';
+    skeleton.style.fontSize = '0.85rem';
+    return;
+  }
+
+  skeleton.style.display = 'none';
+  canvas.style.display = 'block';
+  legend.style.display = 'flex';
+
+  const dpr = window.devicePixelRatio || 1;
+  const W = canvas.parentElement.clientWidth - 48;
+  const H = 300;
+  canvas.width  = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width  = W + 'px';
+  canvas.style.height = H + 'px';
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  const pad = { top: 20, right: 20, bottom: 40, left: 48 };
+  const cw = W - pad.left - pad.right;
+  const ch = H - pad.top - pad.bottom;
+
+  const scores = state.history.map(d => d.score);
+  const minS = 0, maxS = 100;
+
+  function xPos(i) { return pad.left + (i / (state.history.length - 1)) * cw; }
+  function yPos(s) { return pad.top + (1 - (s - minS) / (maxS - minS)) * ch; }
+
+  // Zone bands
+  const zones = [
+    { from: 0,  to: 25,  color: 'rgba(248,113,113,0.08)' },
+    { from: 25, to: 45,  color: 'rgba(251,191,36,0.06)' },
+    { from: 45, to: 55,  color: 'rgba(212,168,67,0.06)' },
+    { from: 55, to: 75,  color: 'rgba(96,165,250,0.07)' },
+    { from: 75, to: 100, color: 'rgba(74,222,128,0.07)' },
+  ];
+  zones.forEach(z => {
+    ctx.fillStyle = z.color;
+    ctx.fillRect(pad.left, yPos(z.to), cw, yPos(z.from) - yPos(z.to));
+  });
+
+  // Zone boundary lines
+  [25, 45, 55, 75].forEach(v => {
+    ctx.beginPath();
+    ctx.moveTo(pad.left, yPos(v));
+    ctx.lineTo(pad.left + cw, yPos(v));
+    ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 4]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  });
+
+  // Y-axis labels
+  ctx.fillStyle = '#94A3B8';
+  ctx.font = '11px system-ui';
+  ctx.textAlign = 'right';
+  [0, 25, 50, 75, 100].forEach(v => {
+    ctx.fillText(v, pad.left - 8, yPos(v) + 4);
+  });
+
+  // X-axis date labels (every 6 months)
+  ctx.textAlign = 'center';
+  state.history.forEach((d, i) => {
+    if (i % Math.max(1, Math.floor(state.history.length / 8)) !== 0) return;
+    const date = new Date(d.date + 'T00:00:00');
+    const label = date.toLocaleDateString('en-US', { month: 'short', year: '2-digit' });
+    ctx.fillStyle = '#94A3B8';
+    ctx.fillText(label, xPos(i), H - pad.bottom + 16);
+    // Tick
+    ctx.beginPath();
+    ctx.moveTo(xPos(i), pad.top + ch);
+    ctx.lineTo(xPos(i), pad.top + ch + 4);
+    ctx.strokeStyle = '#2D3748';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  });
+
+  // Gradient fill under line
+  const grad = ctx.createLinearGradient(0, pad.top, 0, pad.top + ch);
+  grad.addColorStop(0, 'rgba(212,168,67,0.25)');
+  grad.addColorStop(1, 'rgba(212,168,67,0)');
+  ctx.beginPath();
+  state.history.forEach((d, i) => {
+    const x = xPos(i), y = yPos(d.score);
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  });
+  ctx.lineTo(xPos(state.history.length - 1), pad.top + ch);
+  ctx.lineTo(pad.left, pad.top + ch);
+  ctx.closePath();
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  // Main line
+  ctx.beginPath();
+  state.history.forEach((d, i) => {
+    const x = xPos(i), y = yPos(d.score);
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  });
+  ctx.strokeStyle = '#D4A843';
+  ctx.lineWidth = 2.5;
+  ctx.lineJoin = 'round';
+  ctx.stroke();
+
+  // Current score dot
+  const lastX = xPos(state.history.length - 1);
+  const lastY = yPos(state.history[state.history.length - 1].score);
+  ctx.beginPath();
+  ctx.arc(lastX, lastY, 5, 0, Math.PI * 2);
+  ctx.fillStyle = getRegimeColor(state.history[state.history.length - 1].score);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(lastX, lastY, 3, 0, Math.PI * 2);
+  ctx.fillStyle = '#fff';
+  ctx.fill();
+}
+
+// ══════════════════════════════════════════════════════════════════
+// INDICATOR TABLE
+// ══════════════════════════════════════════════════════════════════
+
+function renderTableLoading() {
+  document.getElementById('indicatorBody').innerHTML =
+    `<tr><td colspan="5" style="text-align:center;color:var(--slate);padding:2rem;">Fetching indicator data…</td></tr>`;
+}
+
+let tableShowAll = false;
+function toggleTable() {
+  tableShowAll = !tableShowAll;
+  document.getElementById('expandBtnLabel').textContent = tableShowAll ? 'Show Less' : 'Show All';
+  renderTable();
+}
+
+let sortKey = null, sortDir = 1;
+function sortTable(key) {
+  if (sortKey === key) sortDir *= -1;
+  else { sortKey = key; sortDir = 1; }
+  document.querySelectorAll('th').forEach(th => th.classList.remove('sorted'));
+  event.target.closest('th').classList.add('sorted');
+  renderTable();
+}
+
+function renderTable() {
+  const rows = INDICATORS.map(ind => {
+    const d = state.indicatorData[ind.id];
+    const p = PILLARS.find(p => p.id === ind.pillar);
+    return {
+      name: ind.name,
+      pillar: p ? p.name : ind.pillar,
+      value: d ? d.latest : null,
+      change: d ? (d.latest - d.prev) : null,
+      zscore: d ? d.zscore : null,
+      inverted: ind.inverted,
+      unit: ind.unit,
+    };
+  });
+
+  // Sort
+  if (sortKey) {
+    rows.sort((a, b) => {
+      let av = a[sortKey], bv = b[sortKey];
+      if (av === null) return 1;
+      if (bv === null) return -1;
+      if (typeof av === 'string') return av.localeCompare(bv) * sortDir;
+      return (av - bv) * sortDir;
+    });
+  }
+
+  const display = tableShowAll ? rows : rows.slice(0, 10);
+  const body = document.getElementById('indicatorBody');
+
+  if (rows.every(r => r.value === null)) {
+    body.innerHTML = `<tr><td colspan="5" style="text-align:center;color:var(--slate);padding:2rem;">Fetching indicator data…</td></tr>`;
+    return;
+  }
+
+  body.innerHTML = display.map(r => {
+    const val = r.value !== null ? formatValue(r.value, r.unit) : '—';
+    const chg = r.change !== null ? r.change : null;
+    const zsc = r.zscore !== null ? r.zscore : null;
+
+    let chgHtml = '—';
+    if (chg !== null) {
+      const isPositive = r.inverted ? chg < 0 : chg > 0;
+      const cls = Math.abs(chg) < 0.001 ? 'change-neutral' : isPositive ? 'change-up' : 'change-down';
+      const arrow = Math.abs(chg) < 0.001 ? '→' : chg > 0 ? '↑' : '↓';
+      chgHtml = `<span class="${cls}">${arrow} ${formatValue(Math.abs(chg), r.unit)}</span>`;
+    }
+
+    let zHtml = '—';
+    if (zsc !== null) {
+      const effZ = r.inverted ? -zsc : zsc;
+      const zcls = effZ > 0.5 ? 'change-up' : effZ < -0.5 ? 'change-down' : 'change-neutral';
+      zHtml = `<span class="zscore ${zcls}">${zsc.toFixed(2)}</span>`;
+    }
+
+    return `<tr>
+      <td>${r.name}${r.inverted ? ' <span style="color:var(--slate);font-size:0.7rem">(inv)</span>' : ''}</td>
+      <td>${val}</td>
+      <td>${chgHtml}</td>
+      <td>${zHtml}</td>
+      <td><span class="pillar-badge">${r.pillar}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function formatValue(v, unit) {
+  if (v === null || isNaN(v)) return '—';
+  const n = Math.abs(v) >= 1000 ? v.toLocaleString('en-US', { maximumFractionDigits: 0 })
+          : Math.abs(v) >= 10   ? v.toFixed(1)
+          : v.toFixed(2);
+  if (unit === '%') return n + '%';
+  if (unit === 'K') return (v / 1000).toFixed(0) + 'K';
+  return n;
+}
+
+// ══════════════════════════════════════════════════════════════════
+// STATUS BAR
+// ══════════════════════════════════════════════════════════════════
+
+function updateStatusBar(finalState) {
+  const dot  = document.getElementById('statusDot');
+  const text = document.getElementById('statusText');
+  const prog = document.getElementById('progressItems');
+
+  const done    = Object.values(state.fetchStatus).filter(s => s === 'done').length;
+  const errors  = Object.values(state.fetchStatus).filter(s => s === 'error').length;
+  const total   = INDICATORS.length;
+  const fetching = total - done - errors;
+
+  if (finalState === 'done') {
+    dot.className = 'status-dot done';
+    text.textContent = `${done} indicators loaded, ${errors} unavailable`;
+  } else {
+    dot.className = 'status-dot fetching';
+    text.textContent = `Fetching… ${done + errors}/${total} complete`;
+  }
+
+  // Show first few chips
+  const chips = INDICATORS.slice(0, 8).map(ind => {
+    const s = state.fetchStatus[ind.id] || 'fetching';
+    return `<span class="progress-chip ${s}">${ind.name.split(' ')[0]}</span>`;
+  });
+  prog.innerHTML = chips.join('');
+}
+
+// ══════════════════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════════════════
+
+function init() {
+  const savedKey = localStorage.getItem('fred_api_key');
+  if (savedKey) {
+    state.apiKey = savedKey;
+    startFetch();
+  } else {
+    showModal();
+    // Draw empty gauge
+    drawGauge(0);
+    document.getElementById('gaugeLabel').textContent = 'Enter API Key';
+    document.getElementById('lastUpdated').textContent = 'API key required to load data';
+    document.getElementById('statusText').textContent = 'Enter your FRED API key to load data';
+    document.getElementById('statusDot').className = 'status-dot';
+  }
+}
+
+// Resize chart on window resize
+window.addEventListener('resize', () => {
+  if (state.history.length > 0) renderTrendChart();
+});
+
+init();
+</script>
+</body>
+</html>
